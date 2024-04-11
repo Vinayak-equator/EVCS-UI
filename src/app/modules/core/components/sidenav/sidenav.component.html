@@ -1,0 +1,462 @@
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 fixed-start ugg-side-bar-color"
+  id="sidenav-main">
+  <div class="sidenav-header" id = "iconlogo">
+    <!-- <a class="navbar-brand m-0"
+      href=" https://demos.creative-tim.com/material-dashboard-pro/pages/dashboards/analytics.html " 
+      target="_blank"> -->
+      <a class="navbar-brand m-0" [routerLink]="['/dashboard']"  
+     >
+      <img src="./assets/img/UGG-logo.svg"  class="navbar-brand-img h-100" alt="main_logo">
+      <!-- <img src="./assets/img/ugg-logo-icon.jpg" id = "iconlogomobile" style="display: none;" class="navbar-brand-img h-100" alt="main_logo" /> -->
+    </a>
+  </div>
+
+  <div class="sidenav-header" id = "iconlogomobile" style="display: none;">
+    <!-- <a class="navbar-brand m-0"
+      href=" https://demos.creative-tim.com/material-dashboard-pro/pages/dashboards/analytics.html " 
+      target="_blank"> -->
+      <a class="navbar-brand hide-navbar" [routerLink]="['/dashboard']"  
+     >
+      <!-- <img src="./assets/img/UGG-logo.svg"  class="navbar-brand-img h-100" alt="main_logo"> -->
+      <img src="./assets/img/ugg-logo-icon.jpg"   class="navbar-brand-img h-100" alt="main_logo" />
+    </a>
+  </div>
+  <hr class="horizontal light">
+  <div class="collapse navbar-collapse  w-auto h-auto" id="sidenav-collapse-main">
+    <ul class="navbar-nav" id = "fullMenu">
+      <li class="nav-item">
+        <a class="nav-link text-dark " routerLink="/dashboard">
+          <div class="nev-icon dashboard"></div>
+          <span class="sidenav-normal  ms-2  ps-1">{{ 'sidebar.dashboard' | translate }}</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-dark " routerLink="/tenants">
+          <div class="nev-icon tenants"></div>
+          <span class="sidenav-normal  ms-2  ps-1">{{ 'sidebar.tenants' | translate }}</span>
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="showTransfer">
+        <a class="nav-link text-dark " routerLink="/transfer">
+          <div class="nev-icon transfer-site"></div>
+          <span class="sidenav-normal  ms-2  ps-1">{{ 'sidebar.transferSite' | translate }}</span>
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="showRegisterChargePoint">
+        <a class="nav-link text-dark " routerLink="/register-chargepoint">
+          <div class="nev-icon register-charge-point"></div>
+          <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.register-chargepoint' | translate }}</span>
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="showChargePoints">
+        <a class="nav-link text-dark " routerLink="/site-dashboard">
+          <div class="nev-icon charge-points"></div>
+          <span class="sidenav-normal  ms-2  ps-1">{{
+            'sidebar.chargePoints' | translate }}</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-dark " routerLink="/smart-charging">
+          <div class="nev-icon charge-points"></div>
+          <span class="sidenav-normal  ms-2  ps-1">{{
+            'sidebar.smartCharging' | translate }}</span>
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="showPromocode">
+        <a class="nav-link text-dark " routerLink="/promo-code">
+          <div class="nev-icon promo-codes"></div>
+          <span class="sidenav-normal  ms-2  ps-1">{{ 'sidebar.promoCode' | translate }}</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-dark " routerLink="/document-center">
+          <div class="nev-icon">
+            <img width="20" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABfUlEQVR4nO2aX0rEMBCHvxf3BoreQ/AKVh998iB6hN31Ch5LH3xvbS+wIqywO1KYQqn9lzRt4zY/mJd0En4fk0wgFIL+6A5IAOkZeW6Eh0oMIIqIpzC2Al6ArMNMIVMIk/kpsFVPxto6NOJq/sYGJPMQJLMBGcOIi/nGOmmQqbuWzAESqTETiFsfQcaQBJCSQkX+69YSRxFAJinrQEnoWkuuiITDjl9da0xJAFlyRcTixnbtoVWLAxlTEkBKChUx1D3w2fAWLHNurTZjXa8vsSMPThZpM1bVGbDzEeQC2Jfy9zrWpNeO5yGZAyQ3/K55PxqiY3Uwz/r9G7hx5GHwIufAm+Z8AJc1Y1el/AfgAByBx5Z1ZUqQOoimbznMNfClY0+OPAxapOhOXVuouuWKtfLzgQ8gicGhrjaBnXYs70DiHuuZ5k8GEqm5Pq/qNvmzX4guJQFkKRURD8JYJwOSemBaKpFfwMbaeGBcKrG2AVkpTOpJJda2/6IEMYN+AY4UlU67n02HAAAAAElFTkSuQmCC">
+          </div>
+          <span class="sidenav-normal  ms-2  ps-1">{{ 'sidebar.documentCenter' | translate }}</span>
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="showTransaction">
+        <a class="nav-link text-dark " routerLink="/transaction-list">
+          <div class="nev-icon transactions"></div>
+          <span class="sidenav-normal  ms-2  ps-1">{{ 'sidebar.transactions' | translate }}</span>
+        </a>
+      </li>
+
+  
+
+      <li class="nav-item" *ngIf="showDRReport || showNDRReport || showDAReport || showFRReport || showPDReport || showCUReport">
+        <a data-bs-toggle="collapse" href="#applicationsExamplesreports" class="nav-link text-dark" aria-controls="applicationsExamples" role="button" aria-expanded="false">
+          <div class="nev-icon reports"></div>
+          <span class="nav-link-text ms-2 ps-1">{{ 'sidebar.reports' | translate }}</span>
+        </a>
+        <div class="collapse " id="applicationsExamplesreports">
+          <ul class="nav ">
+            <li class="nav-item " *ngIf="showDRReport">
+              <a class="nav-link text-dark" routerLink="/driver-registration-report">
+                <span class="sidenav-mini-icon"><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+                <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.driver-registration-report' | translate }} </span>
+              </a>
+            </li>
+            <li class="nav-item " *ngIf="showNDRReport">
+              <a class="nav-link text-dark" routerLink="/non-registered-driver-report">
+                <span class="sidenav-mini-icon"><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+                <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.non-registered-driver-report' | translate }}
+                </span>
+              </a>
+            </li>
+            <li class="nav-item " *ngIf="showDAReport">
+              <a class="nav-link text-dark" routerLink="/driver-activity-report">
+                <span class="sidenav-mini-icon"><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+                <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.driver-activity-report' | translate }} </span>
+              </a>
+            </li>
+            <li class="nav-item " *ngIf="showFRReport">
+              <a class="nav-link text-dark" routerLink="/financial-revenue-report">
+                <span class="sidenav-mini-icon"><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+                <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.financial-revenue-report' | translate }} </span>
+              </a>
+            </li>
+            <li class="nav-item " *ngIf="showPDReport">
+              <a class="nav-link text-dark" routerLink="/promocode-details-report">
+                <span class="sidenav-mini-icon"><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+                <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.promocode-details-report' | translate }} </span>
+              </a>
+            </li>
+            <li class="nav-item " *ngIf="showCUReport">
+              <a class="nav-link text-dark" routerLink="/chargepoint-uptime-report">
+                <span class="sidenav-mini-icon"><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+                <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.chargepoint-uptime-report' | translate }} </span>
+              </a>
+            </li>
+
+
+            <li class="nav-item " *ngIf="showCUReport">
+              <a class="nav-link text-dark" routerLink="/chargepoint-utilization-report">
+                <span class="sidenav-mini-icon"><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+                <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.chargepoint-utilization-report' | translate }} </span>
+              </a>
+            </li>
+
+            <li class="nav-item " *ngIf="showCUReport">
+              <a class="nav-link text-dark" routerLink="/site-utlization-report">
+                <span class="sidenav-mini-icon"><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+                <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.site-utilization-report' | translate }} </span>
+              </a>
+            </li>
+
+            <li class="nav-item " *ngIf="showCUReport">
+              <a class="nav-link text-dark" routerLink="/reservation-report">
+                <span class="sidenav-mini-icon"><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+                <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.reservation-report' | translate }} </span>
+              </a>
+            </li>
+
+          </ul>
+        </div>
+      </li>
+
+
+
+
+
+      <li class="nav-item" *ngIf="showUser || showRole || showFinancial">
+        <a data-bs-toggle="collapse" href="#applicationsExamples" class="nav-link text-dark" aria-controls="applicationsExamples" role="button" aria-expanded="false">
+          <div class="nev-icon settings"></div>
+          <span class="nav-link-text ms-2 ps-1">{{ 'sidebar.settings' | translate }}</span>
+        </a>
+        <div class="collapse " id="applicationsExamples">
+          <ul class="nav ">
+            <li class="nav-item">
+              <a class="nav-link text-dark" routerLink="/global">
+                <span class="sidenav-mini-icon"><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+                <span class="sidenav-normal ms-2 ps-1"> {{ 'sidebar.global' | translate }} </span>
+              </a>
+            </li>
+            <li class="nav-item " *ngIf="showUser">
+              <a class="nav-link text-dark" routerLink="/users">
+                <span class="sidenav-mini-icon"><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+                <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.users' | translate }} </span>
+              </a>
+            </li>
+            <li class="nav-item " *ngIf="showRole">
+              <a class="nav-link text-dark" routerLink="/roles">
+                <span class="sidenav-mini-icon"><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+                <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.roles' | translate }} </span>
+              </a>
+            </li>
+            <li class="nav-item " *ngIf="showFinancial">
+              <a class="nav-link text-dark" routerLink="/financial">
+                <span class="sidenav-mini-icon"><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+                <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.financial' | translate }} </span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" routerLink="/onboarding">
+                <span class="sidenav-mini-icon"><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+                <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.onboarding' | translate }} </span>
+              </a>
+            </li>           
+          </ul>
+        </div>
+      </li>
+
+
+
+      <li class="nav-item" >
+        <a data-bs-toggle="collapse" href="#applicationsExamplessupport" class="nav-link text-dark" aria-controls="applicationsExamples" role="button" aria-expanded="false">
+          <div class="nev-icon support"></div>
+          <span class="nav-link-text ms-2 ps-1">{{ 'sidebar.support' | translate }}</span>
+        </a>
+        <div class="collapse " id="applicationsExamplessupport">
+          <ul class="nav ">
+            <li class="nav-item " *ngIf="showUser">
+              <a class="nav-link text-dark" routerLink="/query">
+                <span class="sidenav-mini-icon"><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+                <span class="nav-link-text ms-2 ps-1" *ngIf="!isMasterAdmin">{{ 'sidebar.raiseQuery' | translate
+                  }}</span>
+                <span class="nav-link-text ms-2 ps-1" *ngIf="isMasterAdmin">{{ 'sidebar.answerQuery' | translate
+                  }}</span>
+              </a>
+            </li>
+            <li class="nav-item " *ngIf="showDeletionRequest">
+              <a class="nav-link text-dark" routerLink="/deletion-requests">
+                <span class="sidenav-mini-icon"><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+                <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.deletionRequests' | translate }} </span>
+              </a>
+            </li>
+            <li class="nav-item " *ngIf="ShowChargePointRequest">
+              <a class="nav-link text-dark" routerLink="/transfer-requests">
+                <span class="sidenav-mini-icon"><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+                <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.transferRequests' | translate }} </span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark " routerLink="/log-management">
+                <span class="sidenav-mini-icon"><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+                <span class="sidenav-normal  ms-2  ps-1">{{ 'sidebar.logmanagement' | translate }}</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+  </ul>
+
+  <ul class="navbar-nav" style="display: none;" id = "mobileMenu">
+    <li class="nav-item">
+      <a class="nav-link text-dark " routerLink="/dashboard">
+        <div class="nev-icon dashboard"  matTooltip="Dashboard" matTooltipPosition = "right"></div>
+        <span class="sidenav-normal  ms-2  ps-1">{{ 'sidebar.dashboard' | translate }}</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-dark " routerLink="/tenants">
+        <div class="nev-icon tenants" matTooltip="Organizations" matTooltipPosition = "right"></div>
+        <span class="sidenav-normal  ms-2  ps-1">{{ 'sidebar.tenants' | translate }}</span>
+      </a>
+    </li>
+    <li class="nav-item" *ngIf="showTransfer">
+      <a class="nav-link text-dark " routerLink="/transfer">
+        <div class="nev-icon transfer-site" matTooltip="Transfer Site" matTooltipPosition = "right"></div>
+        <span class="sidenav-normal  ms-2  ps-1">{{ 'sidebar.transferSite' | translate }}</span>
+      </a>
+    </li>
+    <li class="nav-item" *ngIf="showRegisterChargePoint">
+      <a class="nav-link text-dark " routerLink="/register-chargepoint">
+        <div class="nev-icon register-charge-point" matTooltip="Register Charge Point" matTooltipPosition = "right"></div>
+        <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.register-chargepoint' | translate }}</span>
+      </a>
+    </li>
+    <li class="nav-item" *ngIf="showChargePoints">
+      <a class="nav-link text-dark " routerLink="/site-dashboard">
+        <div class="nev-icon charge-points" matTooltip="Charge Point" matTooltipPosition = "right"></div>
+        <span class="sidenav-normal  ms-2  ps-1">{{
+          'sidebar.chargePoints' | translate }}</span>
+      </a>
+    </li>
+    <li class="nav-item" *ngIf="showPromocode">
+      <a class="nav-link text-dark " routerLink="/promo-code">
+        <div class="nev-icon promo-codes" matTooltip="Promo Code" matTooltipPosition = "right"></div>
+        <span class="sidenav-normal  ms-2  ps-1">{{ 'sidebar.promoCode' | translate }}</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-dark " routerLink="/document-center">
+        <div class="nev-icon" matTooltip="Document Center" matTooltipPosition = "right">
+          <img width="20" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABfUlEQVR4nO2aX0rEMBCHvxf3BoreQ/AKVh998iB6hN31Ch5LH3xvbS+wIqywO1KYQqn9lzRt4zY/mJd0En4fk0wgFIL+6A5IAOkZeW6Eh0oMIIqIpzC2Al6ArMNMIVMIk/kpsFVPxto6NOJq/sYGJPMQJLMBGcOIi/nGOmmQqbuWzAESqTETiFsfQcaQBJCSQkX+69YSRxFAJinrQEnoWkuuiITDjl9da0xJAFlyRcTixnbtoVWLAxlTEkBKChUx1D3w2fAWLHNurTZjXa8vsSMPThZpM1bVGbDzEeQC2Jfy9zrWpNeO5yGZAyQ3/K55PxqiY3Uwz/r9G7hx5GHwIufAm+Z8AJc1Y1el/AfgAByBx5Z1ZUqQOoimbznMNfClY0+OPAxapOhOXVuouuWKtfLzgQ8gicGhrjaBnXYs70DiHuuZ5k8GEqm5Pq/qNvmzX4guJQFkKRURD8JYJwOSemBaKpFfwMbaeGBcKrG2AVkpTOpJJda2/6IEMYN+AY4UlU67n02HAAAAAElFTkSuQmCC">
+        </div>
+        <span class="sidenav-normal  ms-2  ps-1">{{ 'sidebar.documentCenter' | translate }}</span>
+      </a>
+    </li>
+    <li class="nav-item" *ngIf="showTransaction">
+      <a class="nav-link text-dark " routerLink="/transaction-list">
+        <div class="nev-icon transactions" matTooltip="Transactions" matTooltipPosition = "right"></div>
+        <span class="sidenav-normal  ms-2  ps-1">{{ 'sidebar.transactions' | translate }}</span>
+      </a>
+    </li>
+
+
+
+    <li class="nav-item" *ngIf="showDRReport || showNDRReport || showDAReport || showFRReport || showPDReport || showCUReport">
+      <a data-bs-toggle="collapse" href="#applicationsExamplesreports" class="nav-link text-dark" aria-controls="applicationsExamples" role="button" aria-expanded="false">
+        <div class="nev-icon reports" matTooltip="Reports" matTooltipPosition = "right"></div>
+        <span class="nav-link-text ms-2 ps-1">{{ 'sidebar.reports' | translate }}</span>
+      </a>
+      <div class="collapse " id="applicationsExamplesreports">
+        <ul class="nav ">
+          <li class="nav-item " *ngIf="showDRReport">
+            <a class="nav-link text-dark" matTooltip="Driver Registration" matTooltipPosition = "right" routerLink="/driver-registration-report">
+              <span class="sidenav-mini-icon" ><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+              <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.driver-registration-report' | translate }} </span>
+            </a>
+          </li>
+          <li class="nav-item " *ngIf="showNDRReport">
+            <a class="nav-link text-dark" matTooltip="Non-Register Driver" matTooltipPosition = "right" routerLink="/non-registered-driver-report">
+              <span class="sidenav-mini-icon" ><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+              <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.non-registered-driver-report' | translate }}
+              </span>
+            </a>
+          </li>
+          <li class="nav-item " *ngIf="showDAReport">
+            <a class="nav-link text-dark" matTooltip="Driver Activity" matTooltipPosition = "right" routerLink="/driver-activity-report">
+              <span class="sidenav-mini-icon" ><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+              <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.driver-activity-report' | translate }} </span>
+            </a>
+          </li>
+          <li class="nav-item " *ngIf="showFRReport">
+            <a class="nav-link text-dark" matTooltip="Financial Revenue" matTooltipPosition = "right" routerLink="/financial-revenue-report">
+              <span class="sidenav-mini-icon" ><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+              <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.financial-revenue-report' | translate }} </span>
+            </a>
+          </li>
+          <li class="nav-item " *ngIf="showPDReport">
+            <a class="nav-link text-dark" matTooltip="Promo Codes Details" matTooltipPosition = "right" routerLink="/promocode-details-report">
+              <span class="sidenav-mini-icon" ><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+              <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.promocode-details-report' | translate }} </span>
+            </a>
+          </li>
+          <li class="nav-item " *ngIf="showCUReport">
+            <a class="nav-link text-dark" matTooltip="ChargrPoint Uptime" matTooltipPosition = "right" routerLink="/chargepoint-uptime-report">
+              <span class="sidenav-mini-icon" ><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+              <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.chargepoint-uptime-report' | translate }} </span>
+            </a>
+          </li>
+
+          <li class="nav-item " *ngIf="showCUReport">
+            <a class="nav-link text-dark" routerLink="/chargepoint-utilization-report">
+              <span class="sidenav-mini-icon"><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+              <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.chargepoint-utilization-report' | translate }} </span>
+            </a>
+          </li>
+
+          <li class="nav-item " *ngIf="showCUReport">
+            <a class="nav-link text-dark" matTooltip="Site Utilization" matTooltipPosition = "right" routerLink="/site-utilization-report">
+              <span class="sidenav-mini-icon"><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+              <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.site-utilization-report' | translate }} </span>
+            </a>
+          </li>
+
+          <li class="nav-item " *ngIf="showCUReport">
+            <a class="nav-link text-dark" matTooltip="Reservation Report" matTooltipPosition = "right" routerLink="/reservation-report">
+              <span class="sidenav-mini-icon"><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+              <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.reservation-report' | translate }} </span>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </li>
+
+
+
+
+
+    <li class="nav-item" *ngIf="showUser || showRole || showFinancial">
+      <a data-bs-toggle="collapse" href="#applicationsExamples" class="nav-link text-dark" aria-controls="applicationsExamples" role="button" aria-expanded="false">
+        <div class="nev-icon settings" matTooltip="Settings" matTooltipPosition = "right"></div>
+        <span class="nav-link-text ms-2 ps-1">{{ 'sidebar.settings' | translate }}</span>
+      </a>
+      <div class="collapse " id="applicationsExamples">
+        <ul class="nav ">
+          <li class="nav-item">
+            <a class="nav-link text-dark" routerLink="/global">
+              <span class="sidenav-mini-icon"><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+              <span class="sidenav-normal ms-2 ps-1"> {{ 'sidebar.global' | translate }} </span>
+            </a>
+          </li>
+          <li class="nav-item " *ngIf="showUser">
+            <a class="nav-link text-dark" matTooltip="Users" matTooltipPosition = "right" routerLink="/users">
+              <span class="sidenav-mini-icon" ><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+              <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.users' | translate }} </span>
+            </a>
+          </li>
+          <li class="nav-item " *ngIf="showRole">
+            <a class="nav-link text-dark"  matTooltip="Roles" matTooltipPosition = "right" routerLink="/roles">
+              <span class="sidenav-mini-icon"><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+              <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.roles' | translate }} </span>
+            </a>
+          </li>
+          <li class="nav-item " *ngIf="showFinancial">
+            <a matTooltip="Financial" matTooltipPosition = "right" class="nav-link text-dark" routerLink="/financial">
+              <span class="sidenav-mini-icon" ><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+              <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.financial' | translate }} </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a matTooltip="Onboarding" matTooltipPosition = "right" class="nav-link text-dark" routerLink="/onboarding">
+              <span class="sidenav-mini-icon" ><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+              <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.onboarding' | translate }} </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+
+
+    <li class="nav-item" >
+      <a data-bs-toggle="collapse" href="#applicationsExamplessupport" class="nav-link text-dark" aria-controls="applicationsExamples" role="button" aria-expanded="false">
+        <div class="nev-icon support" matTooltip="Support" matTooltipPosition = "right"></div>
+        <span class="nav-link-text ms-2 ps-1">{{ 'sidebar.support' | translate }}</span>
+      </a>
+      <div class="collapse " id="applicationsExamplessupport">
+        <ul class="nav ">
+          <li class="nav-item " *ngIf="showUser">
+            <a class="nav-link text-dark" matTooltip="Answer Query" matTooltipPosition = "right" routerLink="/query">
+              <span class="sidenav-mini-icon"><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+              <span class="nav-link-text ms-2 ps-1" *ngIf="!isMasterAdmin">{{ 'sidebar.raiseQuery' | translate
+                }}</span>
+              <span class="nav-link-text ms-2 ps-1" *ngIf="isMasterAdmin">{{ 'sidebar.answerQuery' | translate
+                }}</span>
+            </a>
+          </li>
+          <li class="nav-item " *ngIf="showDeletionRequest">
+            <a matTooltip="Deletion Request" matTooltipPosition = "right" class="nav-link text-dark" routerLink="/deletion-requests">
+              <span class="sidenav-mini-icon"><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+              <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.deletionRequests' | translate }} </span>
+            </a>
+          </li>
+          <li class="nav-item " *ngIf="ShowChargePointRequest">
+            <a matTooltip="Transfer Request" matTooltipPosition = "right" class="nav-link text-dark" routerLink="/transfer-requests">
+              <span class="sidenav-mini-icon" ><span class="material-symbols-outlined">arrow_forward_ios</span></span>
+              <span class="sidenav-normal  ms-2  ps-1"> {{ 'sidebar.transferRequests' | translate }} </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark " routerLink="/log-management">
+              <!-- <div class="nev-icon" matTooltip="Log Management" matTooltipPosition = "right"></div> -->
+              <div class="nev-icon" matTooltip="Log Management" matTooltipPosition = "right">
+                <img width="20" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABfUlEQVR4nO2aX0rEMBCHvxf3BoreQ/AKVh998iB6hN31Ch5LH3xvbS+wIqywO1KYQqn9lzRt4zY/mJd0En4fk0wgFIL+6A5IAOkZeW6Eh0oMIIqIpzC2Al6ArMNMIVMIk/kpsFVPxto6NOJq/sYGJPMQJLMBGcOIi/nGOmmQqbuWzAESqTETiFsfQcaQBJCSQkX+69YSRxFAJinrQEnoWkuuiITDjl9da0xJAFlyRcTixnbtoVWLAxlTEkBKChUx1D3w2fAWLHNurTZjXa8vsSMPThZpM1bVGbDzEeQC2Jfy9zrWpNeO5yGZAyQ3/K55PxqiY3Uwz/r9G7hx5GHwIufAm+Z8AJc1Y1el/AfgAByBx5Z1ZUqQOoimbznMNfClY0+OPAxapOhOXVuouuWKtfLzgQ8gicGhrjaBnXYs70DiHuuZ5k8GEqm5Pq/qNvmzX4guJQFkKRURD8JYJwOSemBaKpFfwMbaeGBcKrG2AVkpTOpJJda2/6IEMYN+AY4UlU67n02HAAAAAElFTkSuQmCC">
+              </div>
+              <span class="sidenav-normal  ms-2  ps-1">{{ 'sidebar.logmanagement' | translate }}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+</ul>
+  </div>
+</aside>
+<ng-content></ng-content>

@@ -1,0 +1,13 @@
+.flex {
+    display: flex;
+}
+
+.scroll{
+    margin: 0;
+    overflow-y: scroll;
+    height: 30vh;
+    word-break: break-all;
+    scrollbar-width: thin;
+}
+
+

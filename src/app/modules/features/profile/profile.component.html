@@ -1,0 +1,359 @@
+<div class="mt-3">
+    <div class="card mat-elevation-z mb-3">
+        <div class="card-body">
+            <div id = "EditForm" style="display: none;">
+                <div class="row">
+                    <div class="col-md-6 lg-6">
+                        <h2 class="h2">{{'sidebar.profile' | translate }}</h2>
+                    </div>
+
+
+                </div>
+
+                <div class="body-content-outer">
+                    <div class="row">
+                        <div class="col-md-12 lg-12">
+
+                            <div class="ucg-table">
+
+                                <div class="tenantFilterSection container-fluid">
+                                    <br />
+                                    <form [formGroup]="profileForm" #userProfile="ngForm" class="margin-bottom-40"
+                                        autocomplete="off">
+                                        <div class="form-row">
+
+                                            <div class="col-md-12 text-center mb-2">
+                                                <div class="user">
+                                                    <img width="100%" class="profile-circle" src="assets/profile.png" />
+                                                    <div matTooltip="Edit Profile Image">
+                                                        <img class="circle-edit"
+                                                            src="data:image/png;base64,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">
+                                                        <img class="circle-edit-icon"
+                                                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAADJ0lEQVR4nO2azUtUURiHTx9zby2KoP/ACtoVqIsGXQhaCGWLNMIMI60WCUUDNViEZNKQ1VgujhMIUUgwmyDBjYu5l6HctG4XLVpauz5WwxvnlpIx2ug48773nN8Dd3/u8wznvJw7SgEAAAAAAACAg5BWGdIqS6S2cK/FTflTiqIHERjlI4IA+YggQD4iCJCPCALkI4IA+YggQD4iCJCPCALkI4IA+YggQD4iCJCPCALkI4IA+YggQL7rEUiCfFcjkCT5rkUgifJdiUCS5dsegeIg39YIFCf5fwIoWyDIh3zCL1/xbyvYdhS/ZOz5il82Dlwl58G0oyAfo2bMIcz5kE/Y8xX/gYoDV/FLxrSj+GVj1FRyHsz5CvIxasYczPmMQD4jkM8I5DMC+YxAPiOQzwjkMwL5jEA+I5DPCBX9BppNLLDfVk45eKtpoNC/TKFPsYigLZNvoNDPRwGkR9A2yie1lUJvcTmA1AjaQvkGKmxvWiFfYgRtqXwDhV66bAApEbTF8g0UevOrBuCOoG2XX1A7KPB/rBmAK4K2XL6BAr/jv/I5ImgH5Bso9DMVB6hXBO2IfAMF/vt1Bah1BO2S/PldeynwS+sOUKsI2iH5BgoSpzckvxYRtGPyDRR6uaoCbFYE7aB8AwXex6oDVBtBOyr/Te5wc/H5gerlVxNBOyrfMDnWMn3s7AAVpg/yRNAOyzcMpzs/dfQOEksE7bh8c/18ZrC3ZALUPYJ2XL7hxURjz5L8ukbQkB8xPtI2+2+AmkfQkL/MtVTXYrkANYugIX+ZuSf7d3f195eVv3kRvC/RN+bAv2T+bVH/TVYwzzLJ62vJ32CEn9FHncC7ScVEoznkud9TLHdvt7+tJMCaEcwF3u9b1AwV/HZ6p3Zyv1dsuDh06lulAVZEiK4tvBwFXo+5ReV+j1gy87ipwQitRHz3hb5SKnXi8/hI28uZyeYj3Gu3gol7rY9WE3783Hkaunry69id9rmp+8m+fF5t416vdQynOz/8vbUMXOn+PnLr6MLT0ZYbr7OH9nCvz3rML9xEyI62Pnz1ILmPez0AAAAAAAAAoGLOL6IBQj6Rr7dfAAAAAElFTkSuQmCC">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <h4 class="font-18"> User Name </h4>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                                    <mat-label>{{'formFields.name' | translate}}</mat-label>
+                                                    <input matInput autocomplete="off"
+                                                        placeholder="{{'formFields.name' | translate}}" tabindex="1"
+                                                        formControlName="name">
+                                                    <mat-error>
+                                                        <span
+                                                            *ngIf="(!profileForm.get('name')?.valid && !profileForm.get('name')?.errors?.serverError) && !name">
+                                                            {{'requiredFields.name' | translate }}</span>
+                                                        <span
+                                                            *ngIf="!profileForm.get('name')?.errors?.serverError && (name || (profileForm.get('name')?.valid && !name))">
+                                                            {{'requiredFields.name' | translate }}</span>
+                                                    </mat-error>
+                                                    <mat-error>
+                                                        <span
+                                                            *ngIf="profileForm.get('name')?.errors?.serverError | translate">
+                                                            {{profileForm.get('name')?.errors?.serverError |
+                                                            translate}}</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <h4 class="font-18"> Email Address </h4>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                                    <mat-label>{{'formFields.email' | translate}}</mat-label>
+                                                    <input matInput autocomplete="off"
+                                                        placeholder="{{'formFields.email' | translate}}" tabindex="2"
+                                                        formControlName="email" [readonly]="true" >
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <h4 class="font-18"> Phone Number </h4>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                                    <mat-label>{{'formFields.phone' | translate}}</mat-label>
+                                                    <input matInput autocomplete="off"
+                                                        placeholder="{{'formFields.phone' | translate}}" tabindex="1"
+                                                        formControlName="phone">
+                                                    <mat-error>
+                                                        <span
+                                                            *ngIf="(!profileForm.get('phone')?.valid && !profileForm.get('phone')?.errors?.serverError) && !phone">
+                                                            {{'requiredFields.phone' | translate }}</span>
+                                                        <span
+                                                            *ngIf="!profileForm.get('phone')?.errors?.serverError && (phone || (profileForm.get('phone')?.valid && !phone))">
+                                                            {{'requiredFields.phone' | translate }}</span>
+                                                    </mat-error>
+                                                    <mat-error>
+                                                        <span
+                                                            *ngIf="profileForm.get('phone')?.errors?.serverError | translate">
+                                                            {{profileForm.get('phone')?.errors?.serverError |
+                                                            translate}}</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <h4 class="font-18"> Address </h4>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                                    <mat-label>{{'formFields.address' | translate}}</mat-label>
+                                                    <input matInput autocomplete="off"
+                                                        placeholder="{{'formFields.address' | translate}}" tabindex="1"
+                                                        formControlName="address">
+                                                    <mat-error>
+                                                        <span
+                                                            *ngIf="(!profileForm.get('address')?.valid && !profileForm.get('address')?.errors?.serverError) && !address">
+                                                            {{'requiredFields.address' | translate }}</span>
+                                                        <span
+                                                            *ngIf="!profileForm.get('address')?.errors?.serverError && (address || (profileForm.get('address')?.valid && !address))">
+                                                            {{'requiredFields.address' | translate }}</span>
+                                                    </mat-error>
+                                                    <mat-error>
+                                                        <span
+                                                            *ngIf="profileForm.get('address')?.errors?.serverError | translate">
+                                                            {{profileForm.get('address')?.errors?.serverError |
+                                                            translate}}</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+<!-- company  -->
+<div class="col-md-2">
+    <h4 class="font-18"> Company </h4>
+</div>
+<div class="form-group col-md-4">
+    <mat-form-field class="w-100 ucg-input" appearance="outline">
+        <mat-label>{{'formFields.company' | translate}}</mat-label>
+        <input matInput autocomplete="off"
+            placeholder="{{'formFields.company' | translate}}" tabindex="1"
+            formControlName="company">
+        <mat-error>
+            <span
+                *ngIf="(!profileForm.get('company')?.valid && !profileForm.get('company')?.errors?.serverError) && !company">
+                {{'requiredFields.company' | translate }}</span>
+            <span
+                *ngIf="!profileForm.get('company')?.errors?.serverError && (company || (profileForm.get('company')?.valid && !company))">
+                {{'requiredFields.company' | translate }}</span>
+        </mat-error>
+        <mat-error>
+            <span
+                *ngIf="profileForm.get('company')?.errors?.serverError | translate">
+                {{profileForm.get('company')?.errors?.serverError |
+                translate}}</span>
+        </mat-error>
+    </mat-form-field>
+</div>
+<div class="col-md-2">
+    <h4 class="font-18"> Designation </h4>
+</div>
+<div class="form-group col-md-4">
+    <mat-form-field class="w-100 ucg-input" appearance="outline">
+        <mat-label>{{'formFields.position' | translate}}</mat-label>
+        <input matInput autocomplete="off"
+            placeholder="{{'formFields.position' | translate}}" tabindex="1"
+            formControlName="position">
+        <mat-error>
+            <span
+                *ngIf="(!profileForm.get('position')?.valid && !profileForm.get('position')?.errors?.serverError) && !position">
+                {{'requiredFields.position' | translate }}</span>
+            <span
+                *ngIf="!profileForm.get('position')?.errors?.serverError && (position || (profileForm.get('position')?.valid && !position))">
+                {{'requiredFields.position' | translate }}</span>
+        </mat-error>
+        <mat-error>
+            <span
+                *ngIf="profileForm.get('position')?.errors?.serverError | translate">
+                {{profileForm.get('position')?.errors?.serverError |
+                translate}}</span>
+        </mat-error>
+    </mat-form-field>
+</div>
+                                            <div class="col-md-2">
+                                                <h4 class="font-18"> City </h4>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                                    <mat-label>{{'formFields.city' | translate}}</mat-label>
+                                                    <input matInput autocomplete="off"
+                                                        placeholder="{{'formFields.city' | translate}}" tabindex="1"
+                                                        formControlName="city">
+                                                    <mat-error>
+                                                        <span
+                                                            *ngIf="(!profileForm.get('city')?.valid && !profileForm.get('city')?.errors?.serverError) && !city">
+                                                            {{'requiredFields.city' | translate }}</span>
+                                                        <span
+                                                            *ngIf="!profileForm.get('city')?.errors?.serverError && (city || (profileForm.get('city')?.valid && !city))">
+                                                            {{'requiredFields.city' | translate }}</span>
+                                                    </mat-error>
+                                                    <mat-error>
+                                                        <span
+                                                            *ngIf="profileForm.get('city')?.errors?.serverError | translate">
+                                                            {{profileForm.get('city')?.errors?.serverError |
+                                                            translate}}</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <h4 class="font-18"> State </h4>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                                    <mat-label>{{'formFields.state' | translate}}</mat-label>
+                                                    <input matInput autocomplete="off"
+                                                        placeholder="{{'formFields.state' | translate}}" tabindex="1"
+                                                        formControlName="state">
+                                                    <mat-error>
+                                                        <span
+                                                            *ngIf="(!profileForm.get('state')?.valid && !profileForm.get('state')?.errors?.serverError) && !state">
+                                                            {{'requiredFields.state' | translate }}</span>
+                                                        <span
+                                                            *ngIf="!profileForm.get('state')?.errors?.serverError && (state || (profileForm.get('state')?.valid && !state))">
+                                                            {{'requiredFields.state' | translate }}</span>
+                                                    </mat-error>
+                                                    <mat-error>
+                                                        <span
+                                                            *ngIf="profileForm.get('state')?.errors?.serverError | translate">
+                                                            {{profileForm.get('state')?.errors?.serverError |
+                                                            translate}}</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <h4 class="font-18"> ZipCode </h4>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                                    <mat-label>{{'formFields.zipCode' | translate}}</mat-label>
+                                                    <input matInput autocomplete="off"
+                                                        placeholder="{{'formFields.zipCode' | translate}}" tabindex="1"
+                                                        formControlName="zipcode">
+                                                    <mat-error>
+                                                        <span
+                                                            *ngIf="(!profileForm.get('zipcode')?.valid && !profileForm.get('zipcode')?.errors?.serverError) && !zipcode">
+                                                            {{'requiredFields.zipcode' | translate }}</span>
+                                                        <span
+                                                            *ngIf="!profileForm.get('zipcode')?.errors?.serverError && (zipcode || (profileForm.get('zipcode')?.valid && !zipcode))">
+                                                            {{'requiredFields.zipcode' | translate }}</span>
+                                                    </mat-error>
+                                                    <mat-error>
+                                                        <span  
+                                                            *ngIf="profileForm.get('zipcode')?.errors?.serverError | translate">
+                                                            {{profileForm.get('zipcode')?.errors?.serverError |
+                                                            translate}}</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <h4 class="font-18"> Country </h4>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                                    <mat-label>{{'formFields.country' | translate}}</mat-label>
+                                                    <input matInput autocomplete="off"
+                                                        placeholder="{{'formFields.country' | translate}}" tabindex="1"
+                                                        formControlName="country">
+                                                    <mat-error>
+                                                        <span
+                                                            *ngIf="(!profileForm.get('country')?.valid && !profileForm.get('country')?.errors?.serverError) && !country">
+                                                            {{'requiredFields.country' | translate }}</span>
+                                                        <span
+                                                            *ngIf="!profileForm.get('country')?.errors?.serverError && (country || (profileForm.get('country')?.valid && !country))">
+                                                            {{'requiredFields.country' | translate }}</span>
+                                                    </mat-error>
+                                                    <mat-error>
+                                                        <span
+                                                            *ngIf="profileForm.get('country')?.errors?.serverError | translate">
+                                                            {{profileForm.get('country')?.errors?.serverError |
+                                                            translate}}</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                    <button mat-raised-button color="primary" class="btn-primary btn-popup float-right mb-1"
+                                        (click)="updateProfile()">Update</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id = "DisplayUnit" class="container-fluid px-2 px-md-4">
+                <div class="page-header min-height-300 border-radius-xl mt-4"
+                    style="background-image: url('https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');">
+                    <span class="mask  bg-primary  opacity-6"></span>
+                </div>
+                <div class="card card-body mx-3 mx-md-4 mt-n6">
+                    <div class="row gx-4 mb-2">
+                        <div class="col-auto">
+                            <div class="avatar avatar-xl position-relative">
+                                <img src="../../../assets/img/bruce-mars.jpg" alt="profile_image"
+                                    class="w-100 border-radius-lg shadow-sm">
+                            </div>
+                        </div>
+                        <div class="col-auto my-auto">
+                            <div class="h-100">
+                                <h3 class="mb-1">
+                                    {{user.name}}
+                                </h3>
+                                <p class="mb-0 font-weight-normal text-sm">
+                                    CEO / Co-Founder
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-auto ml-auto">
+                            <div class="pr-edit">
+                                <button (click) = "ShowHidedata()" mat-raised-button color="primary" class="btn-icon mat-elevation-z">
+                                    <span  class="material-symbols-outlined">account_circle</span> Edit Profile
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="pr-info-card">
+                                <div class="pr-icn">
+                                    <span class="material-symbols-outlined">mail</span>
+                                </div>
+                                <p>
+                                    {{user.email}}
+                                </p>
+                            </div>
+                            <div class="pr-info-card">
+                                <div class="pr-icn">
+                                    <span class="material-symbols-outlined">call</span>
+                                </div>
+                                <p>
+                                    {{user.phone}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12">
+                            <div class="pr-info-card address">
+                                <div class="pr-icn">
+                                    <span class="material-symbols-outlined">location_on</span>
+                                </div>
+                                <p>
+                                    {{user.address?.street1}}, {{user.address?.city}}, {{user.address?.state}}, {{user.address?.country}}, {{user.address?.zipCode}}   
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

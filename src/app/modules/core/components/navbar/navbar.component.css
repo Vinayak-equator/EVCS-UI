@@ -1,0 +1,7 @@
+::ng-deep .mat-menu-panel {
+  padding: 0 0 !important;
+  width: 150px !important;
+}
+.logo-img {
+  width: 11rem;
+}

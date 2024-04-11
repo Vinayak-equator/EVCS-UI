@@ -1,0 +1,17 @@
+.centerdiv{
+    display: flex;
+    align-items: center;    
+}
+.ml-2{
+    margin-left: 10px !important;
+}
+.active{
+    border-radius: 5px;
+    background: #ededed;
+  }
+  
+  mat-cell{
+    display: block !important;
+    text-align: center !important;
+}
+

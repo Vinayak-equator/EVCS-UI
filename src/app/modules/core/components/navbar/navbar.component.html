@@ -1,0 +1,133 @@
+ <!-- Navbar -->
+ <nav class="navbar navbar-main navbar-expand-lg position-sticky mt-4 top-1 px-0 shadow-none border-radius-xl z-index-sticky"
+ id="navbarBlur" data-scroll="true">
+ <div class="container-fluid py-1 px-3">
+   <div class="sidenav-toggler sidenav-toggler-inner d-xl-block d-none ">
+     <a class="nav-link text-body p-0" (click)="showHideMenu()" >
+       <div class="sidenav-toggler-inner">
+         <i class="sidenav-toggler-line"></i>
+         <i class="sidenav-toggler-line"></i>
+         <i class="sidenav-toggler-line"></i>
+       </div>
+     </a>
+   </div>
+   <div class="nav-bar-title-outer">
+     <h2>Universal EVCS Management</h2>
+   </div>
+   <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+     <ul class="navbar-nav  justify-content-end ms-md-auto align-items-center">
+      <!-- <li class="nav-item mr-3">
+        <a href="javascript:;" mat-mini-fab color="secondary"  (click)="selectOrg()" matTooltip="Select Organization" class="table-action-btn">
+            <span class="material-symbols-outlined">apartment</span>
+        </a>
+      </li> -->
+       <li class="nav-item dropdown nav-fleg-outer">
+         <a href="javascript:;" class="nav-link text-white p-0 dropdown-toggle position-relative" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+           <span class="nav-fleg"><img src="./assets/img/us-fleg.svg" /></span>
+         </a>
+         <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="javascript:;" (click)="useLanguage('en')" >English</a></li>
+          <!-- <li><a class="dropdown-item" href="javascript:;" (click)="useLanguage('fr')">French</a></li>
+          <li><a class="dropdown-item" href="javascript:;" (click)="useLanguage('es')">Spanish</a></li> -->
+        </ul>
+         <!-- <mat-form-field appearance="outline" class="ucg-form-control">
+          <mat-label>Language</mat-label>
+          <mat-select formControlName="language" [(ngModel)]="lang" name="language" (selectionChange)="useLanguage($event.value)" placeholder="Language">
+            <mat-option *ngFor="let language of languages" [value]="language.value">
+              {{language.text}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field> -->
+
+       </li>
+
+       <!-- <li class="nav-item" >
+        <a data-bs-toggle="collapse" href="#applicationsExamplesHeaderMenu" class="nav-link text-dark" aria-controls="applicationsExamples" role="button" aria-expanded="false">
+          <div class="nev-icon reports"></div>
+          <span class="nav-link-text ms-2 ps-1">{{currentUsername | translate}}</span>
+        </a>
+        <div class="collapse " id="applicationsExamplesHeaderMenu">
+          <ul class="nav ">
+            
+            <li class="nav-item ">
+              <a class="nav-link text-dark" (click)="profile()">
+                <span class="sidenav-mini-icon"> P </span>
+                <span class="sidenav-normal  ms-2  ps-1"> Profile </span>
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link text-dark" (click)="logout()">
+                <span class="sidenav-mini-icon"> L </span>
+                <span class="sidenav-normal  ms-2  ps-1"> Logout </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li> -->
+      <li class="nav-item dropdown user-drop">
+        <a class="nav-link dropdown-toggle" href="javascript:;" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{currentUsername | translate}} <span class="material-symbols-outlined">expand_more</span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="javascript:;" (click)="profile()">Profile</a></li>
+          <li><a class="dropdown-item" href="javascript:;" (click)="selectOrg()">Change Organization</a></li>
+          <li><a class="dropdown-item" href="javascript:;" (click)="logout()">Logout</a></li>
+        </ul>
+      </li>
+
+       <!-- <li class="nav-item profile-img-outer">
+         <a 
+           class="nav-link text-white p-0 position-relative" target="_blank">
+           <img src="./assets/img/profile-img.svg" />
+           <span class="user-name" (click)="logout()">{{currentUsername | translate}}</span>
+         </a>
+       </li>       -->
+     </ul>
+   </div>
+ </div>
+</nav>
+<!-- End Navbar -->
+
+
+<!-- <mat-toolbar class="main-header">
+  <a [routerLink]="['/']" class="ucg-logo">
+    <img class="logo-img" src="/assets/EV-Chargers-Logo.png" alt="">
+  </a>
+
+  <div class="right-nav">
+    <h2>{{ 'navbar.title'| translate }}</h2>
+
+    <form [formGroup]="hearderForm">
+      <div class="profile row mt-4">
+        <div class="profile-menu col-md-6">
+          <button mat-button [matMenuTriggerFor]="menu" aria-label="profile menu">
+            <img src="" alt=""
+              class="img-fluid rounded-circle z-depth-0">
+            {{currentUsername}} <mat-icon aria-hidden="false" aria-label="expand_more icon">expand_more</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu" [overlapTrigger]="false">
+            <button mat-menu-item (click)="profile()">
+              <mat-icon>person</mat-icon>
+              <span>Profile</span>
+            </button>
+            <button mat-menu-item (click)="logout()">
+              <mat-icon>logout</mat-icon>
+              <span>Log-out</span>
+            </button>
+          </mat-menu>
+        </div>
+        <div class="ucg-form col-md-5">
+          <mat-form-field appearance="outline" class="ucg-form-control">
+            <mat-label>Language</mat-label>
+            <mat-select formControlName="language" [(ngModel)]="lang" name="language" (selectionChange)="useLanguage($event.value)" placeholder="Language">
+              <mat-option *ngFor="let language of languages" [value]="language.value">
+                {{language.text}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</mat-toolbar> -->

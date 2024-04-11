@@ -1,0 +1,52 @@
+::ng-deep .no-line .mat-form-field-underline {
+  display: none;
+}
+
+::ng-deep .mat-radio-label-content {
+  width: 100%;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+/* .w-250 {
+  width: 250%;
+  margin-bottom: -15px;
+} */
+
+.mb-slam {
+  margin-bottom: -15px;
+}
+
+.mat-radio-label-content {
+  width: 100% !important  ;
+}
+
+.mat-form-field {
+  width: 100% !important;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.disableaction {
+  filter: opacity(0.2) grayscale(1);
+  pointer-events: none;
+}
+
+.existerr {
+  padding-top: 15px;
+  color: #f44336;
+  font-size: 75%;
+}
+
+.isEditable {
+  pointer-events: none;
+  opacity: 0.4;
+}

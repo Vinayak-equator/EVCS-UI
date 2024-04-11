@@ -1,0 +1,28 @@
+<div class="full-modal-wrap">
+  <div class="modal full-modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Select Organization</h4>
+            </div>
+            <div class="modal-body">
+                
+                <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Organization</mat-label>
+            <mat-select (selectionChange)="tenantSelection($event.value)" [(ngModel)]="selectedTenant" tabindex="1">
+              <mat-option *ngFor="let tenant of tenants" [value]="tenant">
+                {{tenant.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-danger" (click)="closePopupModal()">
+                    Close
+                </button> -->
+            </div>
+        </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,158 @@
+<!-- New Design -->
+
+<div class="mt-3">
+    <div class="card mat-elevation-z mb-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 lg-6">
+                    <h2 class="h2">Users List</h2>
+                </div>
+                <!-- <div *ngIf="createTenant" class="col-md-6 lg-6 text-end">
+            <span class="creation-button">
+              <button mat-raised-button color="primary" class="btn-primary"
+                (click)="navigateTenant();">{{'button.newTenant' | translate}}</button>
+            </span>
+          </div> -->
+                <div class="col-md-6 lg-6 text-end">
+                    <div class="head-right-outer">
+                        <a class="btn-border mat-elevation-z icon-right" mat-raised-button
+                        data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" (click)="togglechnage()" aria-controls="multiCollapseExample1">Filter<span
+                                class="material-symbols-outlined">{{this.chnageicon}}</span></a>
+                        <a class="btn-border mat-elevation-z" (click)="sendDetails({}, 'new')" mat-raised-button
+                            href="javascript:;"><span class="material-symbols-outlined">add</span> {{'button.newUser' |
+                            translate }} </a>
+                        <!-- <a class="btn-back mat-elevation-z" mat-raised-button href="javascript:;"><span
+                                class="material-symbols-outlined">keyboard_backspace</span> Back</a> -->
+                    </div>
+                </div>
+            </div>
+            <div class="filter-outer">
+                <div class="collapse" id="multiCollapseExample1">
+                <div class="row">
+                    <div class="col-md-3 lg-3">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Filter by Name</mat-label>
+                            <input type="text" matInput [formControl]="userControl">
+                        </mat-form-field>
+                        <!-- <div class="input-group input-group-outline my-3">
+                    <label class="form-label">Filter by Name</label>
+                    <input type="text" [formControl]="nameControl" class="form-control">
+                  </div> -->
+                    </div>
+                    <div class="col-md-3 lg-3">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Filter by Role</mat-label>
+                            <input type="text" matInput [formControl]="userRoleControl">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3 lg-3">
+                        <div class="form-check form-switch">
+                            <mat-slide-toggle [color]="'primary'" [(ngModel)]="showDeleted" (change)="getUsers('showDeleted')">Show
+                                Deleted Records</mat-slide-toggle>
+                            <!-- <input class="form-check-input" (change)="getUsers()" type="checkbox"
+                                id="flexSwitchCheckDefault" checked="">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Show Deleted Records</label> -->
+                        </div>
+                    </div>
+                    <div class="col-md-3 lg-3">
+                        <a href="javascript:;" mat-raised-button class="reset-btn mat-elevation-z"
+                            (click)="resetFilters()"><span class="material-symbols-outlined">restart_alt</span>
+                            Reset</a>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="body-content-outer">
+                <div class="row">
+                    <div class="col-md-12 lg-12">
+
+                        <div class="ucg-table">
+                            <mat-table #table [dataSource]="dataSource" matSort matSortDirection="asc">
+                                <!-- matSortActive="name" -->
+                                <ng-container matColumnDef="name">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" (click)="sendDetails(element, 'edit')"
+                                        style="cursor:pointer;"> {{ element.name }} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="email">
+                                    <mat-header-cell class="wd-400" *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+                                    <mat-cell class="wd-400" *matCellDef="let element"> {{ element.email }} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="role">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Role </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{ element?.role?.replace('_', ' ') }}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="status">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" style="pointer-events: none;">
+                                        <label class="form-label">
+                                            <mat-slide-toggle [color]="'primary'"
+                                                [checked]="element.status === 'Active'">
+                                            </mat-slide-toggle>
+                                        </label>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="action" style="cursor: default;cursor:pointer;">
+                                    <mat-header-cell *matHeaderCellDef class="wd-200 action-column"> Action </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" class="wd-200 action-column">
+
+                                        <div class="table-action">
+                                            <a *ngIf="!showDeleted" matTooltip="Edit User Details" mat-mini-fab color="primary"
+                                                href="javascript:;" (click)="sendDetails(element, 'edit')" class="table-action-btn">
+                                                <span class="material-symbols-outlined">info</span>
+                                            </a>
+                                            <a  *ngIf="!showDeleted" href="javascript:;" mat-mini-fab color="warn"
+                                                matTooltip="Delete User"
+                                                
+                                                (click)="deleteUser(element.id)" class="table-action-btn">
+                                                <span class="material-symbols-outlined">delete</span>
+                                            </a>
+                                            <a *ngIf="showDeleted" href="javascript:;" mat-mini-fab color="success"
+                                                matTooltip="Undo Delete Organization"
+                                               
+                                                (click)="undeleteUser(element.id)" class="table-action-btn">
+                                                <span class="material-symbols-outlined">undo</span>
+                                            </a>
+                                        </div>
+                                       
+                                        
+                                        <!-- <img *ngIf="element.used !== 0" src="/assets/zoom-in.svg"
+                                    (click)="sendDetails(element, 'view')" /> -->
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                            </mat-table>
+
+                            <div *ngIf="process" class="text-center norecord table-loader">
+                               
+                                <div class="loader-inner">
+                                  <mat-spinner [diameter]="40"></mat-spinner>
+                                  <small>Loading</small>
+                                </div>
+                              </div>
+
+                            <div *ngIf="!process && (dataSource.data.length == 0 || dataSource.filteredData.length == 0)"
+                                class="norecord">
+                                {{'table.noRecordFound' | translate}}</div>
+
+                            <mat-paginator #paginator [length]="totalCount" [pageIndex]="pageNumber"
+                                [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true"
+                                (page)="pageChanged($event)">
+                            </mat-paginator>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--   OLD  -->

@@ -1,0 +1,881 @@
+<div class="container-fluid mt-5">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 lg-6">
+                    <h2 class="h2">
+                        <div *ngIf="chargerPoint.status == 'Online'" class="charger-header-Offline">
+                            <h4 class="online-circle"></h4>
+                        </div>
+                        <div *ngIf="chargerPoint.status == 'Offline'" class="charger-header-Offline">
+                            <h4 class="offline-circle"></h4>
+                        </div> <span>Charger Details :</span> {{chargePointId}}
+                    </h2>
+
+                </div>
+                <div class="col-md-6 lg-6 text-end">
+                    <div class="head-right-outer">
+
+
+                        <a class="btn-back mat-elevation-z" (click)="navigateBack();" mat-raised-button
+                            href="javascript:;"><span class="material-symbols-outlined">keyboard_backspace</span>
+                            Back</a>
+                    </div>
+                </div>
+            </div>
+            <div id="ShowDetails">
+                <div class="row mt-2 cd-box-1">
+                    <div class="col-md-12 lg-12">
+                        <ul class="top-cd">
+                            <li>
+                                <label>Organization</label>
+                                <span> {{tenantName}}</span>
+                            </li>
+                            <li>
+                                <label>Site</label>
+                                <span>{{siteName}}</span>
+                            </li>
+                            <li>
+                                <label>Vendor Name</label>
+                                <span>{{chargerPoint?.info?.chargePointVendor}}</span>
+                            </li>
+                            <li>
+                                <label>Model Number</label>
+                                <span>{{chargerPoint?.info?.chargePointModel}}</span>
+                            </li>
+                            <li>
+                                <label>Sr Number</label>
+                                <span> {{chargerPoint?.info?.chargePointSerialNumber}}</span>
+                            </li>
+
+                            <li>
+                                <label>Meter Type</label>
+                                <span>{{chargerPoint?.info?.meterType}}</span>
+                            </li>
+                            <li>
+                                <label>Meter Sr Number</label>
+                                <span>{{chargerPoint?.info?.meterSerialNumber}}</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="row mt-4 cd-box-2">
+                    <div class="col-lg-3 col-sm-3">
+                        <img src="../assets/img/EVCharger.svg" />
+                    </div>
+                    <div class="col-lg-9 col-sm-9">
+                        <h2>{{chargePointId}}</h2>
+                        <ul>
+                            <li>Charger Type: <span>{{chargerPoint.chargerType}}</span></li>
+                            <li>Connector Type:<span>{{chargerPoint.connectorType1}}</span></li>
+                            <li>Last HeartBeat Time:<span>{{chargerPoint.lastHeartBeatTime|date:"MM-dd-yyyy hh:mm a"}}</span></li>
+                        </ul>
+                        <ul>
+                            <li>No of Connections:<span>{{chargerPoint.numberOfConnectors}}</span></li>
+                            <li>Availability Status:<span class="active">{{chargerPoint.availabilityStatus}}</span></li>
+                        </ul>
+                        <div class="row charger-btn-outer">
+                            <div class="col-lg-12 d-flex">
+                                <a (click)="openPopup()" class="btn edit">Edit</a>
+                                <a (click)="deactivate();" class="btn deactivate">Deactivate</a>
+                                <!-- *ngIf="canViewConnector"  -->
+                                <a class="btn deactivate reset"
+                                    *ngIf="canViewConnector && chargerPoint.status == 'Online'" (click)="reset()">
+                                    Reset
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="ShowForm" style="display:none">
+                <form [formGroup]="chargerForm" #chargerRegistration="ngForm" class="margin-bottom-40 ucg-container">
+                    <div class="mt-3">
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <!-- [ngClass]="{'has-error' : name && isSubmitClicked}" -->
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>Name</mat-label>
+                                    <input matInput placeholder="Name" maxlength="150" min="3" max="150"
+                                        formControlName="name" required [readonly]="isTransferred">
+                                    <mat-error>
+                                        <span
+                                            *ngIf="(!chargerForm.get('name')?.valid && !chargerForm.get('name')?.errors?.serverError) && !name">
+                                            {{'requiredFields.name' | translate }}</span>
+                                        <span
+                                            *ngIf="!chargerForm.get('name')?.errors?.serverError && (name || (chargerForm.get('name')?.valid && !name))">
+                                            {{'requiredFields.nameLength' | translate }}</span>
+                                    </mat-error>
+                                    <mat-error>
+                                        <span *ngIf="chargerForm.get('name')?.errors?.serverError">
+                                            {{chargerForm.get('name')?.errors?.serverError | translate}}</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-4 ucg-input">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Charge Type</mat-label>
+                                    <mat-select formControlName="chargerType" required [disabled]="isTransferred">
+                                        <mat-option>Charge Type</mat-option>
+                                        <mat-option value="Level2">Level2</mat-option>
+                                        <mat-option value="DC Fast">DC Fast</mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                        <span *ngIf="!chargerForm.get('chargerType')?.valid">
+                                            ChargeType is required.</span>
+                                        <span *ngIf="!chargerForm.get('chargerType')?.errors?.serverError">
+                                            {{chargerForm.get('chargerType')?.errors?.serverError}}</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="form-group col-md-4 ucg-input">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>No Of Connectors</mat-label>
+                                    <mat-select formControlName="numberOfConnectors" required
+                                        [disabled]="isTransferred || IsDisabled">
+                                        <mat-option>No Of Connectors</mat-option>
+                                        <mat-option *ngFor="let connector of connectors" [value]="connector.value">
+                                            {{connector.text}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                        <span *ngIf="!chargerForm.get('connector')?.valid">
+                                            No of connectors is required.</span>
+                                        <span *ngIf="!chargerForm.get('connector')?.errors?.serverError">
+                                            {{chargerForm.get('connector')?.errors?.serverError}}</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+                            <div *ngIf="chargerForm.get('numberOfConnectors')?.value === 1 || chargerForm.get('numberOfConnectors')?.value === 2"
+                                class="form-group col-md-4 ucg-input">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Connector Type 1</mat-label>
+                                    <mat-select formControlName="connectorType1">
+                                        <mat-option>Connector Type</mat-option>
+                                        <mat-option value="J1772">J1772</mat-option>
+                                        <mat-option value="CCS">CCS</mat-option>
+                                        <mat-option value="CHAdeMO">CHAdeMO</mat-option>
+                                        <mat-option value="Tesla">Tesla</mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                        <span *ngIf="!chargerForm.get('connectorType1')?.valid">
+                                            Connector type is required.</span>
+                                        <span *ngIf="!chargerForm.get('connectorType1')?.errors?.serverError">
+                                            {{chargerForm.get('connectorType1')?.errors?.serverError}}</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div *ngIf="chargerForm.get('numberOfConnectors')?.value === 2"
+                                class="form-group col-md-4 ucg-input">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Connector Type 2</mat-label>
+                                    <mat-select formControlName="connectorType2">
+                                        <mat-option>Connector Type</mat-option>
+                                        <mat-option value="J1772">J1772</mat-option>
+                                        <mat-option value="CCS">CCS</mat-option>
+                                        <mat-option value="CHAdeMO">CHAdeMO</mat-option>
+                                        <mat-option value="Tesla">Tesla</mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                        <span *ngIf="!chargerForm.get('connectorType2')?.valid">
+                                            Connector type is required.</span>
+                                        <span *ngIf="!chargerForm.get('connectorType2')?.errors?.serverError">
+                                            {{chargerForm.get('connectorType2')?.errors?.serverError}}</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-4 ucg-input">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Availability Status</mat-label>
+                                    <mat-select formControlName="availabilityStatus" required
+                                        [disabled]="isTransferred">
+                                        <mat-option>Availability Status</mat-option>
+                                        <mat-option value="Active">Active</mat-option>
+                                        <mat-option value="Inactive">Inactive</mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                        <span *ngIf="!chargerForm.get('availabilityStatus')?.valid">
+                                            Availability Status is required.</span>
+                                        <span *ngIf="!chargerForm.get('availabilityStatus')?.errors?.serverError">
+                                            {{chargerForm.get('availabilityStatus')?.errors?.serverError}}</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="btn-group d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button *ngIf="canUpdateChargepoint" mat-raised-button color="secondary"
+                            class="mat-elevation-z btn-danger" (click)="deactivate();"
+                            [ngClass]="{'my-disable': isTransferred}">
+                            <span class="material-symbols-outlined">block</span> {{'button.deactivate' | translate }}
+                        </button>
+                        <button *ngIf="canUpdateChargepoint" mat-raised-button color="primary"
+                            class="mat-elevation-z btn-icon" (click)="updateCharge();"
+                            [ngClass]="{'my-disable': isTransferred}">
+                            <span class="material-symbols-outlined">check</span> {{'button.update' | translate }}
+                        </button>
+                        <button mat-raised-button color="secondary" class="mat-elevation-z btn-secondary"
+                            (click)="cancel('IsCancel');">
+                            <span class="material-symbols-outlined">close</span> {{'button.cancel' | translate }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="charge-info-tab-wrap">
+                <ul class="ci-tabs" id="myTab" role="tablist">
+                    <li class="" role="presentation">
+                        <button class="ci-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                            type="button" role="tab" aria-controls="home" aria-selected="true">
+                            <span class="material-symbols-outlined">ev_charger</span> Connectors
+                        </button>
+                    </li>
+                    <li class="" role="presentation">
+                        <button (click)="selectedTabValue('Configuration')" class="ci-link" id="profile-tab"
+                            data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab"
+                            aria-controls="profile" aria-selected="false">
+                            <span class="material-symbols-outlined">discover_tune</span> Configuration
+                        </button>
+                    </li>
+                    <li class="" role="presentation">
+                        <button class="ci-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
+                            type="button" role="tab" aria-controls="contact" aria-selected="false">
+                            <span class="material-symbols-outlined">settings</span>
+                            Operations
+                        </button>
+                    </li>
+                    <li class="" role="presentation">
+                        <button class="ci-link" (click)="selectedTabValue('Message')" id="messages-tab"
+                            data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab"
+                            aria-controls="messages" aria-selected="false">
+                            <span class="material-symbols-outlined">chat_bubble</span>
+                            Messages
+                        </button>
+                    </li>
+                    <li class="" role="presentation">
+                        <button class="ci-link" (click)="selectedTabValue('Image')" id="img-tab" data-bs-toggle="tab"
+                            data-bs-target="#imgs" type="button" role="tab" aria-controls="imgs" aria-selected="false">
+                            <span class="material-symbols-outlined">insert_photo</span>
+                            Images
+                        </button>
+                    </li>
+                    <!-- <li class="" role="presentation">
+                        <button class="ci-link" (click)="selectedTabValue('smartCharging')" id="smartCharging-tab" data-bs-toggle="tab"
+                            data-bs-target="#smartCharging" type="button" role="tab" aria-controls="smartCharging" aria-selected="false">
+                            <span class="material-symbols-outlined">ev_station</span>
+                            Smart Charging
+                        </button>
+                    </li> -->
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="connector-info-wrap">
+                            <div class="ciw-row">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="cnt-box">
+                                            <div class="cnt-img">
+                                                <img src="../assets/img/connector.png" alt="" />
+                                            </div>
+                                            <div class="cnt-details">
+                                                <h3>Connector 1</h3>
+                                                <i [ngClass]="{'connector-online':chargerPoint.connector1Status == 'Available' ,
+                                        'connector-occupied':chargerPoint.connector1Status == 'Occupied',
+                                        'connector-preparing':chargerPoint.connector1Status == 'Preparing',
+                                        'connector-offline':chargerPoint.connector1Status == 'Offline'} "></i>
+                                                <p class="cnt-st">Status: <b>{{chargerPoint.connector1Status}}</b></p>
+                                                <ul>
+
+                                                    <li>
+                                                        <span class="material-symbols-outlined">speed</span>
+                                                        <p>Last Meter:
+                                                            <b>{{(chargerPoint.connector1LastMeter)?.toFixed(2)}}
+                                                                KWH</b>
+                                                        </p>
+                                                    </li>
+                                                    <li>
+                                                        <span class="material-symbols-outlined">calendar_month</span>
+                                                        <p>Last Meter Time: <b>{{chargerPoint.connector1LastMeterTime|
+                                                                date:"MM-dd-yyyy hh:mm a"}}</b></p>
+                                                    </li>
+                                                    <li>
+                                                        <span class="material-symbols-outlined">query_builder</span>
+                                                        <p>Last Transaction Time: <b>{{chargerPoint.lastTransactionTimeC1|
+                                                                date:"MM-dd-yyyy hh:mm a"}}</b></p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <!-- Button forms -->
+                                            <div class="cnt-status">
+                                                <button
+                                                    *ngIf="chargerForm.get('connector1Status')?.value == 'Available' && chargerPoint.status == 'Online'"
+                                                    mat-raised-button color="warning"
+                                                    class="btn-warning btn-icon mt-2 mat-elevation-z"
+                                                    (click)="connector1InOperative()"><span
+                                                        class="material-symbols-outlined">error</span>
+                                                    InOperative</button>
+                                                <button
+                                                    *ngIf="chargerForm.get('connector1Status')?.value == 'Faulted' || chargerForm.get('connector1Status')?.value != 'Available' && chargerPoint.status == 'Online'"
+                                                    mat-raised-button color="info"
+                                                    class="btn-info btn-icon mt-2 mat-elevation-z"
+                                                    (click)="connector1Operative()"><span
+                                                        class="material-symbols-outlined">check_circle</span>
+                                                    Operative</button>
+                                                <button
+                                                    *ngIf="(chargerForm.get('connector1Status')?.value == 'Available' || chargerForm.get('connector1Status')?.value == 'Preparing') && chargerPoint.status == 'Online'"
+                                                    mat-raised-button color="primary"
+                                                    class="btn-primary btn-icon mt-2 mat-elevation-z"
+                                                    (click)="connector1Start()"><span
+                                                        class="material-symbols-outlined">preliminary</span>
+                                                    Start</button>
+                                                <button
+                                                    *ngIf="chargerForm.get('connector1Status')?.value == 'Occupied' && (chargerForm.get('connector1Status')?.value != 'Available' && chargerPoint.status == 'Online')"
+                                                    mat-raised-button color="danger"
+                                                    class="btn-danger btn-icon mt-2 mat-elevation-z"
+                                                    (click)="connector1Stop()"><span
+                                                        class="material-symbols-outlined">stop_circle</span>
+                                                    Stop</button>
+                                                <button *ngIf="chargerPoint.status == 'Online'" mat-raised-button
+                                                    color="success" class="btn-success btn-icon mt-2 mat-elevation-z"
+                                                    (click)="connector1Unlock()"><span
+                                                        class="material-symbols-outlined">lock_open_right</span>
+                                                    Unlock</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6"
+                                        *ngIf="chargerPoint.numberOfConnectors >= 2 && (chargerPoint.connector2Id !=null)">
+                                        <div class="cnt-box">
+                                            <div class="cnt-img">
+                                                <img src="../assets/img/connector.png" alt="" />
+                                            </div>
+                                            <div class="cnt-details">
+                                                <h3>Connector 2</h3>
+                                                <i [ngClass]="{'connector-online':chargerPoint.connector2Status == 'Available' ,
+                                        'connector-occupied':chargerPoint.connector2Status == 'Occupied',
+                                        'connector-preparing':chargerPoint.connector2Status == 'Preparing',
+                                        'connector-offline':chargerPoint.connector2Status == 'Offline'} "></i>
+
+
+
+                                                <p class="cnt-st">Status: <b>{{chargerPoint.connector2Status}}</b></p>
+                                                <ul>
+                                                    <li>
+                                                        <span class="material-symbols-outlined">speed</span>
+                                                        <p>Last Meter:
+                                                            <b>{{(chargerPoint.connector2LastMeter)?.toFixed(2)}}
+                                                                KWH</b>
+                                                        </p>
+                                                    </li>
+                                                    <li>
+                                                        <span class="material-symbols-outlined">calendar_month</span>
+                                                        <p>Last Meter Time: <b>{{chargerPoint.connector2LastMeterTime|
+                                                                date:"MM-dd-yyyy hh:mm a"}}</b></p>
+                                                    </li>
+                                                    <li>
+                                                        <span class="material-symbols-outlined">query_builder</span>
+                                                        <p>Last Transaction Time: <b>{{chargerPoint.lastTransactionTimeC2|
+                                                                date:"MM-dd-yyyy hh:mm a"}}</b></p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div *ngIf="canViewConnector" class="cnt-status">
+                                                <!-- <div class="cnt-status"> -->
+                                                <button
+                                                    *ngIf="chargerForm.get('connector2Status')?.value == 'Available' && chargerPoint.status == 'Online'"
+                                                    mat-raised-button color="warning"
+                                                    class="btn-warning btn-icon mt-2 mat-elevation-z"
+                                                    (click)="connector2InOperative()"><span
+                                                        class="material-symbols-outlined">error</span>
+                                                    InOperative</button>
+                                                <button
+                                                    *ngIf="chargerForm.get('connector2Status')?.value == 'Faulted' || chargerForm.get('connector2Status')?.value != 'Available' && chargerPoint.status == 'Online'"
+                                                    mat-raised-button color="info"
+                                                    class="btn-info btn-icon mt-2 mat-elevation-z"
+                                                    (click)="connector2Operative()"><span
+                                                        class="material-symbols-outlined">check_circle</span>
+                                                    Operative</button>
+                                                <button
+                                                    *ngIf="(chargerForm.get('connector2Status')?.value == 'Available' || chargerForm.get('connector2Status')?.value == 'Preparing') && chargerPoint.status == 'Online'"
+                                                    mat-raised-button color="primary"
+                                                    class="btn-primary btn-icon mt-2 mat-elevation-z"
+                                                    (click)="connector2Start()"><span
+                                                        class="material-symbols-outlined">preliminary</span>
+                                                    Start</button>
+                                                <button
+                                                    *ngIf="chargerForm.get('connector2Status')?.value == 'Occupied' && (chargerForm.get('connector2Status')?.value != 'Available' && chargerPoint.status == 'Online')"
+                                                    mat-raised-button color="danger"
+                                                    class="btn-danger btn-icon mt-2 mat-elevation-z"
+                                                    (click)="connector2Stop()"><span
+                                                        class="material-symbols-outlined">stop_circle</span>
+                                                    Stop</button>
+                                                <button *ngIf="chargerPoint.status == 'Online'" mat-raised-button
+                                                    color="success" class="btn-success btn-icon mt-2 mat-elevation-z"
+                                                    (click)="connector2Unlock()"><span
+                                                        class="material-symbols-outlined">lock_open_right</span>
+                                                    Unlock</button>
+                                                <!-- </div> -->
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <ng-template mat-tab-label>
+                            <i class="ucg-config-icon"></i>
+                            <p>Configuration</p>
+                        </ng-template>
+                        <div class="container-fluid mt-4" [ngClass]="{'my-disable': status}">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3>ChargePoint Configuration</h3>
+                                </div>
+                            </div>
+                            <div class="row" *ngFor="let configure of configurations">
+                                <div class="col-md-5">
+                                    <mat-form-field appearance="outline" class="w-100 ucg-form-control">
+                                        <mat-label>Key</mat-label>
+                                        <input matInput [value]="configure.key" [readonly]="configure.readonly">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field appearance="outline" class="w-100 ucg-form-control">
+                                        <mat-label>Value</mat-label>
+                                        <input matInput [value]="configure.value" [readonly]="configure.readonly">
+                                    </mat-form-field>
+                                </div>
+                                <div *ngIf="canUpdateConfiguration" class="col-md-3">
+                                    <button *ngIf="!configure.readonly" mat-raised-button
+                                        class="primary btn-primary w-100"
+                                        (click)="updateConfigure(configure)">Update</button>
+                                    <button [disabled]="configure.readonly" *ngIf="configure.readonly" mat-raised-button
+                                        class="secondary btn-secondary w-100">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                        <ng-template mat-tab-label>
+                            <i class="ucg-operation-icon"></i>
+                            <p>Operations</p>
+                        </ng-template>
+
+                        <div class="container-fluid mt-4" [ngClass]="{'my-disable': status}">
+                            <form [formGroup]="firmwareForm">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3>Operations</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-9 col-md-6">
+                                        <mat-form-field appearance="outline" class="w-100 ucg-form-control">
+                                            <mat-label>Location</mat-label>
+                                            <input matInput formControlName="location" placeholder="Location">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button mat-raised-button color="primary" class="btn-primary mx-3"
+                                            (click)="UpdateFirmware()">Update Firmware</button>
+                                        <!-- <button mat-stroked-button color="primary" class="w-100 ucg-btn">Update Firmware</button> -->
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="row">
+                                <div class="col-lg-9 col-md-6">
+                                    <div style="margin-top: 15px;">
+                                        <a target="_blank" href="#">No file to view</a>
+                                    </div>
+                                    <!-- <mat-form-field appearance="outline" class="w-100 ucg-form-control">
+                                            <mat-label>Diagnostic File</mat-label>
+                                            <input matInput formControlName="diagnostic"
+                                                placeholder="Diagnostic file">
+                                        </mat-form-field> -->
+                                </div>
+                                <div class="col-md-3">
+                                    <button mat-raised-button color="primary" class="btn-primary mx-3"
+                                        (click)="Diagnostics()">Get Diagnostics</button>
+                                    <!-- <button mat-stroked-button color="primary" class="w-100 ucg-btn">Get Diagnostics</button> -->
+                                </div>
+                            </div>
+                            <hr>
+                            <form [formGroup]="triggerForm">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-4">
+                                        <mat-form-field appearance="outline" class="w-100 ucg-form-control">
+                                            <mat-label>Select Message Type</mat-label>
+                                            <mat-select formControlName="messageType" required>
+                                                <mat-option>Message Type</mat-option>
+                                                <mat-option value='BootNotification'>BootNotification </mat-option>
+                                                <mat-option value='DiagnosticsStatusNotification'>
+                                                    DiagnosticsStatusNotification</mat-option>
+                                                <mat-option value='FirmwareStatusNotification'>
+                                                    FirmwareStatusNotification</mat-option>
+                                                <mat-option value='Heartbeat'>Heartbeat</mat-option>
+                                                <mat-option value='MeterValues'>MeterValues</mat-option>
+                                                <mat-option value='StatusNotification'>StatusNotification
+                                                </mat-option>
+                                            </mat-select>
+                                            <mat-error>
+                                                <span *ngIf="!triggerForm.get('messageType')?.valid">
+                                                    Message Type Id is required.</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <!-- <div class="label">ConnectorId: {{triggerConnector}}</div> -->
+                                        <mat-form-field appearance="outline" class="w-100 ucg-form-control">
+                                            <mat-label>Connector Id</mat-label>
+                                            <mat-select formControlName="connectorId" required>
+                                                <mat-option>No Of Connectors</mat-option>
+                                                <mat-option value='0'>0</mat-option>
+                                                <mat-option *ngFor="let connector of connectors"
+                                                    [value]="connector.value">
+                                                    {{connector.text}}
+                                                </mat-option>
+                                            </mat-select>
+                                            <mat-error>
+                                                <span *ngIf="!triggerForm.get('connectorId')?.valid">
+                                                    Connector Id is required.</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button mat-raised-button color="primary" class="btn-primary mx-3"
+                                            (click)="Trigger()">Trigger Message</button>
+                                        <!-- <button mat-stroked-button color="primary" class="w-100 ucg-btn">Trigger Message</button> -->
+                                    </div>
+                                </div>
+                            </form>
+                            <hr>
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <button mat-raised-button color="primary" class="btn-primary w-100"
+                                        (click)="clearCache()">Clear
+                                        Cache</button>
+                                    <!-- <button mat-stroked-button color="primary" class="w-100 ucg-btn">Clear Cache</button> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="messages" role="tabpanel" aria-labelledby="messages-tab">
+                        <ng-template mat-tab-label>
+                            <i class="ucg-messages-icon"></i>
+                            <p>Messsages</p>
+                        </ng-template>
+                        <div class="container-fluid mt-4">
+                            <form [formGroup]="chargerMessageForm">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3>Messsages</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-4">
+                                        <mat-form-field appearance="outline" class="w-100 ucg-form-control">
+                                            <mat-label>Choose a Date</mat-label>
+                                            <input matInput [matDatepicker]="picker" formControlName="date"
+                                                placeholder="Choose a date" [max]="maxDate" required>
+                                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker></mat-datepicker>
+                                            <mat-error>
+                                                <span *ngIf="!chargerMessageForm.get('date')?.valid">
+                                                    Date is required.</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+
+                                        <mat-form-field appearance="outline" class="w-100 ucg-form-control">
+                                            <mat-label>Connector Id</mat-label>
+                                            <mat-select formControlName="messageConnectorId" required>
+                                                <mat-option>Select Connector Id</mat-option>
+                                                <mat-option value='0'>0</mat-option>
+                                                <mat-option *ngFor="let connector of connectors"
+                                                    [value]="connector.value">
+                                                    {{connector.text}}
+                                                </mat-option>
+                                            </mat-select>
+                                            <mat-error>
+                                                <span *ngIf="!chargerMessageForm.get('messageConnectorId')?.valid">
+                                                    Connector is required.</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button mat-raised-button color="primary" class="btn-primary w-100"
+                                            (click)="find()">Find</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="mat-elevation-z8 ucg-table">
+                                        <mat-table #table [dataSource]="dataSource" matSort matSortActive="logTime"
+                                            matSortDirection="asc">
+
+                                            <ng-container matColumnDef="logTime">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header> Log Time
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element"> {{element.logtime |
+                                                    date:"MM-dd-yyyy h:mm a" : "CST"}} </mat-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="id">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header> Id
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="connector">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header class="alignCenter">
+                                                    Connector
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element" class="alignCenter">
+                                                    {{element.connectorId}}
+                                                </mat-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="messageType">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header> Message Type
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element"> {{element.messageType}}
+                                                </mat-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="result">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header> Result
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let element"> {{element.result}} </mat-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="rawMessage">
+                                                <mat-header-cell *matHeaderCellDef> Message </mat-header-cell>
+                                                <mat-cell *matCellDef="let element">
+
+                                                    <i class="json-icon" (click)="jsonPopUp(element.rawMessage)"></i>
+
+                                                </mat-cell>
+                                            </ng-container>
+
+                                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                                        </mat-table>
+                                        <div *ngIf="dataSource.data.length == 0 || dataSource.filteredData.length == 0"
+                                            class="norecord">{{'table.noRecordFound' | translate}}</div>
+                                        <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
+                                            [showFirstLastButtons]="true">
+                                        </mat-paginator>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image tab -->
+                    <div class="tab-pane fade" id="imgs" role="tabpanel" aria-labelledby="img-tab">
+                        <ng-template mat-tab-label>
+                            <i class="ucg-messages-icon"></i>
+                            <p>Image</p>
+                        </ng-template>
+                        <div class="container-fluid mt-4">
+                            <form [formGroup]="chargerImageForm">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3>Image</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4">
+                                        <mat-form-field appearance="outline" class="w-100 ucg-form-control">
+                                            <mat-label>Connector Id</mat-label>
+                                            <mat-select formControlName="chargerConnectorId" required>
+                                                <mat-option>Select Connector Id</mat-option>
+                                                <mat-option value='0'>0</mat-option>
+                                                <mat-option *ngFor="let connector of connectors"
+                                                    [value]="connector.value">
+                                                    {{connector.text}}
+                                                </mat-option>
+                                            </mat-select>
+                                            <mat-error>
+                                                <span *ngIf="!chargerImageForm.get('chargerConnectorId')?.valid">
+                                                    Connector is required.</span>
+                                            </mat-error>
+                                        </mat-form-field>                                   
+                                    </div>
+                                    <div class="col-md-4 mt-1">
+                                        <label for="images" class="drop-container" id="dropcontainer">                                          
+                                            <input type="file" id="images" accept="image/*" (change)="onFileSelected($event)" required multiple>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-3">
+                                        <button mat-raised-button color="primary" class="btn-primary w-100"
+                                        (click)="onUpload()">Upload</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>                       
+                    </div>
+                    <!-- Smart Charging -->
+                    <!-- <div class="tab-pane fade" id="smartCharging" role="tabpanel" aria-labelledby="smartCharging-tab">
+                        <ng-template mat-tab-label>
+                            <i class="ucg-messages-icon"></i>
+                            <p>Smart Charging</p>
+                        </ng-template>
+                        <div class="container-fluid mt-4">
+                            <form [formGroup]="smartChargingForm">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3>Smart Charging</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4">
+                                        <mat-form-field appearance="outline" class="w-100 ucg-form-control">
+                                            <mat-label>Connector Id</mat-label>
+                                            <mat-select formControlName="chargerConnectorId" required>
+                                                <mat-option>Select Connector Id</mat-option>
+                                                <mat-option value='0'>0</mat-option>
+                                                <mat-option *ngFor="let connector of connectors"
+                                                    [value]="connector.value">
+                                                    {{connector.text}}
+                                                </mat-option>
+                                            </mat-select>
+                                            <mat-error>
+                                                <span *ngIf="!smartChargingForm.get('chargerConnectorId')?.valid">
+                                                    Connector is required.</span>
+                                            </mat-error>
+                                        </mat-form-field> 
+                                                                     
+                                    </div>
+                                    <div class="col-md-2">
+                                        <mat-form-field appearance="outline" class="w-100 ucg-form-control">
+                                            <mat-label>Start Time</mat-label>
+                                            <input matInput type="time" formControlName="startTime" placeholder="Start Time">
+                                        </mat-form-field>
+                                    </div>  
+                                    <div class="col-md-2">
+                                        <mat-form-field appearance="outline" class="w-100 ucg-form-control">
+                                            <mat-label>Stop Time</mat-label>
+                                            <input matInput type="time" formControlName="stopTime" placeholder="Stop Time">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <mat-form-field appearance="outline" class="w-100 ucg-form-control">
+                                            <mat-label>KWH</mat-label>
+                                            <input matInput formControlName="KWH" placeholder="KWH" type="number" min="0" max="11">
+                                            <mat-error *ngIf="smartChargingForm.get('KWH').errors && (smartChargingForm.get('KWH').dirty || smartChargingForm.get('KWH').touched)">
+                                                <span *ngIf="smartChargingForm.get('KWH').hasError('min')">Value must be greater than or equal to 0</span>
+                                                <span *ngIf="smartChargingForm.get('KWH').hasError('max')">Value must be less than or equal to 11</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>   
+
+                                    <div class="col-md-3">
+                                        <button mat-raised-button color="primary" class="btn-primary w-100"
+                                        (click)="onSubmit()">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>   
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mat-elevation-z8 ucg-table">
+                                    <mat-table #table [dataSource]="dataSource1" matSort matSortActive="chargePointId"
+                                        matSortDirection="asc">
+
+                                        <ng-container matColumnDef="chargePointId">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header>ChargePoint Id
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let element"> {{element.chargePointId}} </mat-cell>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="connector">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header class="alignCenter">
+                                                Connector
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let element" class="alignCenter">
+                                                {{element.connectorId}}
+                                            </mat-cell>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="kwh">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header> KWH
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let element"> {{element.kwh}}
+                                            </mat-cell>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="startTime">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header> Start Time
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let element"> {{element.startTime}} </mat-cell>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="stopTime">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header> Stop Time
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let element"> {{element.stopTime}} </mat-cell>
+                                        </ng-container>
+
+                                        <mat-header-row *matHeaderRowDef="displayedSmartColumns"></mat-header-row>
+                                        <mat-row *matRowDef="let row; columns: displayedSmartColumns;"></mat-row>
+                                    </mat-table>
+                                    <div *ngIf="dataSource1.data.length == 0 || dataSource1.filteredData.length == 0"
+                                        class="norecord">{{'table.noRecordFound' | translate}}</div>
+                                    <mat-paginator #paginator [length]="dataSource1.data.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
+                                        [showFirstLastButtons]="true">
+                                    </mat-paginator>
+                                </div>
+                            </div>
+                        </div>                    
+                    </div> -->
+                    <div *ngIf="process" class="loader-outer static-loader">
+                        <div class="loader-inner">
+                            <mat-spinner [diameter]="40"></mat-spinner>
+                            <small>Loading</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit : {{chargePointId}}</h4>
+            </div>
+            <div class="modal-body">
+                <!-- <p>One Stop Solution for all CS problems</p> -->
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="closePopup()">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="ucg-dialog-box">
+    <div class="dialog-header-primary">
+        <h4 style="margin: 0;">Merchant Key</h4>
+    </div>
+    <div class="form-row">
+        <mat-radio-group [(ngModel)]="merchantKey" (change)="radioChange($event)">
+            <mat-radio-button [color]="'primary'" value="1">Universal EV Merchant Key</mat-radio-button>
+            &nbsp; &nbsp;
+            <mat-radio-button [color]="'primary'" value="2">Set Different Merchant Key</mat-radio-button>
+        </mat-radio-group>
+        <br /><br />
+        <mat-form-field *ngIf="merchantKey === '2'" class="w-100 ucg-input" appearance="outline">
+            <mat-label>{{'formFields.keyName' | translate}}</mat-label>
+            <input matInput autocomplete="off" [(ngModel)]="keyName" placeholder="{{'formFields.keyName' | translate}}"
+                tabindex="100" required>
+            <mat-error>
+                <span>
+                    {{'requiredFields.keyName' | translate }}</span>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field *ngIf="merchantKey === '2'" class="w-100 ucg-input" appearance="outline">
+            <mat-label>{{'formFields.apiLoginID' | translate}}</mat-label>
+            <input matInput autocomplete="off" [(ngModel)]="apiLoginID"
+                placeholder="{{'formFields.apiLoginID' | translate}}"
+                placeholder="{{'formFields.apiLoginID' | translate}}" tabindex="101" required>
+            <mat-error>
+                <span>
+                    {{'requiredFields.apiLoginID' | translate }}</span>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field *ngIf="merchantKey === '2'" class="w-100 ucg-input" appearance="outline">
+            <mat-label>{{'formFields.apiTransactionKey' | translate}}</mat-label>
+            <textarea matInput autocomplete="off" [(ngModel)]="apiTransactionKey" rows="3"
+                placeholder="{{'formFields.apiTransactionKey' | translate}}" tabindex="102" required></textarea>
+            <mat-error>
+                <span>
+                    {{'requiredFields.apiTransactionKey' | translate }}</span>
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="btn-group d-grid gap-2 d-md-flex justify-content-md-end m-20">
+        <button mat-raised-button color="primary" class="btn-primary btn-popup mat-elevation-z"
+            [disabled]="!(merchantKey === '1') && (!(merchantKey === '2') || !keyName || !apiLoginID || !apiTransactionKey)"
+            (click)="save()"><span class="material-symbols-outlined">check</span> Save</button>
+        <button mat-raised-button color="secondary" class="btn-secondary btn-popup mat-elevation-z"
+            [mat-dialog-close]="false"><span class="material-symbols-outlined">close</span> Cancel</button>
+    </div>
+</div>

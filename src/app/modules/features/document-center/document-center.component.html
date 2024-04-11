@@ -1,0 +1,113 @@
+<div class="mt-3">
+    <div class="card mat-elevation-z mb-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 lg-6">
+                    <h2 class="h2">Document Center</h2>
+                </div>
+            </div>
+            <div class="filter-outer">
+                <form [formGroup]="documentCenterForm" #documentCenter="ngForm" class="margin-bottom-40"
+                    autocomplete="off">
+                    <div class="row">
+                        <div class="col-md-4 lg-4">
+                            <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                <mat-label>Select Organization</mat-label>
+                                <mat-select formControlName="tenants" tabindex="1" required>
+                                    <mat-option *ngFor="let tenant of tenants" [value]="tenant"
+                                        (click)="tenantSelection()">
+                                        {{tenant.name}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    <span *ngIf="!documentCenterForm.get('tenants')?.valid">
+                                        Organization name is required.</span>
+                                </mat-error>
+                            </mat-form-field>
+                            <!-- <mat-form-field *ngIf="!startDate" class="w-100 ucg-input" appearance="outline">
+                                <mat-label>Select Start Month</mat-label>
+                                <input matInput type="month" [matDatepicker]="picker" [(ngModel)]="startDate" [max]="maxDate" required
+                                    readonly (dateChange)="getReport()">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker startView="multi-year" #picker (monthSelected)="closeStartDatePicker($event, picker)"></mat-datepicker>
+                            </mat-form-field>
+                            <mat-form-field *ngIf="startDate" class="w-100 ucg-input" appearance="outline">
+                                <mat-label>Select Start Month</mat-label>
+                                <span>{{startDate}}</span>
+                                <input type="month" matInput style="display: none;">
+                            </mat-form-field> -->
+                        </div>
+                        <div class="col-md-4 lg-4">
+                            <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                <mat-label>Select Site</mat-label>
+                                <mat-select formControlName="sites"
+                                    [disabled]="!documentCenterForm.get('tenants')?.value" tabindex="1" required>
+                                    <mat-option *ngFor="let site of sites" [value]="site">
+                                        {{site.name}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    <span *ngIf="!documentCenterForm.get('sites')?.valid">
+                                        Site is required.</span>
+                                </mat-error>
+                            </mat-form-field>
+                            <!-- <mat-form-field *ngIf="!endDate" class="w-100 ucg-input" appearance="outline">
+                                <mat-label>Select End Month</mat-label>
+                                <input matInput type="month" [matDatepicker]="picker" [(ngModel)]="endDate" [max]="maxDate" required
+                                    readonly (dateChange)="getReport()">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker startView="multi-year" #picker (monthSelected)="closeEndDatePicker($event, picker)"></mat-datepicker>
+                            </mat-form-field>
+                            <mat-form-field *ngIf="endDate" class="w-100 ucg-input" appearance="outline">
+                                <mat-label>Select End Month</mat-label>
+                                <span>{{endDate}}</span>
+                                <input type="month" matInput style="display: none;">
+                            </mat-form-field> -->
+                        </div>
+                        <div class="col-md-2 lg-2">
+                            <button mat-raised-button color="primary" class="btn-primary mt-02 w-100" [disabled]="!documentCenterForm.get('tenants')?.value && !documentCenterForm.get('sites')?.value" (click)="resetForm(documentCenter)">
+                                <img class="download-btn"
+                                    src="data:image/png;base64,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">
+                                Reset
+                            </button>
+                        </div>
+                        <div class="col-md-2 lg-2">
+                            <button mat-raised-button color="primary" class="btn-primary mt-02 w-100" (click)="getList()"
+                            [disabled]="!documentCenterForm.get('tenants')?.value || !documentCenterForm.get('sites')?.value">
+                                <img class="download-btn"
+                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAAE50lEQVR4nO2dS4tcRRiGS0edoIN4W4UsEgnRnZshICIkLpLRuB13kstC3ZigLvwJgiaQaIYslCwMySIMLrNwGYl3RDGCuJqJohhnI4lMOjh55KO/xo6eqnPpU5dzuh5oaJLOed96p6ZO1VfVJ8ZkMplMJpPJdAZgE3AE+AK4TlwGwCVgp+kTwBbgO9JjHdhjetSTUwy5X2HrcJE6650PW8fkLrDe6bCBa6TFX70Mm/R4uuSHfwN43nQNEsMMPfUvbBLD/OurX2GTGOZ2b/0Jm8Qw//fXj7BJDFPssfthkxjG7rPbYZMYxu21u2GTGKbcbzfDJjFMNc/dC5vEMNV9dytsEsPU896dsEkMU99/N8ImMUyzNqQfNolhmrdjd4USa7w9SNJjs8ewL7WbXj1zqfHmhO1xhT1oL7n6xlJjIGH76tntplfP1FRhctBhyEEHIgcdiBx0IHLQgchBByIHHYgcdCBy0IHIQQciBx2IHHR1fgPOAoflCC+wHXgQuFtf8n4HsAC8BpwHfh/94xy0mzXgBDDfsHB2B/AUsJSDLuZn/erHvabrkCY3tQfPmb5AevwIPGH6Bmmx3KtePA7pcAqYqeh5G/CKzj6+0ZvlTX2t6Z+d1c9sMylAGpyq4PNO4AXgE+BWjWvLZy8Ci3KNMKkWNyCF4WKmxOMzwA8taF0GdoVL9/ZGxL7xzZV8fXqpZU3p4e8Bs9MS9MA1uwAeBj73qP+paExD0G+VhCy/5r65HCxs4vALcJ9juKjSk1d0USP1jsfkevqS93v17+QzVXq2/2GEOBxx+Ckbk1eB/VVmEDpTOQBcKbnmydaDLTATmjVb7UJnFy7ON6l7aE+X2Y3rBrm7lUAdJkLzrsXHTMkU7m2pwk3QTqngHS0Zr/3NswnPvMWHLEZcPblxyP8J29WzFyfVcImH5FdbYLris43JrZVJdRixjdkX29IpEg7JOUftwras3u+hzQctWuJha9t6I9GQHLZ4kOJPESs+xk29H8hvShEvta03Eg3JHosHqbQVccJLo4easgwv4owvwZA8avEgZc0i9npp9FDzWYvm174EQ/KQxYPMrYvY4aXRQ01ZQRZx1ZdgSO6xeJACUxHedlvk2hbNG74EpzXo+y2a130JhuSRDgwdK74EQ7K95s1wwUujh5rPWTS/8iUYkoUOTO/e9yUYkjcaLFhmPC1YbMvwF9vWG4mmvgQ/4KHNhyxaG/Is7bb1RqIhuWpbUuuRgCKu2HZjJpjWyZm+Ii60pVMkHJqdFh9y7sLGcotl0o8cOvsm1XCJh2bJse3k2pA92kLh/5jj+l/2rfD/p2NjdlfJKaTlJsOIDheunrzR9Ox1HRMxeL3BtGt8zD5YZTais4tDjjF5/CCP351w4vCHLIEtfmb1CEAZq/pDka9QPK69dk7fS2XuZIXd73EueA074qPn3yk5QPN9BE/+wo74nyn8DTxZEnaVnt2NsPXbTbH4CXjA4W1Wh4A6x3TL2NAxOWzY2phvicfHwF0VnpHUxlk8mcLNa5slzOBhb4kc9umyOazOsxd1BXmrZg+W0PaNa8QMW4RfBT6LdIP8sMZXK7YCL8tGquzxaT17oE8GW9We+4EUiFy1i2hhTyPksJML+3hAS1Md9rXYHqcl7PXY/qYl7NOxvZm+oWEf19mXPA5Zpp9z/wDkE3gUex2EsQAAAABJRU5ErkJggg==">
+                                View
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <br />
+            <div *ngIf="process" class="text-center norecord">
+                <div class="loader-inner">
+                    <mat-spinner [diameter]="40"></mat-spinner>
+                    <small>Fetching Documents...</small>
+                </div>
+            </div>
+            <div *ngIf="!process && apiNoData" class="text-center norecord">
+                <div class="loader-inner" style="font-size: 16px; color: #ed5144;">
+                    No records found.
+                </div>
+            </div>
+            <div *ngIf="!process && !apiNoData" class="body-content-outer">
+                <div class="row">
+                    <div *ngFor="let document of documentArray; let i = index;" class="col-md-3 lg-3 download-card">
+                        <img width="60px"
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAB1klEQVR4nO2Yy00EQQwFNwlCJBeOLx8unMnCQXBASCwJgNiGXtXYUyU5gVf+tPpyEREREZE/kNf3a7N6GiX6AIFeTy3hAGFeTy3hAEFeb6nn+pgpgQ42N1a9fc6U0ElATZTQTUBNk9BRQE2S0FVATZHQWUBNkNBdQHWXMEFAdZawGsTD48tdKv8U0FbCJAHVUcI0AdVNwkQB1UnCVAHVRcJkAdVBwnQBdXQJZxBQR5ZwFgH1gwQ6/1MJqG8k0Pm3+YrInYrOXwE0dAfGCeBDiCuIDyJQ0RvIFURDd2CcAD6EuIL4IAIVvYFcQTR0B8YJ4EOIK+j2EH77RHu402fdrk+99jdAAZtRAIwCYOgjGI8wH0J8BZ23LjR0AFHAWgg+Qzez2oEK2IwCYBQAQx/BeIT5EAIWPQBOAA3dgXEC1kLwGbqZ1Q5UwGYUAKMAGPoIxiPMhxCw6AFwAmjoDowTsBaCz9DNrHagAjajABgFwNBHMB5hPoSARQ+AE0BDd2CcgLUQfIZuZrUDFbAZBcAoAIY+gvEI8yEELHoAnAAaugPjBPAhxBXEBxGo6A3kCqKhOzBOAB9CXEF8EIGK3kCuIBq6A+ME8CHEFcQHEajoDSQiIiJyackXX7eQ9ddGGwgAAAAASUVORK5CYII=">
+                        <img class="download-circle-btn" (click)="downloadDocument(document)"
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFHElEQVR4nO1b3W8UVRSfxBLxTeRfEDDxsU8qZiUq3XsHbVGL3zZ+YXgw+uILCWmD8Ohn95xtY2iJqYDUhMQYxT13u9BKgXZb2kYgILRdCG0iTb+oChZ6zZ3Ssu1s253ZuTO7rb/kJJvNzNz7+825955z7xnD+B96UUbVa00R3coIqhjBQUbYwQVeYYTDnGBKmfV7+r+O6WugSt2j7jUKEVuO1j7CCfYygWeYwDtcoHRj0/dCJyPcUxLHDUY+ozhZu8okrGAEp90SXlIQwlOM4K1QorLIyCfiYcIdnKBPF/EMntHLRfSDwIUwBT7JBfb4RdxmhN1himz0nXh562cPMIIaaxILivysCKoPgKFE/WpfyJfEcQMj6AqcuF2IsyXxyKNayYdjkacZwXjgZBe2MS5gkxbyTEAZJ/gnD0guakzALR6LbvOUvBnHcibgdtDkHIhwmxG+6Al5LmATF3gzaFJuPIGJ6LM5R3Qsv8f8EgajZiy6zhX5UKJ+tQpldXVu27F98tPuX+TOzh/l8/EanUL0qGXbsQBMrfOaOvXh6UY5/u9NOYO+G0Oy/Ng+fSIQRByRD1Nko84gp+16v5yP/ZdO6RRgisfh8Sxdv7JId6Bz7a9RmwBNgxf0CTBtPSpvyeLt4w7NHZEDf4/ZBEgMXtQtgDQJty9KvjhZu8qPrC4oAZjAy4tmkCZhhe5OBCmAZXF8c0EBuMC25S4AE9CakTyj6vW+vIGgPUCgzLi9xgn2rhQBuIDdGTwAulaQAO1zyJdR9dpcdm8LTQCVLZotuOae+8fgBa8beftEgzzUl5SN/Z02m5i8FwbPIDUxnPFa9Qz1LA0ilKW7f5XXDXzf1yG9wqG+Du8FINyVLsBBrxt4+XidvDx+PWfyKlF65XidhqEADWkCWMdVnjeiMryLY3+6Jn9lYli+3rxfA/l5EyEnvKqnEfci6CVvzQGptAgQRnU15EYE3eQtAQiH0z1gUmdjTkTwg7xlhJO+CpCNCL6Rtwkg9A6BbETwlXyGIXDVr4YzieA3edskyDQtg0vFCb+PDMhzo4Py1eZ6X9u2LYPMZSB0oDcpe28MySOpLmnGo74SKG2qlbGB81awVXOhJddACByHwh+1Nc4Zw5VnfvJVgM/PNs22PSWlrPjtW/ehsCmiW512QBFOx5fnEr4KUPfHyTntf9z2g7NnUKR0VoDNR795yGk6XMgC2NJhBafHYIUsgNr7NOaDEe5ZKQKoOS/nTdHKghager1NAAUnNX7zBWgfSmXc0dFlPcPXXAmw4La4gipCdCtA0MjeA+ANY7GjMWYVIS79oE+SR2Q+YXvrgdyPxhRUBWY2AjwXr5FtQymZD1A7ymZW7o/vGV4fj7/WXC/fOdEQmDnII3qyLq1lv0afyIsqUI9MBXlbqOYxwwm4AFxGAnztiPxMkZSq1Q+68zkbYberIqm04GisYN884cjmRORhIxeYFH2qEEpkbeQF3DIJnzG8QFhEXiq0Ull13mmsxGJprsp6vS6WnjMcfNxBdvzmCUfCMQgZOmHGout0ltC6N+jMecJztEQSRPIhWFJBjlrnwz9/db/hN8wmLParsiyzy0NX1iWwuhBSuUMs8r7KtHwjT3CJC3i3/PDh+4x8QShRWaSKELmAk/rcHVpVPh/494LZRZCwW52+5BI/TN8L7da3xG4/fAgaZguuUXvw6iCCC/iOESYZYb86nLw7gd2xfhP2K7J3r9ml7ilNfPFg0P03ljv+A3BBSKzyxkzdAAAAAElFTkSuQmCC">
+                        <div class="doc-name">
+                            <strong>Document-{{i+1}}</strong>
+                            <span>{{document.monthName}}, {{document.year}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

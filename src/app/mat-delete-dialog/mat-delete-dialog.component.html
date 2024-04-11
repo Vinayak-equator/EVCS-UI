@@ -1,0 +1,28 @@
+<div class="ucg-dialog-box">
+    <div class="dialog-header-primary">
+        <h4 style="margin: 0;" *ngIf="!isobject">{{data.title}}</h4>
+        <h2 *ngIf="isobject" style="color: #184ea2;">Transaction Details</h2>
+        <hr *ngIf="isobject" style="background-color: darkgrey;">
+        <h4 style="margin: 0;" *ngIf="isobject">ChargePoint :<span class="ml-2">{{data.title[0]}}</span></h4>
+        <h4 style="margin: 0;" *ngIf="isobject">Charging Rate : $<span class="ml-1">{{data.title[1]}}</span></h4>
+        <h4 style="margin: 0;" *ngIf="isobject">Charging Unit :<span class="ml-2">{{data.title[2]}}</span></h4>
+        <h4 style="margin: 0;" *ngIf="isobject">Start Meter Value :<span class="ml-2">{{data.title[3]}}</span></h4>
+        <h4 style="margin: 0;" *ngIf="isobject">Stop Meter Value :<span class="ml-2">{{data.title[4]}}</span></h4>
+        <h4 style="margin: 0;" *ngIf="isobject">Start Meter Time :<span class="ml-2">{{data.title[5]}}</span></h4>
+        <h4 style="margin: 0;" *ngIf="isobject">Stop Meter Time :<span class="ml-2">{{data.title[6]}}</span></h4>
+        <h4 *ngIf="isobject"></h4>
+        <h4 style="margin: 0;" *ngIf="isobject">Units Consumed :<span class="ml-2">{{data.title[7]}}</span></h4>
+        <h4 style="margin: 0;" *ngIf="isobject">SubTotal : $<span class="ml-2">{{data.title[8]}}</span></h4>
+        <h4 style="margin: 0;" *ngIf="isobject">Discount Amount : $<span class="ml-2">{{data.title[9]}}</span></h4>
+        <h4 style="margin: 0;" *ngIf="isobject">Amount : $<span class="ml-2">{{data.title[10]}}</span></h4>
+        <hr *ngIf="isobject" style="background-color: darkgrey;">
+    </div>
+    <div class="content-container">
+        <div class="flex dialoug-footer">
+            <button mat-raised-button color="primary" class="btn-primary btn-popup"
+                [mat-dialog-close]="true">Yes</button>
+            <button mat-raised-button color="secondary" class="btn-secondary btn-popup"
+                [mat-dialog-close]="false">No</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.disable-link {
+  pointer-events: none;
+}
+.hide {
+  display: none;
+}
+.m-0 {
+  margin: 0;
+}
+.spc-even {
+  justify-content: space-around;
+}
+.sub-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 20px;
+  padding: 1rem;
+}
+.ucg-container {
+  border: none;
+}
+::ng-deep .mat-expansion-indicator::after {
+  color: rgba(0, 0, 0, 0.54) !important;
+}
+::ng-deep .mat-expansion-panel-header {
+  padding-left: 15px !important;
+}
+.mat-button.mat-accent,
+.mat-stroked-button.mat-accent {
+    color: #009122;
+}
+.mat-button.mat-accent:hover,
+.mat-stroked-button.mat-accent:hover {
+  background-color: #f0fff3;
+}
+.mat-raised-button.mat-accent,
+.mat-flat-button.mat-accent,
+.mat-fab.mat-accent,
+.mat-mini-fab.mat-accent {
+  color: #f0fff3;
+  background-color: #009122;
+}
+.mat-icon-button.mat-accent {
+  color:#009122;
+}
+.merchant-cls {
+  padding-top: 17px;
+  padding-left: 10px;
+}
+.last-elemnt {
+  padding-right: 15px;
+}

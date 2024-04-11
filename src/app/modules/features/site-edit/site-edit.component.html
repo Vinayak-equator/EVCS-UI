@@ -1,0 +1,936 @@
+
+
+<div class="mt-3">
+
+
+    <div class="card mat-elevation-z mb-3">
+        <div class="card-body">
+            
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <h2 class="h2">
+                        <span>{{'allTypeContent.tenant' | translate}}:</span> {{'singleBinding.tenantName' | translate : {tenantName:tenantName} }}
+                    </h2>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h2 class="h2">
+                        <span>Site:</span> {{siteName}}
+                    </h2>
+                </div>
+            </div>
+            <div id="Description">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4">
+                        <div class="list-tick">
+                            <span class="material-symbols-outlined">arrow_forward_ios</span>
+                            <p>
+                                Name: <b> {{Presname}} </b>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="list-tick">
+                            <span class="material-symbols-outlined">arrow_forward_ios</span>
+                            <p>
+                                Address: <b> {{Presstreet}}</b>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="list-tick">
+                            <span class="material-symbols-outlined">arrow_forward_ios</span>
+                            <p>
+                                City: <b> {{Prescity}} </b>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 col-md-4">
+                        <div class="list-tick">
+                            <span class="material-symbols-outlined">arrow_forward_ios</span>
+                            <p>
+                                State: <b> {{Presstate}} </b>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="list-tick">
+                            <span class="material-symbols-outlined">arrow_forward_ios</span>
+                            <p>
+                                Phone: <b> {{Presphone}}</b>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="list-tick">
+                            <span class="material-symbols-outlined">arrow_forward_ios</span>
+                            <p>
+                                Country: <b> {{Prescountry}} </b>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="list-tick">
+                            <span class="material-symbols-outlined">arrow_forward_ios</span>
+                            <p>
+                                Status: <b> {{Presstatus}} </b>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="list-tick">
+                            <span class="material-symbols-outlined">arrow_forward_ios</span>
+                            <p>
+                                Zip Code: <b> {{PreszipCode}} </b>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="list-tick">
+                            <span class="material-symbols-outlined">arrow_forward_ios</span>
+                            <p>
+                                Utility Provider: <b> {{PresutilityProvider}} </b>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row charger-btn-outer">
+                        <div class="col-lg-12">
+                            <a (click)="showEditForm()" class="btn edit">Edit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="EditForm" class="hidedive">
+                <form [formGroup]="siteForm" #siteRegistration="ngForm" class="margin-bottom-40 ucg-container"
+                    autocomplete="off">
+
+                    <mat-slide-toggle color="primary" [(ngModel)]="isOwnSetting" (ngModelChange)="fetchSettings()" [ngModelOptions]="{standalone: true}">Load global settings</mat-slide-toggle>
+                    <br />
+                    <br />
+                    <fieldset>
+                        <legend>&nbsp;Information&nbsp;</legend>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <!-- [ngClass]="{'has-error' : name && isSubmitClicked}" -->
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>{{'formFields.name' | translate}}</mat-label>
+                                    <input matInput placeholder="{{'formFields.name' | translate}}" tabindex="1"
+                                        maxlength="150" autocomplete="off" min="3" max="150" formControlName="name"
+                                        required>
+                                    <mat-error>
+                                        <span
+                                            *ngIf="(!siteForm.get('name')?.valid && !siteForm.get('name')?.errors?.serverError) && !name">
+                                            {{'requiredFields.name' | translate }}</span>
+                                        <span
+                                            *ngIf="!siteForm.get('name')?.errors?.serverError && (name || (siteForm.get('name')?.valid && !name))">
+                                            {{'requiredFields.nameLength' | translate }}</span>
+                                    </mat-error>
+                                    <mat-error>
+                                        <span *ngIf="siteForm.get('name')?.errors?.serverError">
+                                            {{siteForm.get('name')?.errors?.serverError | translate}}</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>{{'formFields.address' | translate}}</mat-label>
+                                    <input matInput placeholder="{{'formFields.address' | translate}}" tabindex="9"
+                                        autocomplete="nope" formControlName="street" required>
+                                    <mat-error>
+                                        <span
+                                            *ngIf="(!siteForm.get('street')?.errors?.serverError && !siteForm.get('street')?.valid) && !street">
+                                            {{'requiredFields.street' | translate }}</span>
+                                        <span
+                                            *ngIf="!siteForm.get('street')?.errors?.serverError && (street || (siteForm.get('street')?.valid && !street))">
+                                            {{'requiredFields.streetLength' | translate }}</span>
+                                    </mat-error>
+                                    <mat-error>
+                                        <span *ngIf="siteForm.get('street')?.errors?.serverError">
+                                            {{siteForm.get('street')?.errors?.serverError| translate }}</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>{{'formFields.city' | translate }}</mat-label>
+                                    <input matInput placeholder="{{'formFields.city' | translate }}" tabindex="10"
+                                        autocomplete="off" maxlength="100" min="2" max="100" formControlName="city"
+                                        required>
+                                    <mat-error>
+                                        <span
+                                            *ngIf="(!siteForm.get('city')?.errors?.serverError && !siteForm.get('city')?.valid) && !city">
+                                            {{'requiredFields.city' | translate }}</span>
+                                        <span
+                                            *ngIf="!siteForm.get('city')?.errors?.serverError && (city || (siteForm.get('city')?.valid && !city))">
+                                            {{'requiredFields.cityLength' | translate }}</span>
+                                    </mat-error>
+                                    <mat-error>
+                                        <span *ngIf="siteForm.get('city')?.errors?.serverError">
+                                            {{siteForm.get('city')?.errors?.serverError | translate }}</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>{{'formFields.state' | translate}}</mat-label>
+                                    <input matInput placeholder="{{'formFields.state' | translate}}" tabindex="11"
+                                        autocomplete="off" maxlength="100" min="2" max="100" formControlName="state"
+                                        required>
+                                    <mat-error>
+                                        <span
+                                            *ngIf="(!siteForm.get('state')?.errors?.serverError && !siteForm.get('state')?.valid) && !state">
+                                            {{'requiredFields.state' | translate }}</span>
+                                        <span
+                                            *ngIf="!siteForm.get('state')?.errors?.serverError && (state || (siteForm.get('state')?.valid && !state))">
+                                            {{'requiredFields.stateLength' | translate }}</span>
+                                    </mat-error>
+                                    <mat-error>
+                                        <span *ngIf="siteForm.get('state')?.errors?.serverError">
+                                            {{siteForm.get('state')?.errors?.serverError | translate }}</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-6 ucg-input">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>{{'formFields.country' | translate }}</mat-label>
+                                    <mat-select formControlName="country" tabindex="12" required autocomplete="off">
+                                        <mat-option *ngFor="let countryName of countryList"
+                                            [value]="countryName.country">
+                                            {{countryName.country}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                        <span
+                                            *ngIf="(!siteForm.get('country')?.errors?.serverError && !siteForm.get('country')?.valid) && !country">
+                                            {{'requiredFields.country' | translate }}</span>
+                                        <span
+                                            *ngIf="!siteForm.get('country')?.errors?.serverError && (country || (siteForm.get('country')?.valid && !country))">
+                                            {{'requiredFields.countryLength' | translate }}</span>
+                                    </mat-error>
+                                    <mat-error>
+                                        <span *ngIf="siteForm.get('country')?.errors?.serverError">
+                                            {{siteForm.get('country')?.errors?.serverError | translate }}</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-6 ucg-input">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>{{'formFields.zipCode' | translate}}</mat-label>
+                                    <input matInput placeholder="{{'formFields.zipCode' | translate}}" tabindex="13"
+                                        type="text" autocomplete="off" (keypress)="onKeyPress($event)" maxlength="6"
+                                        minlength="5" formControlName="zipCode" required>
+                                    <mat-error>
+                                        <span
+                                            *ngIf="(!siteForm.get('zipCode')?.errors?.serverError && !siteForm.get('zipCode')?.valid) && !siteForm.get('zipCode')?.errors?.pattern && !zip">
+                                            {{'requiredFields.zipCode' | translate }}</span>
+                                        <span
+                                            *ngIf="!siteForm.get('zipCode')?.errors?.serverError && (zip || (siteForm.get('zipCode')?.valid && !zip))">
+                                            {{'requiredFields.zipCodeLength' | translate }}</span>
+
+                                        <span *ngIf="siteForm.get('zipCode')?.errors?.pattern | translate">
+                                            {{'requiredFields.phonePattern' | translate}}</span>
+                                    </mat-error>
+                                    <mat-error>
+                                        <span *ngIf="siteForm.get('zipCode')?.errors?.serverError">
+                                            {{siteForm.get('zipCode')?.errors?.serverError | translate }}</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>{{'formFields.phone' | translate}}</mat-label>
+                                    <input matInput placeholder="{{'formFields.phone' | translate}}" tabindex="14"
+                                        type="text" autocomplete="off" (keypress)="onKeyPress($event)" maxlength="10"
+                                        min="10" max="10" formControlName="phone" required>
+                                    <mat-error>
+                                        <span
+                                            *ngIf="(!siteForm.get('phone')?.errors?.serverError && !siteForm.get('phone')?.valid) && !siteForm.get('phone')?.errors?.pattern && !phone">
+                                            {{'requiredFields.phone' | translate }}</span>
+                                        <span
+                                            *ngIf="!siteForm.get('phone')?.errors?.serverError && (phone || siteForm.get('phone')?.valid && !phone)">
+                                            {{'requiredFields.phoneLength' | translate }}</span>
+
+                                        <span *ngIf="siteForm.get('phone')?.errors?.pattern | translate">
+                                            {{'requiredFields.phonePattern' | translate}}</span>
+                                    </mat-error>
+                                    <mat-error>
+                                        <span *ngIf="siteForm.get('phone')?.errors?.serverError">
+                                            {{siteForm.get('phone')?.errors?.serverError | translate }}</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-6 ucg-input">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>{{'formFields.status' | translate }}</mat-label>
+                                    <mat-select formControlName="status" tabindex="2">
+                                        <mat-option>{{'formFields.status' | translate }}</mat-option>
+                                        <mat-option value="{{'formFields.active' | translate }}">{{'formFields.active' |
+                                            translate }}</mat-option>
+                                        <mat-option
+                                            value="{{'formFields.inactive' | translate }}">{{'formFields.inactive' |
+                                            translate }}</mat-option>
+                                    </mat-select>
+
+                                    <mat-error>
+                                        <span *ngIf="siteForm.get('status')?.errors?.serverError">
+                                            {{siteForm.get('status')?.errors?.serverError | translate }}</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>{{'formFields.customerId' | translate }}</mat-label>
+                                    <input matInput placeholder="{{'formFields.customerId' | translate }}" tabindex="10"
+                                        autocomplete="off" formControlName="customerId">
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>{{'formFields.vendorId' | translate }}</mat-label>
+                                    <input matInput placeholder="{{'formFields.vendorId' | translate }}" tabindex="10"
+                                        autocomplete="off" formControlName="vendorId">
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>{{'formFields.siteManager' | translate }}</mat-label>
+                                    <input matInput placeholder="{{'formFields.siteManager' | translate }}" tabindex="10"
+                                        autocomplete="off" formControlName="siteManager">
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>{{'formFields.registrationDate' | translate }}</mat-label>
+                                    <input matInput [matDatepicker]="picker" placeholder="{{'formFields.registrationDate' | translate }}"
+                                    formControlName="registrationDate">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <br />
+                    <br />
+                    <fieldset>
+                        <legend>&nbsp;Infrastructure Fees&nbsp;</legend>
+                        <div class="form-row">
+                            <div class="form-group col-md-3 lg-3 ucg-input">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>{{'formFields.processingFees' | translate}}</mat-label>
+                                    <input matInput autocomplete="off" type="text" formControlName="processingFees"
+                                        placeholder="{{'formFields.processingFees' | translate}}" tabindex="2" (change)="checkIsOwnSetting()">
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-3 lg-3 ucg-input">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>{{'formFields.cloudServiceFees' | translate}}</mat-label>
+                                    <input matInput autocomplete="off" type="text" formControlName="cloudServiceFees"
+                                        placeholder="{{'formFields.cloudServiceFees' | translate}}" tabindex="2" (change)="checkIsOwnSetting()">
+                                    <!-- <mat-hint>Emails should be comma separated.</mat-hint> -->
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-3 lg-3 ucg-input">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>{{'formFields.networkingFees' | translate}}</mat-label>
+                                    <input matInput autocomplete="off" type="text" formControlName="networkingFees"
+                                        placeholder="{{'formFields.networkingFees' | translate}}" tabindex="2" (change)="checkIsOwnSetting()">
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-3 lg-3 ucg-input">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>{{'formFields.salesTax' | translate}}</mat-label>
+                                    <input matInput autocomplete="off" type="text" formControlName="salesTax"
+                                        placeholder="{{'formFields.salesTax' | translate}}" tabindex="2" (change)="checkIsOwnSetting()">
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-3 lg-3 ucg-input">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>{{'formFields.meterServiceFees' | translate}}</mat-label>
+                                    <input matInput autocomplete="off" type="text" formControlName="meterServiceFees"
+                                        placeholder="{{'formFields.meterServiceFees' | translate}}" tabindex="2" (change)="checkIsOwnSetting()">
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-3 lg-3 ucg-input">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>{{'formFields.revenueShare' | translate}}</mat-label>
+                                    <input matInput autocomplete="off" type="text" formControlName="revenueShare"
+                                        placeholder="{{'formFields.revenueShare' | translate}}" tabindex="2">
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-3 lg-3 ucg-input">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>{{'formFields.meterNumber' | translate}}</mat-label>
+                                    <input matInput autocomplete="off" type="text" formControlName="meterNumber"
+                                        placeholder="{{'formFields.meterNumber' | translate}}" tabindex="2">
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-3 lg-3 ucg-input">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>{{'formFields.maintenanceCharges' | translate}}</mat-label>
+                                    <input matInput autocomplete="off" type="text" formControlName="maintenanceCharges"
+                                        placeholder="{{'formFields.maintenanceCharges' | translate}}" tabindex="2">
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-3 lg-3 ucg-input">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>{{'formFields.utilityCost' | translate}}</mat-label>
+                                    <input matInput autocomplete="off" type="text" formControlName="utilityCost"
+                                        placeholder="{{'formFields.utilityCost' | translate}}" tabindex="2">
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-3 lg-3 ucg-input">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>{{'formFields.utilityProvider' | translate}}</mat-label>
+                                    <input matInput autocomplete="off" type="text" formControlName="utilityProvider"
+                                        placeholder="{{'formFields.utilityProvider' | translate}}" tabindex="2">
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-3 lg-3 ucg-input">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>{{'formFields.utilityOwner' | translate}}</mat-label>
+                                    <mat-select formControlName="utilityOwner" tabindex="2">
+                                        <mat-option value="Universal EV">Universal EV</mat-option>
+                                        <mat-option value="Other">Other</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div *ngIf="this.siteForm.get('utilityOwner')?.value === 'Other'" class="form-group col-md-3 lg-3 ucg-input">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>{{'formFields.maintenanceChargesReason' | translate}}</mat-label>
+                                    <input matInput autocomplete="off" type="text" formControlName="maintenanceChargesReason"
+                                        placeholder="{{'formFields.maintenanceChargesReason' | translate}}" tabindex="2">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <br />
+                    <br />
+                    <fieldset>
+                        <legend>&nbsp;Pricing&nbsp;</legend>
+                        <mat-radio-group formControlName="priceType" (change)="checkIsOwnSetting()">
+                            <mat-radio-button color="primary" value="1">
+                                &nbsp;{{'allTypeContent.consumptionBasedPricing' | translate}}&nbsp;
+                            </mat-radio-button>
+                            <br />
+                            <mat-radio-button color="primary" value="2">
+                                &nbsp;{{'allTypeContent.timeOfUsePricing' | translate}}&nbsp;
+                            </mat-radio-button>
+                            <br />
+                            <mat-radio-button class="mb-15" color="primary" disabled="true" value="3">
+                                &nbsp;{{'allTypeContent.differentialPricing' | translate}}&nbsp;
+                            </mat-radio-button>
+                        </mat-radio-group>
+                        <br />
+                        <br />
+                        <div *ngIf="siteForm.get('priceType')?.value === '1'">
+                            <div class="form-row">
+                                <div class="form-group col-md-2 ucg-input">
+                                    <mat-form-field class="w-100" appearance="outline">
+                                        <mat-label>{{'formFields.level2Rate' | translate }}</mat-label>
+                                        <input matInput tabindex="3" autocomplete="off" type="text"
+                                            ThreeDigitDecimalNumber formControlName="level2Rate" required
+                                            (change)="checkIsOwnSetting()"
+                                            placeholder="{{'formFields.level2Rate' | translate }}" onkeyup="
+                                        var date = this.value;
+                                        if (event.keyCode !== 8 && date.match(/^\d{3}$/) !== null) {
+                                           this.value = date + '.';
+                                        }" max="7" maxlength="7"
+                                            onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))">
+
+                                        <mat-error>
+                                            <span *ngIf="(!siteForm.get('level2Rate')?.valid)">
+                                                {{'requiredFields.level2Rate' | translate }}</span>
+                                            <span *ngIf="siteForm.get('level2Rate')?.errors?.serverError">
+                                                {{siteForm.get('level2Rate')?.errors?.serverError | translate }}</span>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div *ngIf="canModifyMarkupCharge" class="form-group col-md-2 ucg-input">
+                                    <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                        <mat-label>{{'formFields.markupCharge' | translate}}</mat-label>
+                                        <input matInput autocomplete="off" type="text" tabindex="14"
+                                            formControlName="markupCharge"
+                                            placeholder="{{'formFields.markupCharge' | translate}}"
+                                            ThreeDigitDecimalNumber (change)="validateMarkupThreshold($event)" onkeyup="
+                                var date = this.value;
+                                if (event.keyCode !== 8 && date.match(/^\d{3}$/) !== null) {
+                                   this.value = date + '.';
+                                }" max="6" maxlength="6"
+                                            onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))">
+                                        <mat-error>
+                                            <span *ngIf="markupError">Markup must be less than
+                                                {{markupThreshold}}%</span>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group col-md-2 ucg-input">
+                                    <mat-form-field class="w-100" appearance="outline">
+                                        <mat-label>{{'formFields.RateUnit' | translate }}</mat-label>
+                                        <mat-select formControlName="level2RateUnit" tabindex="4" autocomplete="off"
+                                            required (selectionChange)="checkIsOwnSetting()">
+                                            <mat-option>{{'formFields.RateUnit' | translate }}</mat-option>
+                                            <mat-option value="{{'formFields.KWH' | translate }}">{{'formFields.KWH' |
+                                                translate }}
+                                            </mat-option>
+                                            <mat-option value="{{'formFields.min' | translate }}">{{'formFields.min' |
+                                                translate }}
+                                            </mat-option>
+                                            <mat-option value="{{'formFields.hr' | translate }}">{{'formFields.hr' |
+                                                translate }}
+                                            </mat-option>
+                                        </mat-select>
+
+                                        <mat-error>
+                                            <span *ngIf="(!siteForm.get('level2RateUnit')?.valid)">
+                                                {{'requiredFields.level2RateUnit' | translate }}</span>
+                                            <span *ngIf="siteForm.get('level2RateUnit')?.errors?.serverError">
+                                                {{siteForm.get('level2RateUnit')?.errors?.serverError | translate
+                                                }}</span>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group col-md-2 ucg-input">
+                                    <mat-form-field class="w-100" appearance="outline">
+                                        <mat-label>{{'formFields.dcFastRate' | translate }}</mat-label>
+                                        <input matInput tabindex="5" autocomplete="off" type="text"
+                                            ThreeDigitDecimalNumber formControlName="dcFastRate" required
+                                            (change)="checkIsOwnSetting()"
+                                            placeholder="{{'formFields.dcFastRate' | translate }}" onkeyup="
+                                        var date = this.value;
+                                        if (event.keyCode !== 8 && date.match(/^\d{3}$/) !== null) {
+                                           this.value = date + '.';
+                                        }" max="7" maxlength="7"
+                                            onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))">
+
+                                        <mat-error>
+                                            <span *ngIf="(!siteForm.get('dcFastRate')?.valid)">
+                                                {{'requiredFields.dcFastRate' | translate }}</span>
+                                            <span *ngIf="siteForm.get('dcFastRate')?.errors?.serverError">
+                                                {{siteForm.get('dcFastRate')?.errors?.serverError | translate }}</span>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div *ngIf="canModifyMarkupCharge" class="form-group col-md-2 ucg-input">
+                                    <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                        <mat-label>{{'formFields.markupCharge' | translate}}</mat-label>
+                                        <input matInput autocomplete="off" type="text" tabindex="14"
+                                            formControlName="markupPercentForDC"
+                                            placeholder="{{'formFields.markupCharge' | translate}}"
+                                            ThreeDigitDecimalNumber (change)="validateDCMarkupThreshold($event)"
+                                            onkeyup="
+                                var date = this.value;
+                                if (event.keyCode !== 8 && date.match(/^\d{3}$/) !== null) {
+                                   this.value = date + '.';
+                                }" max="6" maxlength="6"
+                                            onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))">
+                                        <mat-error>
+                                            <span *ngIf="markupError">Markup must be less than
+                                                {{markupThreshold}}%</span>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group col-md-2 ucg-input">
+                                    <mat-form-field class="w-100" appearance="outline">
+                                        <mat-label>{{'formFields.RateUnit' | translate }}</mat-label>
+                                        <mat-select formControlName="dcFastRateUnit" tabindex="6" autocomplete="off"
+                                            required (selectionChange)="checkIsOwnSetting()">
+                                            <mat-option>{{'formFields.RateUnit' | translate }}</mat-option>
+                                            <mat-option value="{{'formFields.KWH' | translate }}">{{'formFields.KWH' |
+                                                translate }}
+                                            </mat-option>
+                                            <mat-option value="{{'formFields.min' | translate }}">{{'formFields.min' |
+                                                translate }}
+                                            </mat-option>
+                                            <mat-option value="{{'formFields.hr' | translate }}">{{'formFields.hr' |
+                                                translate }}
+                                            </mat-option>
+                                        </mat-select>
+
+                                        <mat-error>
+                                            <span *ngIf="(!siteForm.get('dcFastRateUnit')?.valid)">
+                                                {{'requiredFields.dcRateUnit' | translate }}</span>
+                                            <span *ngIf="siteForm.get('dcFastRateUnit')?.errors?.serverError">
+                                                {{siteForm.get('dcFastRateUnit')?.errors?.serverError | translate
+                                                }}</span>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="siteForm.get('priceType')?.value === '2'">
+                            <div class="row" *ngFor="let time of timePricing; let i = index">
+                                <div class="col-md-12 lg-12 cross-div">
+                                    <button mat-mini-fab color="warn" class="cancel-fab-btn" (click)="removeTime(i)">
+                                        <img class="cross-icon"
+                                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAACaklEQVR4nO3cy2oUQRTG8YOXGF3oQpeZgOgD6IspEhQRzErjk7mQBKNCFMXGji/hhcR/KKgWF2Yu3dVVp6e+3z6TU19Oqqt7qtpMRERERERERERERERkGcAl4KL3tIAN4IJNCXAdeAZ8An4Dp8AH4DFw1ZwItQBPgKNY4y/gM/AUuGGeAXeAr5zvPTBzUOcs/vHP8wW4ax4B14BvLNYA2wXr3I41LFOnm//Av4DnSxRfNOwVQu7smjfAO1bTArczTxfzprX/OTSHq4twQVlVk6Oze3Ry59TdagT4ST/tmJ3ds5M7P8wb4C39NWN09oBO7hyYN8DDAQNKHnaCkIMH5g1wGXg9cGBtimlk4HTReRPuGM0jYCtBFzVDOjtRJ4ef3zLPEnVT26ezS/7uIkoMmNpCLjFwag05ZwDUHnKOIFDI4weCQh6/s1HI2da4TYLPKPZMPAvSdGPdF74JhN1WE3LBsOsLuUDY9YacMWyFnCFshZwhbIWcIWyFPI+CzgBNHZMMuaMppKPlXQbohmWtQq53GkEPldY65Ho6Gz34zxLyTF9lTShkG/EzJ03bDTLQBpoMtCUsA21yzEDbdjPQRvQMgE1g38NyizRLv8NwGti8iQfYi4ecOOwd8ya+zWDdjr99NE+AK8DJGh7oPHF1Miu+++KPt5AThB3GtGmeAN89b52l3zRybN4Ar7w/zGH1zn5h3gC3luzqZiIvRgljuWkeAfcXhL3v4URqvLE6mFPnMXDPPIudvReL7a7cR8AjTxeWeIO1E5Zw/6yYQs0v3XbygsFs2DRex+amCURERERERERERERExHw7AzryqGBf7gnyAAAAAElFTkSuQmCC">
+                                    </button>
+                                </div>
+                                <div class="col-md-4 lg-4">
+                                    <div class="row">
+                                        <div class="col-md-6 lg-6">
+                                            <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                                <mat-label>{{'formFields.startTime' | translate}}</mat-label>
+                                                <input matInput autocomplete="off" type="time" [(ngModel)]="time.startTime" (ngModelChange)="checkIsOwnSetting()"
+                                                    placeholder="{{'formFields.startTime' | translate}}" tabindex="2" [ngModelOptions]="{standalone: true}">
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-md-6 lg-6">
+                                            <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                                <mat-label>{{'formFields.endTime' | translate}}</mat-label>
+                                                <input matInput autocomplete="off" type="time" [(ngModel)]="time.endTime" (ngModelChange)="checkIsOwnSetting()"
+                                                    placeholder="{{'formFields.endTime' | translate}}" tabindex="2" [ngModelOptions]="{standalone: true}">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 lg-4">
+                                    <div class="row">
+                                        <div class="col-md-7 lg-7">
+                                            <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                                <mat-label>{{'formFields.level2Rate' | translate}}</mat-label>
+                                                <input matInput autocomplete="off" type="text" [(ngModel)]="time.level2Rate" (ngModelChange)="checkIsOwnSetting()"
+                                                    placeholder="{{'formFields.level2Rate' | translate}}" tabindex="2" [ngModelOptions]="{standalone: true}">
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-md-5 lg-5">
+                                            <mat-form-field class="w-100" appearance="outline">
+                                                <mat-label>{{'formFields.level2RateUnit' | translate }}</mat-label>
+                                                <mat-select [(ngModel)]="time.level2RateUnit" tabindex="6" (ngModelChange)="checkIsOwnSetting()"
+                                                    autocomplete="off" [ngModelOptions]="{standalone: true}">
+                                                    <mat-option disabled>{{'formFields.level2RateUnit' | translate
+                                                        }}</mat-option>
+                                                    <mat-option value="{{'formFields.KWH' | translate }}">{{'formFields.KWH'
+                                                        |
+                                                        translate }}
+                                                    </mat-option>
+                                                    <mat-option value="{{'formFields.min' | translate }}">{{'formFields.min'
+                                                        |
+                                                        translate }}
+                                                    </mat-option>
+                                                    <mat-option value="{{'formFields.hr' | translate }}">{{'formFields.hr' |
+                                                        translate }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 lg-4">
+                                    <div class="row">
+                                        <div class="col-md-7 lg-7">
+                                            <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                                <mat-label>{{'formFields.dcFastRate' | translate}}</mat-label>
+                                                <input matInput autocomplete="off" type="text" [(ngModel)]="time.dcFastRate" (ngModelChange)="checkIsOwnSetting()"
+                                                    placeholder="{{'formFields.dcFastRate' | translate}}" tabindex="2" [ngModelOptions]="{standalone: true}">
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-md-5 lg-5">
+                                            <mat-form-field class="w-100" appearance="outline">
+                                                <mat-label>{{'formFields.dcFastRateUnit' | translate }}</mat-label>
+                                                <mat-select [(ngModel)]="time.dcFastRateUnit" tabindex="6" (ngModelChange)="checkIsOwnSetting()"
+                                                    autocomplete="off" [ngModelOptions]="{standalone: true}">
+                                                    <mat-option disabled>{{'formFields.dcFastRateUnit' | translate
+                                                        }}</mat-option>
+                                                    <mat-option value="{{'formFields.KWH' | translate }}">{{'formFields.KWH'
+                                                        |
+                                                        translate }}
+                                                    </mat-option>
+                                                    <mat-option value="{{'formFields.min' | translate }}">{{'formFields.min'
+                                                        |
+                                                        translate }}
+                                                    </mat-option>
+                                                    <mat-option value="{{'formFields.hr' | translate }}">{{'formFields.hr' |
+                                                        translate }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2 lg-2">
+                                    <button mat-mini-fab color="primary" (click)="addTime()">
+                                        <img width="25px"
+                                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAABLElEQVR4nO3dwU0EMRREwckDyIcV6SLIZ5c8mgMcueGl8fyqDDxPfbKlOQ4AAAAAKEvykuQjv3dLcmmfZzv5+nCrXNvn2U4Wa59nOxFAgNFiAQKMFgsQYLRYgACjxQIEGC0WIMBosQABRosFCDBaLECA0WIBAowWC6h+/KfVAZI8Fo+03cd/v0OAt1NEWPhi7Wz+5gXe4hdrZ3P/F3jtE/53ApQJUCZAmQBlApQJUCZAmQBlApQJUCZAmQBlApQJUCbAgAAuZMoXMhcRfnRN8nzsLsnj9wX6aq9JHtrn20I8S+nLYu3zbCcCCDBaLECA0WIBAowWCxBgtFiAAKPFAgQYLRYgwGixAAFGiwUIMFosQIDRYgH1ALeFDfzEp/gC73qKF2sAAAAAHLv7BL6Hu57nEIu6AAAAAElFTkSuQmCC">
+                                    </button>
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                        <!-- <br /> -->
+                        <div class="form-row">
+                            <div *ngIf="canModifyPreAuth" class="form-group col-md-6">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>{{'formFields.preAuthAmount' | translate}}</mat-label>
+                                    <input matInput autocomplete="off" type="text" tabindex="14"
+                                        formControlName="preAuthAmount"
+                                        placeholder="{{'formFields.preAuthAmount' | translate}}" ThreeDigitDecimalNumber
+                                        onkeyup="
+                                    var date = this.value;
+                                    if (event.keyCode !== 8 && date.match(/^\d{3}$/) !== null) {
+                                    this.value = date + '.';
+                                    }" max="6" maxlength="6"
+                                        onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <br />
+                    <br />
+
+                    <div class="btn-group d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button *ngIf="!isTransferred && canUpdateSite" mat-raised-button
+                            [ngClass]="{'img-disable': parentSiteRequest}" color="primary" class="btn-primary mx-3"
+                            (click)="updateSite();">
+                            {{'button.update' | translate }}
+                        </button>
+                        <button mat-raised-button color="secondary" class="btn-secondary" (click)="cancel();">
+                            {{'button.cancel' | translate }}
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="card mat-elevation-z mb-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 lg-6">
+                    <h2 class="h2">{{'allTypeContent.chargerList' | translate }}</h2>
+                </div>
+
+                <div class="col-md-6 lg-6 text-end">
+                    <div class="head-right-outer">
+                        <a class="btn-border mat-elevation-z icon-right" (click)="togglechnage()"  mat-raised-button data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Filter<span class="material-symbols-outlined">{{this.chnageicon}}</span>
+                        </a>
+                        <a class="btn-border mat-elevation-z" (click)="navigateCharger();" mat-raised-button href="javascript:;"><span class="material-symbols-outlined">add</span> {{'button.newCharger' | translate
+                        }} </a>
+                        <a class="btn-back mat-elevation-z"(click)="back();" mat-raised-button href="javascript:;"><span class="material-symbols-outlined">keyboard_backspace</span> Back</a>
+                    </div>
+                  </div>
+                <!-- <div *ngIf="createTenant" class="col-md-6 lg-6 text-end">
+            <span class="creation-button">
+              <button mat-raised-button color="primary" class="btn-primary"
+                (click)="navigateTenant();">{{'button.newTenant' | translate}}</button>
+            </span>
+          </div> -->
+                <div class="col-md-6 lg-6 text-end">
+                    <!-- <div class="head-right-outer">
+                        <a class="btn-border mat-elevation-z icon-right" mat-raised-button
+                            href="javascript:;">Filter<span
+                                class="material-symbols-outlined">keyboard_arrow_down</span></a>
+                        <a *ngIf="canCreateSite" class="btn-border mat-elevation-z" (click)="navigateSite();"
+                            mat-raised-button href="javascript:;"><span class="material-symbols-outlined"
+                                [ngClass]="{'img-disable': parentTenantRequest}">add</span> {{'button.newSite' |
+                            translate }} </a>
+                        <a class="btn-back mat-elevation-z" mat-raised-button href="javascript:;"><span
+                                class="material-symbols-outlined">keyboard_backspace</span> Back</a>
+                    </div> -->
+                </div>
+            </div>
+            <div class="filter-outer">
+                <div class="collapse" id="multiCollapseExample1">
+                <div class="row">
+                    <div class="col-md-2">
+
+
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Filter by ChargePointId</mat-label>
+                            <input type="text" matInput [formControl]="chargePointIdControl"
+                                [matAutocomplete]="autoChargePointId" (change)="filterChange(filterSelectObj[0], $event)">
+                            <mat-autocomplete autoActiveFirstOption #autoChargePointId="matAutocomplete"
+                                (optionSelected)="filterChange(filterSelectObj[0], $event)">
+                                <mat-option *ngFor="let option of filteredByChargePointId | async" [value]="option">
+                                    {{option}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-2">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Filter by ChargerType</mat-label>
+                            <input type="text" matInput [formControl]="chargeTypeControl" [matAutocomplete]="autoChargeType"
+                                (change)="filterChange(filterSelectObj[1], $event)">
+                            <mat-autocomplete autoActiveFirstOption #autoChargeType="matAutocomplete"
+                                (optionSelected)="filterChange(filterSelectObj[1], $event)">
+                                <mat-option *ngFor="let option of filteredByChargeType | async" [value]="option">
+                                    {{option}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-2">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Filter by Status</mat-label>
+                            <input type="text" matInput [formControl]="statusControl" [matAutocomplete]="autoStatus"
+                                (change)="filterChange(filterSelectObj[2], $event)">
+                            <mat-autocomplete autoActiveFirstOption #autoStatus="matAutocomplete"
+                                (optionSelected)="filterChange(filterSelectObj[2], $event)">
+                                <mat-option *ngFor="let option of filteredByStatus | async" [value]="option">
+                                    {{option}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-switch">
+                            <mat-slide-toggle [(ngModel)]="deletedRecords" [color]="'primary'" (change)="toggleDeletedRecords()">Show
+                                Deleted Records</mat-slide-toggle>
+                            <!-- <input class="form-check-input" (change)="toggleDeletedRecords()" type="checkbox"
+                                id="flexSwitchCheckDefault" checked="">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Show Deleted Records</label> -->
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="javascript:;" mat-raised-button class="reset-btn mat-elevation-z"
+                            (click)="resetFilters()"><span class="material-symbols-outlined">restart_alt</span>
+                            Reset</a>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="body-content-outer">
+                <div class="row">
+                    <div class="col-md-12 lg-12">
+
+                        <div class="ucg-table">
+                            <mat-table #table [dataSource]="dataSource" matSort matSortActive="registrationDate"
+                                matSortDirection="desc">
+
+                                <ng-container matColumnDef="registrationDate">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{element.registrationDate |
+                                        date:"MM-dd-yyyy h:mm a"}} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="customerId">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> {{'table.header.customerId' | translate }}
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{element.customerId}} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="chargePointId">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> {{'table.header.chargePointId' |
+                                        translate}}
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" [ngClass]="{'disable-link': deletedRecords}"
+                                    (click)="chargeEdit(element);" style="cursor:pointer;">
+                                        <a [ngClass]="{'disable-link': deletedRecords}"
+                                        (click)="chargeEdit(element);" [routerLink]="['/charger-edit']">
+                                            {{element.chargePointId}} 
+                                        </a>                                    
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="location">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header > {{'table.header.siteAddress' | translate}}
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" >{{element.location}} </mat-cell>
+                                  </ng-container>
+
+                                  <ng-container matColumnDef="status">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header > {{'table.header.status' | translate}}
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" >{{element.status}} </mat-cell>
+                                  </ng-container>
+
+                                <ng-container matColumnDef="chargerType">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> {{'table.header.chargerType' |
+                                        translate}}
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{element.chargerType}} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="availabilityStatus">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Availability Status
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{element.availabilityStatus}} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="numberOfConnectors">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header class="alignCenter">
+                                        {{'table.header.noOfConnectors' | translate}} </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" class="alignCenter">
+                                        {{element.numberOfConnectors}}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="connectorType1">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header class="alignCenter">
+                                        {{'table.header.connectortype1' | translate}} </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" class="alignCenter"> {{element.connectorType1}}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="connectortype2">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header class="alignCenter">
+                                        {{'table.header.connectortype2' | translate}} </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" class="alignCenter"> {{element.connectorType2}}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="action" style="cursor: default;cursor:pointer;">
+                                    <mat-header-cell *matHeaderCellDef class="wd-200 action-column"
+                                        [ngClass]="{'disable-link hide': deletedRecords}"> Action </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" class="wd-200 action-column" [ngClass]="{'disable-link hide': deletedRecords}">
+                                            <div class="table-action">
+                                              <a matTooltip="ChargePoint Details" mat-mini-fab color="primary" href="javascript:;"  (click)="chargeEdit(element);" class="table-action-btn">
+                                                <span class="material-symbols-outlined">info</span>
+                                              </a>
+                                              <a href="javascript:;" mat-mini-fab color="warn" matTooltip="ChargePoint Delete " *ngIf="!element.isrequestraised && !isTransferred && canDeleteChargepoint"  (click)="deleteChargePoint(element)"  class="table-action-btn">
+                                                <span class="material-symbols-outlined">delete</span>
+                                              </a>
+                                        <a href="javascript:;" mat-mini-fab color="success" matTooltip="ChargePoint Undo "  *ngIf="element.isrequestraised && !isTransferred && canDeleteChargepoint && !deletedRecords"    (click)="unDeleteChargePoint(element)" class="table-action-btn">
+                                            <span class="material-symbols-outlined">undo</span>
+                                              
+                                              </a> 
+                                            </div>
+                                          </mat-cell>
+                                        <!-- <mat-cell *matCellDef="let element" class="spc-even"
+                                        [ngClass]="{'disable-link hide': deletedRecords}">
+                                        <img matTooltip="Chargepoint Details" src="/assets/zoom-in.svg"
+                                            (click)="chargeEdit(element);" />
+                                        <img [ngClass]="{'img-disable': parentSiteRequest}"
+                                            *ngIf="!element.isrequestraised && !isTransferred && canDeleteChargepoint"
+                                            matTooltip="Delete Chargepoint" width="24" src="/assets/delete.png"
+                                            (click)="deleteChargePoint(element)" />
+                                        <img [ngClass]="{'img-disable': parentSiteRequest}"
+                                            matTooltip="Undo Delete Chargepoint" width="24"
+                                            *ngIf="element.isrequestraised && !isTransferred && canDeleteChargepoint && !deletedRecords"
+                                            (click)="unDeleteChargePoint(element)"
+                                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAAEWElEQVRoge2YS2hcVRjH/985k8dkklJRS6OWKpUa0RYh0SSV4NyZWrpIyBQ7ulAURERwIbh0Y5Z1IxZEVFyIYMHYmIYExTSZCYgm03QQ6ys+ikmNSfMyNkkd28y5n4s4YZjcmXNflRbmvzyP7/v973ncez+grLLKKqussmxqLdq8fy3avP96ii+cBAd4GMxDawdb9znHsxmfeOSy0dxodx45Cg7cAgBgLEDIaO3Q6LfucDXxCcuk6NFQMpXWzdUa2BI8J59MFI0PLLI0jbrBs9+Vmq/dQky0DiC7pYNwK0w1vHqo6X4nwPkqAQ8wLdJVWtTFsLWFVg+23EtsJgDstOieZ2lGdU+qUBr4CZimUTsyflEXx5YBAFg51NgglEzCBxN+wQMODACbJhIA6i2659nkSF1y/PtSMUrCAz9RQBmhz9OzdpkcGQC8mfAbHnDwHshp22B6wjRNA4BVoh0kKLFqPHhfYYcG/mcSFRGn8ICLFchpxWi6RwhKAHSbRfccgyJ1w6kfAC38LyQqwqHTX8644XBtALBngoBAKXjB0qhJjP7hlsGTAUBrYglEAsw3bUlM+JVMGfYCD/hgAABWog/tFeBkERNWmpRKGMGRsUmvuX0xADgyMSWVCPsBD/hoAMiZwBcAdlhn4xmZlQ/7BQ+4uEZLB6NqJqooOoBJXAUF/M3pk3JXJVkc2DztlFIlL4Vb7/Yrry9bSHPPW2k6yyq8PZE+7zW35xXQwM8CmLZovyNAMvlXpHGP1/yeDGjgp7Os2qQSbQCsDu0uP0y4NqCDV0oa2xPp88GRsUnJgTCsTAixq6bzqa8zx1+LgkEdnxw55pTD1RnQwF80pTK2DaYn8hszkQO7FWWTAO4CAKqqQtWTL0A27IN56U/17MKbp5cqs4cHjpxyxOR4BTTwc0wiUggPAMHEV1OSAwaA36imFtXPvbwBn7mMt2c+lkuV2cNOWQCHBrTwoEjd0NiPxebnTFQ/82JG7N6D9eUFvDr1Dj4Luf8csr1ctuD/+3zWaf34sQOr9bcPvcKfBqcrM7rhioB5Zhon4g8bv3ngZFdXl+nIgAbe1q9kvjp6YzEwTjAhaHdOns5QQMX7O/ovAF7qQhtyDN/eG3sJwOvwcAMSMIuAaunv6L/gvi7EWGBpRp3Ab2TnZQDafVOSCahnJT4Cg9zVhTxW5TpOPtYAqboZ8FRjZabHbR/iTRMM6UdJMd4dD/5Tsf4GA8/ntxe+B+Ld8cpMxXobA+8RcGdBGGcvjVzpu3Y4dc4VtYXaT3U+Daa3AISArQY2x/XGogCGCppnHB2k2uHUOT/hAWAg1vcBKdlEQMkVFcI8Y9F8s68/NG7Vf7Rn4krN360MvF9sjGJq3tLItOjrL+W1ULw7XnklkH1EEb/r+Qz832rvjXHJAcTx62ILudToQGdfz41qYEYSPwEC33gGiMckcUtfrO93APC1xHGNpADMgSkFYZ4Y6OzrAWHzbPwLcyQRDfJSCAYAAAAASUVORK5CYII=">
+                                    </mat-cell> -->
+                                </ng-container>
+
+                                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                            </mat-table>
+                            <div *ngIf="process" class="text-center norecord table-loader">
+
+                                <div class="loader-inner">
+                                    <mat-spinner [diameter]="40"></mat-spinner>
+                                    <small>Loading</small>
+                                </div>
+                            </div>
+                            <div *ngIf="!process && (dataSource.data.length == 0 || dataSource.filteredData.length == 0)"
+                                class="norecord">
+                                {{'table.noRecordFound' | translate}}</div>
+                            <mat-paginator #paginator [length]="totalCount" 
+                                [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true"
+                                >
+                            </mat-paginator>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

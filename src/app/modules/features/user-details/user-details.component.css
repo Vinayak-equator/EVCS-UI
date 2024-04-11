@@ -1,0 +1,51 @@
+::ng-deep .no-line .mat-form-field-underline {
+  display: none;
+}
+
+.ml-25 {
+  margin-left: 25px;
+}
+
+.per-title {
+  font-weight: 600;
+  font-size: 16px;
+  color: #1951A1;
+}
+
+.arrow-img {
+  transform: rotate(90deg) scaleY(-1);
+  margin-top: -15px;
+  margin-right: 5px;
+}
+
+.t-form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-wd {
+  min-width: 22%;
+  margin-left: 1.5rem;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.disableaction {
+  filter: opacity(0.2) grayscale(1);
+  pointer-events: none;
+}
+
+.existerr {
+  padding-top: 15px;
+  color: #f44336;
+  font-size: 75%;
+}
+
+.disableemail {
+  filter: opacity(0.5);
+  pointer-events: none;
+}

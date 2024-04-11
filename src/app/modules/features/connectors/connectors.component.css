@@ -1,0 +1,43 @@
+::ng-deep .no-line .mat-form-field-underline {
+  display: none;
+}
+
+.disableaction {
+  filter: opacity(0.2) grayscale(1);
+  pointer-events: none;
+}
+
+.text-end {
+  text-align: end;
+}
+
+.spc-even {
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.circle-img {
+  margin-top: -3px;
+}
+
+.md-chip {
+  display: inline-block;
+  padding: 5px 15px;
+  border-radius: 32px;
+  font-size: 14px;
+  cursor: pointer;
+  width: 100px;
+  text-align: center;
+}
+
+.md-chip-approve {
+  background: #3f51b5;
+  color: white;
+}
+
+.md-chip-reject {
+  background: #f44336;
+  color: white;
+}

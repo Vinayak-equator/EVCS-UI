@@ -1,0 +1,122 @@
+<div class="mt-3">
+    <div class="card mat-elevation-z mb-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 lg-6">
+                    <h2 class="h2">Onboarding</h2>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <form [formGroup]="onboardingForm" #onboarding="ngForm" class="margin-bottom-40 ucg-container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <mat-form-field class="w-100" appearance="outline">
+                                <input *ngIf="hasTenantAdmin" matInput readonly [value]="tenantName">
+                                <mat-label>Select Organization</mat-label>
+                                <mat-select *ngIf="!hasTenantAdmin" formControlName="tenantName" tabindex="1"
+                                    required [disabled]="hasTenantAdmin">
+                                    <!-- <mat-option (click)="toggleAllTenantSelection()" value="select-all">Select
+                                        All</mat-option> -->
+                                    <mat-option *ngFor="let tenant of tenants" [value]="tenant.tenantId"
+                                        (click)="tenantSelection()">
+                                        {{tenant.name}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    <span *ngIf="!onboardingForm.get('tenantName')?.valid">
+                                        Organization name is required.</span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Select Site</mat-label>
+                                <mat-select formControlName="siteName" required tabindex="2">
+                                    <!-- <mat-option (click)="toggleAllSiteSelection()" value="select-all">Select
+                                        All</mat-option> -->
+                                    <mat-option *ngFor="let site of sites" [value]="site.siteId"
+                                        (click)="siteSelection()">
+                                        {{site.name}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    <span *ngIf="!onboardingForm.get('siteName')?.valid">
+                                        Site name is required.</span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Select Charge Point</mat-label>
+                                <mat-select formControlName="chargePointName" required tabindex="2">
+                                    <!-- <mat-option (click)="toggleAllCharPointSelection()" value="select-all">Select
+                                        All</mat-option> -->
+                                    <mat-option *ngFor="let chargePoint of chargePoints" [value]="chargePoint.id"
+                                        (click)="charPointSelection()">
+                                        {{chargePoint.id}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    <span *ngIf="!onboardingForm.get('chargePointName')?.valid">
+                                        ChargePoint is required.</span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-4">
+                            <mat-form-field appearance="outline" class="w-100 ucg-form-control">
+                                <mat-label>Select Message Type</mat-label>
+                                <mat-select formControlName="messageType" required>
+                                    <mat-option>Message Type</mat-option>
+                                    <mat-option value='BootNotification'>BootNotification </mat-option>
+                                    <mat-option value='DiagnosticsStatusNotification'>
+                                        DiagnosticsStatusNotification</mat-option>
+                                    <mat-option value='FirmwareStatusNotification'>
+                                        FirmwareStatusNotification</mat-option>
+                                    <mat-option value='Heartbeat'>Heartbeat</mat-option>
+                                    <mat-option value='MeterValues'>MeterValues</mat-option>
+                                    <mat-option value='StatusNotification'>StatusNotification
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    <span *ngIf="!onboardingForm.get('messageType')?.valid">
+                                        Message Type Id is required.</span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-3 col-md-4">
+                            <!-- <div class="label">ConnectorId: {{triggerConnector}}</div> -->
+                            <mat-form-field appearance="outline" class="w-100 ucg-form-control">
+                                <mat-label>Connector Id</mat-label>
+                                <mat-select formControlName="connectorId" required>
+                                    <mat-option>No Of Connectors</mat-option>
+                                    <mat-option value='0'>0</mat-option>
+                                    <mat-option *ngFor="let connector of filteredConnectors"
+                                        [value]="connector.value">
+                                        {{connector.text}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    <span *ngIf="!onboardingForm.get('connectorId')?.valid">
+                                        Connector Id is required.</span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <button mat-raised-button color="primary" class="btn-primary mx-3"
+                                (click)="Trigger()">Trigger Message</button>
+                            <!-- <button mat-stroked-button color="primary" class="w-100 ucg-btn">Trigger Message</button> -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div *ngIf="process" class="loader-outer static-loader">
+            <div class="loader-inner">
+                <mat-spinner [diameter]="40"></mat-spinner>
+                <small>Loading</small>
+            </div>
+        </div>
+    </div>
+</div>

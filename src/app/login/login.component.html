@@ -1,0 +1,46 @@
+<div class="main-container">
+  
+  <div class="gradbg">
+    <div class="app">
+      <form>
+        <header>
+          <!-- <img src="assets/login.png"> -->
+          <div class="imgbg">
+            <img class="logo-img" src="assets/EV-Chargers-Logo.png">
+          </div>
+        </header>
+        <div class="inputs">
+          <div *ngIf="!showForgotPassword" class="input-icons">
+            <input type="text" name="username" class="input-field" placeholder="Username" [(ngModel)]="username">
+            <span class="material-symbols-outlined">account_circle</span>
+          </div>
+          <div *ngIf="!showForgotPassword" class="input-icons">
+            <input type="password" name="password" placeholder="Password" [(ngModel)]="password"
+              (keyup.enter)="login()">
+              <span class="material-symbols-outlined">key</span>
+          </div>
+          <p class="forgot-pass" *ngIf="!showForgotPassword"><a class="pointer" (click)="showForgotPassword = true; clearAllMsgs();">Forgot
+              password?</a></p>
+          <div *ngIf="showForgotPassword" class="input-icons" style="padding-top: 3rem;">
+            <img src="assets/email.svg" width="26" />
+            <input type="text" name="email" class="input-field" placeholder="Email" [(ngModel)]="email">
+          </div>
+          <p class="forgot-pass" *ngIf="showForgotPassword"><a class="pointer" (click)="showForgotPassword = false; clearAllMsgs();">Back to
+              login</a></p>
+        </div>
+      </form>
+      <footer>
+        <div *ngIf="loginError" class="error_text">Username or Password is invalid.</div>
+        <div *ngIf="inactiveError" style="padding-bottom: 10px;" class="error_text">Your account in inactive, please
+          contact admin for activating your account.</div>
+        <div *ngIf="showEmailSent" class="success_text">Email sent, please check your inbox.</div>
+        <div *ngIf="showEmailError" class="error_text">Email does not exist.</div>
+        <button *ngIf="!showForgotPassword && !showProgress" type="button" class="btn btn-secondary"
+          [disabled]="!username || !password" (click)="login()">Login</button>
+        <button *ngIf="showForgotPassword" type="button" class="btn btn-secondary" [disabled]="!email"
+          (click)="forgotPassword()">Send</button>
+        <mat-progress-bar *ngIf="showProgress" mode="indeterminate"></mat-progress-bar>
+      </footer>
+    </div>
+  </div>
+</div>

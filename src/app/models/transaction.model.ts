@@ -1,0 +1,31 @@
+export class Transaction {
+	id: string;
+	transactionId: string;
+	tenantName: string;
+	siteName: string;
+	chargePointId: string;
+	stopResult: string;
+	startResult:string;
+	stopReason: string;
+	connector: string;
+	startTransactionMin: string;
+	stopTransactionMin:string;
+	endTime:string;
+	meterStart: string;
+	meterStop: string;
+	customerName: string;
+	customerEmail: string;
+	autherization: string;
+	amount: string;
+	chargingRate:number;
+	chargingUnit:number;
+	connectorId:number;
+	email:number;
+	startTagId:string;
+	stopTagId:string;
+	promocode:string;
+	subtotal:string;
+	discountamount:string;
+	cellphonenumber: string;
+	markupcharge: number;
+}

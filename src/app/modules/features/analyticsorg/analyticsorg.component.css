@@ -1,0 +1,79 @@
+.site-container {
+  max-height: 181px;
+  overflow-y: scroll;
+}
+.list-group-item.active {
+  background-color: #1951a1;
+  border-color: #1951a1;
+}
+.stat-text {
+  color: #1951a1;
+  font-size: 18px;
+  font-weight: 500;
+  padding-top: 0.75rem;
+}
+.card-counter {
+  box-shadow: 2px 2px 10px #b0b0b0;
+  margin: 5px;
+  padding: 20px 10px;
+  background-color: #fff;
+  height: 100px;
+  border-radius: 5px;
+}
+.card-counter.primary {
+  background-color: #007bff;
+  color: #fff;
+}
+.card-counter.danger {
+  background-color: #ef5350;
+  color: #fff;
+}
+.card-counter.success {
+  background-color: #66bb6a;
+  color: #fff;
+}
+.card-counter.info {
+  background-color: #894bda;
+  color: #fff;
+}
+.card-counter.usr {
+  background-color: #ff7f50;
+  color: #fff;
+}
+.card-counter img {
+  width: 4rem;
+  opacity: 0.4;
+}
+.card-counter .count-numbers {
+  position: absolute;
+  right: 35px;
+  top: 35px;
+  font-size: 32px;
+  display: block;
+}
+.card-counter .count-name {
+  position: absolute;
+  right: 35px;
+  top: 65px;
+  text-transform: capitalize;
+  opacity: 0.5;
+  display: block;
+  font-size: 18px;
+}
+h4 {
+  margin: 0;
+}
+.ml-18 {
+  margin-left: 18px;
+}
+.chartjs-container {
+  padding-top: 2rem;
+}
+.text-center {
+  justify-content: center;
+}
+.clear-window {
+  width: 33px;
+  margin-top: -6px;
+  margin-left: -4px;
+}

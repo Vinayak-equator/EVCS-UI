@@ -1,0 +1,93 @@
+::ng-deep .no-line .mat-form-field-underline {
+  display: none;
+}
+
+.per-title {
+  font-weight: 600;
+  font-size: 16px;
+  color: #1951a1;
+}
+
+.arrow-img {
+  transform: rotate(90deg) scaleY(-1);
+  margin-top: -15px;
+  margin-right: 5px;
+}
+
+.ucg-container {
+  padding-bottom: 2rem;
+}
+
+.hcust {
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.t-form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-wd {
+  min-width: 22%;
+  margin-left: 1.5rem;
+}
+
+.mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+.text {
+  color: black;
+}
+
+::ng-deep .mat-expansion-indicator::after {
+  color: rgba(0, 0, 0, 0.54) !important;
+}
+
+::ng-deep .mat-expansion-panel-header {
+  padding-left: 15px !important;
+}
+
+.mt-15 {
+  margin-top: 15px;
+}
+
+.mb-15 {
+  margin-bottom: 15px;
+}
+
+fieldset {
+  padding: 30px 20px 10px 20px;
+  border-radius: 20px;
+  border: solid 1px #00000055;
+}
+
+fieldset legend {
+  color: #00000066;
+  margin-top: -40px;
+  background: white;
+  width: fit-content;
+  font-size: 20px;
+}
+/* fieldset .mat-form-field {
+  padding: 10px 0;
+} */
+
+.cross-div {
+  text-align: right;
+  margin-bottom: -22px;
+  padding-right: 0px;
+  z-index: 1;
+}
+
+.cancel-fab-btn {
+  width: 25px;
+  height: 25px;
+}
+
+.cross-icon {
+  width: 20px;
+  margin-top: -15px;
+}

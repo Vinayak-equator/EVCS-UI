@@ -1,0 +1,590 @@
+<div class="cache-btn">
+  <button mat-mini-fab style="width: 40px; height: 40px;" color="secondary" (click)="clearCache()">
+
+    <span class="material-symbols-outlined">
+      mop
+    </span>
+  </button>
+</div>
+
+<div *ngIf="process" class="loader-outer">
+  <div class="loader-inner">
+    <mat-spinner [diameter]="40"></mat-spinner>
+    <small>Loading</small>
+  </div>
+</div>
+
+<div class="row mt-3">
+
+  <!-- </form> -->
+  <div class="row mt-4">
+    <div class="col-lg-4 col-sm-4 mt-sm-0 mt-4">
+      <div class="card  mb-2 box-1 total-tenants-outer">
+        <div class="card-header d-flex">
+          <div class="box-icon-outer text-center">
+            <img src="./assets/img/total-tenants.svg" />
+          </div>
+          <div class="header-text-outer mt-2" (click)="goToSite()">
+            <h4>{{'cards.sites' | translate }}</h4>
+            <p>{{sitesCount}}</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-sm-4 mt-sm-0 mt-4">
+      <div class="card  mb-2 box-1 total-charge-points">
+        <div class="card-header d-flex">
+          <div class="box-icon-outer text-center">
+            <img src="./assets/img/total-charge-points.svg" />
+          </div>
+          <div class="header-text-outer mt-2" routerLink="/connectors/All">
+            <h4>{{'cards.chargePoints' | translate }}</h4>
+            <p>{{chargePointsCount}}</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-lg-4 col-sm-4 mt-sm-0 mt-4 offline-charger">
+      <div class="card  mb-2 box-1 offline-charge-points">
+        <div class="card-header d-flex">
+          <div class="box-icon-outer text-center">
+            <img src="./assets/img/offline-Charger.svg" />
+          </div>
+          <div class="header-text-outer mt-2" routerLink="/connectors/Offline">
+            <h4>Off. ChargePoints</h4>
+            <p>{{totalchargePoints_Offline}}</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div *ngIf="isSiteOwner" class="row mt-2">
+    <div class="col-lg-4 col-sm-4 mt-sm-0 mt-4">
+      <div class="card mb-2 box-1 total-revenue-generated">
+        <div class="card-header d-flex">
+          <div class="box-icon-outer text-center">
+            <img width="34px" style="margin: -4px;"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAE7klEQVR4nO1Z3YscRRCf+K15UKMRP+I/IJ6CGM8XieCjD4JxTbLVe5eFcIpwEBPkslM9zItfj2qivgiCRIgkiknAB8VHHz00nhgiCuFMiJ4JSfQ2W3XGlpqNYbZndrpndu+MsAUNx/VUdVV19a8+NghGNKIRDUxxbK6CkB8F5BCQPwbkOaXpDGhiWcnfyHOg+YDS3FIRjwtP8F8TxIvrlKbXFPK80mxKLeR5QHp1Ily8Z8UVb+wyt4GmdxQSlVbcWqCpo5DersVmzYooX0fapJAWBlU8eyO0AJqeXTbFN8TmmsTrfZWgs6B5L2jaBhGvb7bM2qkpc60s+Vv+J3sK+UOFdK7gRvbIWUNVvvaiuVEhHe5z6A9K01b5pqS8pkI+mm8EHyojr5DEG/nKUxtC3t7PW/b3/WQD8g6RlfPIDw7lJgDp3RwP/dII+eEiPh8D/iUJL4V8InMO0u5g4AebEcqzm+PFu128ZQwQEpkiO+uszjNBVai00UY871K+FpvrVMRTOSjTlL0i3mbLrFXIx6xb+LW+y9xa2oAs4lDbFTabsH0vaP6uL8Igz07G5s4iGapF92ffBL1VTvl4cV2SYNKHh7y9iEe8C8jfeCSur1xlBGhG6xYu+ITtZUrKAwsqXYgASJOWon8C8vug+QPbGSrsbCw8f6dZnX3U9IqX8uKdbG1DW91G8ye9Xlt6/PJe2NloQeR+lzxAfs4Kv+NeBaBUlXaG9UkqCvlISsH53l2zShRIgcHPLnlTsbkJNJ3vMSLi9U4DknK3F3n2Opm6fN+nDPjJ3gdNX6YBwVPmPiuUZ5xMUs9bsbzN5zDQ9EXq0V2saxrz4SuiDBx7hJ4YMFf62rremrEOm4eIHxvQgHFL5hE3E9LpNNOW2Nzuc5gkG9D0W04COzzRogcqGRCbOyxZCz4G9DQpruyZpkbEGxTSHzk1zUV5S6JQGQOmp831Vjh3ltUAIfG20vx1fiKjk2XexnRFAyqFUC+ZVQn2p6E1hee1GXPzsoUQWI94S8iPBBUpSYqaNoOm3y1ojnz4wc5JPo+4KowWkdL0oNL0V+oWZpcNRpWVyKSHdfEA0utpnrw4lyIu5ZTzXgYgf1Q6kWWxl865SgnQ/FKPAWHnqcJE5/EYVVLQ9SKaq5zvX8whNQsNiJaesL7/LNMcaTpbVGrY1Ij4+UrFnJBMzKwwOlpUTk/G5gal6ZT1UD+VOY8YD5q/tfbec3pf00nLKS8HviTjvkxDg7yj0OiIX8jH/kxD04FW575CWZqjgRoaIRn3WUmoXVwXSclMuwsNQFpSmiaKzq1rGrNbStD0ZjCMpl66JJcnIFx6EpA+z3qeD0BIDxXxNmWCh/zjUJr6RBmJ4WwmnZWDXLxK099pPtf3TZlI5JQgDd15upLyKSP2ZEOBj8n0YFgG1DWN2Z6/FHJvBMMZ6vKhbExTO5ke7DSrqxqgus27zhstCorVaubqYBjUHcbywfyHySekAZce1leefNvFeeqFyrTywxru9g5i+6PMpQZ8X1K/RDwuMS2leDKpk6oy4vFk0iDlQU7PoFKIMzTP55HMKgUZfDC/3KJTAz9YXxJYk3FfZmBVYQHSBfH6ZGxuCVaaJCfIxCw98/FXnI9LeQChuSu4In5mlRm/TCaQ9yedmHR20p521+mkHpI9zTPy7RXxM+uIRhT8/+kfaCM9dSxzBfQAAAAASUVORK5CYII=">
+          </div>
+          <div class="header-text-outer mt-2">
+            <h4>Total Revenue Reimbursement</h4>
+            <p>$ {{totalRevenueReimbursement}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-sm-4 mt-sm-0 mt-4">
+      <div class="card mb-2 box-1 utility-reimbursement">
+        <div class="card-header d-flex">
+          <div class="box-icon-outer text-center">
+            <img width="34px" style="margin: -4px;"
+              src="data:image/png;base64,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">
+          </div>
+          <div class="header-text-outer mt-2">
+            <h4>Total Utility Reimbursement</h4>
+            <p>$ {{totalUtilityReimbursement}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-sm-4 mt-sm-0 mt-4">
+      <div class="card mb-2 box-1 total-reimbursement">
+        <div class="card-header d-flex">
+          <div class="box-icon-outer text-center">
+            <img width="34px" style="margin: -4px;"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFX0lEQVR4nO1bS4gdRRQ90QiKY4xjDKggYTbqwhjjB1fjZyEiQaPORMRNQmAMLjQfo+P4Xl1RQRDiP6i4cGGCC/GfiIImoBERYj5qlFmoCxMURE1ihCjRIzXeN6npqaqufume9My8AwVzX9+6n9O3qruqeoAOwjDgpwLSbQb8BNMlXskYazXUFKXHKxkDk4WAkHz8DVaMaUmAgFtCJe8ZDlumIgHbM0l+3LpmJ8DMte2VEWA8M3BVzZ3ZBewx4C/6+zpPXOv0mtXpqaykZIKS990EAXsN+JcmutxJfrn+Zq/1VlpSMkHDI+Qnm2yIlBQHPe2UVB4BRYZI7OUlZxiOxhbLIYWE3qIlFQvsfvD0oiW+FjytKAH94IkG3OwQudn+VpiAdkoq587cpv22+q5ndLeqrVt81/MqTcBZBvzcNvt3nr8oipRUKLBB8EwB9+r1gbjHETsr1M+wgN2pfipBf4GSygZmy17v/EjyOoHOzPNpdVrzhQF/FHCJtRXyUzkksaTcwLITnk1+CDy7gM9zBNzmmxgnnIBUuIE5QdvxPJBy5wOVcKczJ4yxjbpBKgyyQwA6FcDOEEBnDmAV80tp6EyC6DwFmDJOBZxrwEcMuFPAQ9p22N8eAM+a6OoqDSlBCtgn4MHIMviAbxE0JQgQsM+A/+q1dwS8WsAu25rgNfqbJeGfLAmTngAB5zp3fihiY0h19gs4J8V2bSCRIO34bt35PDsGfFd1H0qxPVkqYJeVbakn2LlWh8IXKbYnSwX8ob91JdjpUt2DKbZLgZnAPf26tDEbr1KDgI5Hg6/EpgM6BCBQATLNGiJHXtOhjR75jYMBP1OltAPFGkNfs20u25I7GfDl1IOMukPAu2wuBnypSKfBtg8WawYDPqs3c3VypyZ4k3Z6L6Yn4AYDfuc2AV9ICGqjp9+GhH4vZvsZ8JWcGD/UXG5AKhrg+drp+5yAWq+42RY9lMydlf19Zvn62BhyYtynuvOQigHwJAH/tmvzVeApEeN71Pgi/a5gWOX5Ocm0EujRlkLAfE14WPssUnlPqE/rWN6Afwp4QmL6/8OA3+Yl4xyc3uiTQ8gmnEKAMyw3+eSAnyuzK8tkGPBNdbAkorNede72yWUSYMB7VO85nxzos0x1cueXcTDgY9rZRHTWqs4TPrlkAp5UvXt9csDP41oBD8ZseyHgUu280a8xEkS/BvGGTy6ZgFZF9vnkgJ9Nsa9NokgZP03wcnWwwyeXTMBO1bvMJwf62McrG+CF8Ww9EHC2OjgEcIZPx+7jq85vGXl/BQT8rnpzfLLHx8kCHrFPM/tUi9kOwoA/qZPzQjrObu9sn1wGAYPgGe42mfPV2ei2WRYN8GLV+Qbtwhz9OuO6iM5XqrPAJ5dBQAO8RHW+9MmBuG7XIfx6ar7jYMDn8x5rzjb2Yp9cBgFN8GZ3Wz0rB3w8rDqPol0IuFJZXJ+w2Fjpk8sgwICrVOcZnxzo85rGfkdqvuMg4PVq5CMEYMA1GsxTPrkkAp52V3RZOeDja9VZiHYh4DwlYF9Ipwneqo7e8sklEfC2+zzPyh77MwU8bNcya8BTi+Q8BnYBoQuJ4AqvCV6qJO3WPgtVf5dPv00Cdrt3MyuHVrMG/AHHCnP0heOKQDLdrQSyR90hmz79HAIOBPp0B+wvTtnPSIIBX9WElkV0Piiy6RjYhC2q/35Ev1najpaAq/PGdN1gX9/zVrLJGALPtZ/J64cL0XV+zTZBfz2mCdCFXRIro4f1rP+Ctv8RoQLYd/0GeJHuRxzRWJeW6IIznPV33Zsl4D5UgSZ4lX23FvDnGiTqPnHs8Nxrd4jtOqGS5DFF8R+sXeiGKBYyGAAAAABJRU5ErkJggg==">
+          </div>
+          <div class="header-text-outer mt-2">
+            <h4>Total Reimbursement</h4>
+            <p>$ {{totalReimbursement}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4 box-2">
+    <div class="col-lg-6">
+      <div class="card">
+        <!-- <div class="text-center mt-n3 mx-3 Connectors-img-outer">
+          <img src="./assets/img/Connectors-img.svg" />
+        </div> -->
+
+        <div class="card-body p-3 connectors-footer">
+
+          <div class="cn-status-inner">
+            <h3>Connectors</h3>
+
+            <div class="connectors-footer-contect">
+              <div class="row">
+                <div class="col-lg-6 col-md-6">
+                  <label class="available" routerLink="/connectors/AllChargers">
+                    <span class="material-symbols-outlined">check_circle</span>
+                    <p>{{ connectors }}</p>
+                    Total
+                  </label>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <label class="available" routerLink="/connectors/Online">
+                    <span class="material-symbols-outlined">check_circle</span>
+                    <p>{{connectorsAvailableCount}}</p>
+                    Available
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6 col-md-6">
+                  <label class="faulted" routerLink="/connectors/Occupied">
+                    <span class="material-symbols-outlined">change_circle</span>
+                    <p>{{connectorsInUseCount}}</p>
+                    Occupied
+                  </label>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <label class="occupied" routerLink="/connectors/Unavailable">
+                    <span class="material-symbols-outlined">error</span>
+                    <p>{{connectorsOfflineCount}}</p>
+                    Unavailable
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6 col-md-6">
+                  <label class="unavailable" routerLink="/connectors/Faulted">
+                    <span class="material-symbols-outlined">disabled_by_default</span>
+                    <p>{{this.connectorFaultedCount}}</p>
+                    Faulted
+                  </label>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <label class="preparing" routerLink="/connectors/Preparing">
+                    <span class="material-symbols-outlined">ev_charger</span>
+                    <p>{{this.connectorPreparingCount}}</p>
+                    Preparing
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6 col-md-6">
+                  <label class="authorized mb-0" routerLink="/connectors/Authorized">
+                    <span class="material-symbols-outlined">account_circle</span>
+                    <p>{{this.connectorAuthorizeCount}}</p>
+                    Authorized
+                  </label>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <label class="finishing mb-0" routerLink="/connectors/Finishing">
+                    <span class="material-symbols-outlined">done_all</span>
+                    <p>{{this.connectorFinishingCount}}</p>
+                    Finishing
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 box-2-2">
+      <div class="card z-index-2">
+        <div class="card-body pt-0">
+          <div class="border-radius-lg">
+            <div class="dashboard-graph">
+
+              <div class="hd-with-btn">
+                <h3>Connectors</h3>
+                <div class="icons-btn">
+                  <a matTooltip="Refresh" matTooltipPosition="below" href="javascript:;" mat-mini-fab color="primary"
+                    (click)="refreshConnector()"><span class="material-symbols-outlined">
+                      refresh
+                    </span></a>
+                </div>
+              </div>
+
+              <!-- <h3></h3> -->
+
+              <div class="chart">
+                <!-- *ngIf="piechartData.length" -->
+                <div class="chartjs-container">
+                  <canvas id="ChartJs" baseChart [datasets]="piechartData" [options]="piechartOptions"
+                    [colors]="piechartColors" [labels]="piechartLabel" [legend]="piechartLegend" [chartType]="'pie'"
+                    [plugins]="piechartPlugins">
+                  </canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="row mt-5 box-2">
+
+
+
+    <div class="col-lg-6 box-2-2">
+      <div class="card z-index-2 relative">
+
+
+        <div *ngIf="process1" class="loader-outer static-loader">
+          <div class="loader-inner">
+            <mat-spinner [diameter]="40"></mat-spinner>
+            <small>Loading</small>
+          </div>
+        </div>
+
+        <div class="card-body pt-0">
+          <div class="border-radius-lg">
+            <div class="dashboard-graph">
+              <div class="hd-with-btn">
+                <h3>Transactions</h3>
+                <div class="icons-btn">
+                  <a matTooltip="Change Date Range" matTooltipPosition="below" href="javascript:;" mat-mini-fab
+                    color="primary" (click)="ViewDateRange()"><span class="material-symbols-outlined">
+                      calendar_month
+                    </span></a>
+                  <a matTooltip="Refresh" matTooltipPosition="below" href="javascript:;" mat-mini-fab color="primary"
+                    (click)="getStatistics()"><span class="material-symbols-outlined">
+                      refresh
+                    </span></a>
+                  <a matTooltip="Full Width" matTooltipPosition="below" href="javascript:;" mat-mini-fab color="primary"
+                    (click)="viewFull()">
+                    <span class="material-symbols-outlined">
+                      open_in_full
+                    </span>
+                  </a>
+                </div>
+              </div>
+              <div class="chart">
+                <!-- *ngIf="finacialchartData.length" -->
+                <div class="chartjs-container">
+                  <h4 style="text-align: end;">Duration: {{this.selected.charAt(0).toUpperCase() + this.selected.slice(1)}}</h4>
+                  <canvas id="ChartJs" baseChart [datasets]="finacialchartData" [labels]="finacialchartLabel"
+                    [options]="finacialchartOptions" [colors]="finacialchartColors" [legend]="finacialchartLegend"
+                    [chartType]="'bar'" [plugins]="finacialchartPlugins">
+
+                  </canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 box-2-2">
+      <div class="card z-index-2 relative">
+
+
+        <div *ngIf="process1" class="loader-outer static-loader">
+          <div class="loader-inner">
+            <mat-spinner [diameter]="40"></mat-spinner>
+            <small>Loading</small>
+          </div>
+        </div>
+
+
+        <div class="card-body pt-0">
+          <div class="border-radius-lg">
+            <div class="dashboard-graph">
+              <div class="hd-with-btn">
+                <h3>Units Consumed</h3>
+                <div class="icons-btn">
+                  <a matTooltip="Change Date Range" matTooltipPosition="below" href="javascript:;" mat-mini-fab
+                    color="primary" (click)="ViewDateRange()"><span class="material-symbols-outlined">
+                      calendar_month
+                    </span></a>
+                  <a matTooltip="Refresh" matTooltipPosition="below" href="javascript:;" mat-mini-fab color="primary"
+                    (click)="getStatistics()"><span class="material-symbols-outlined">
+                      refresh
+                    </span></a>
+                  <a matTooltip="Full Width" matTooltipPosition="below" href="javascript:;" mat-mini-fab color="primary"
+                    (click)="viewFullUnit()">
+                    <span class="material-symbols-outlined">
+                      open_in_full
+                    </span>
+                  </a>
+                </div>
+
+              </div>
+
+              <div class="chart">
+                <!-- *ngIf="unitchartData.length" -->
+                <div class="chartjs-container">
+                  <h4 style="text-align: end;">Duration: {{this.selected.charAt(0).toUpperCase() + this.selected.slice(1)}}</h4>
+                  <canvas id="ChartJs" baseChart [datasets]="unitchartData" [options]="unitchartOptions"
+                    [colors]="unitchartColors" [labels]="unitchartLabel" [legend]="unitchartLegend" [chartType]="'line'"
+                    [plugins]="unitchartPlugins">
+                  </canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-5 box-4">
+      <div class="col-lg-12 col-md-12">
+        <div class="card z-index-2">
+          <div class="card-body">
+            <div class="border-radius-lg d-flex justify-content-center">
+              <!-- <div class="box-4-left mr-auto">
+                <h2>Reduced <span>Co2</span> Emission</h2>
+              </div> -->
+              <div class="box-4-right">
+                <ul>
+                  <!-- <li>
+                    <img src="./assets/img/ENERGY.svg">
+                    <div class="es-inner">
+                      <span>{{totalKWH.toFixed(2)}} KWH</span>
+                      <p>KWH</p>
+                    </div>
+                  </li> -->
+                  <li>
+                    <img src="./assets/img/globe.png">
+                    <div class="es-inner">
+                      <span>{{energy.toFixed(2)}} KG</span>
+                      <p>CO2 emission equivalency</p>
+                    </div>
+                  </li>
+                  <li>
+                    <img src="./assets/img/petrol.png">
+                    <div class="es-inner">
+                      <span>{{eco.toFixed(2)}} Gallons</span>
+                      <p>Gas avoided to date</p>
+                    </div>
+                  </li>
+                  <li>
+                    <img src="./assets/img/tree.png">
+                    <div class="es-inner">
+                      <span>{{environment.toFixed(2)}} Trees Seedling</span>
+                      <p>Grown for 10 years</p>
+                    </div>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row mt-5 box-5">
+      <div class="col-lg-12 col-md-12">
+        <agm-map [latitude]="39.16" [longitude]="-97.89" [zoom]="3" [mapTypeControl]='true'
+          style="height: 400px; width: 100%;">
+          <agm-marker *ngFor="let marker of maplist" [latitude]="marker.lat" [longitude]="marker.lng"
+            [iconUrl]="marker.iconsUrl" (mouseOver)="openInfoWindow()" (mouseOut)="closeInfoWindow()">
+            <agm-info-window [disableAutoPan]="true" #infoWindow>{{ marker.label }}<br><br>
+              <strong> <label ngClass="bluelabel">No of Chargers : {{marker.NoOfConnectors }} </label><br>
+                <label ngClass="bluelabel"> Available: {{marker.Available }} </label><br>
+                <label ngClass="bluelabel"> Unavailable: {{marker.UnAvailable }} </label><br>
+                <label ngClass="bluelabel"> Occupied: {{marker.Occupied }} </label>
+              </strong>
+            </agm-info-window>
+          </agm-marker>
+        </agm-map>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+<div class="modal zindex" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+  <div class="modal-width">
+    <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Transactions :</h4>
+        </div>
+        <div class="modal-body">
+          <div class="chart">
+
+            <div class="chartjs-container">
+              <canvas id="ChartJs" baseChart [datasets]="finacialchartData" [labels]="finacialchartLabel"
+                [options]="finacialchartOptions" [colors]="finacialchartColors" [legend]="finacialchartLegend"
+                [chartType]="'bar'" [plugins]="finacialchartPlugins">
+
+              </canvas>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="closePopupModal()">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal zindex" tabindex="-1" role="dialog" [ngStyle]="{'display':UnitdisplayStyle}">
+  <div class="modal-width">
+    <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Unit Consumed :</h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="chart">
+
+            <div class="chartjs-container">
+              <canvas id="ChartJs" baseChart [datasets]="unitchartData" [options]="unitchartOptions"
+                [colors]="unitchartColors" [labels]="unitchartLabel" [legend]="unitchartLegend" [chartType]="'line'"
+                [plugins]="unitchartPlugins">
+              </canvas>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="closePopupModal()">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- 
+  date Range filter
+ -->
+
+
+
+
+
+<footer class="footer mt-4">
+  <div class="container-fluid">
+    <div class="row align-items-center justify-content-lg-between">
+      <div class="col-lg-12 mb-lg-0 text-center">
+        <p>Copyrights © 2024 Universal EV Chargers</p>
+      </div>
+    </div>
+  </div>
+</footer>
+<div class="full-modal-wrap" [ngStyle]="{'display':viewDateRange}">
+  <div class="modal full-modal zindex" tabindex="-1" role="dialog" [ngStyle]="{'display':viewDateRange}">
+    <div class="modal-width">
+      <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Change Date Range</h4>
+          </div>
+          <div class="modal-body">
+
+
+            <!-- <form [formGroup]="siteDashboardForm" #siteDashboard="ngForm" class="margin-bottom-40 ucg-container"> -->
+
+            <!-- <span>Change Date Range</span> -->
+            <div class="row">
+              <div class="col-md-5">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Duration</mat-label>
+                  <mat-select (selectionChange)="selectDuration($event)" tabindex="1" [(value)]="selected">
+                      <mat-option value="thisweek">This week</mat-option>
+                      <mat-option value="lastWeek">Last week</mat-option>
+                      <mat-option value="monthToDate">This Month</mat-option>
+                      <mat-option value="last30Days">Last Month</mat-option>
+                      <mat-option value="thisQuater">This Quater</mat-option>
+                      <mat-option value="lastQuarter">Last Quarter</mat-option>
+                      <mat-option value="yearToDate">Year To Date</mat-option>
+                      <mat-option value="lastYear">Last Year</mat-option>
+                      <mat-option value="custom">Custom</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <!-- <div class="st-btns">
+                  <a href="javascript:;" color="primary" mat-raised-button class="btn-icon mat-elevation-z week"
+                    (click)="datefilters('weekely')"><span class="material-symbols-outlined">
+                      calendar_month
+                    </span> Weekely</a>
+                  <a href="javascript:;" color="primary" mat-raised-button class="btn-icon mat-elevation-z month"
+                    (click)="datefilters('monthly')"><span class="material-symbols-outlined">
+                      calendar_month
+                    </span> Monthly</a>
+                  <a href="javascript:;" color="primary" mat-raised-button class="btn-icon mat-elevation-z year"
+                    (click)="datefilters('yearly')"><span class="material-symbols-outlined">
+                      calendar_month
+                    </span> Yearly</a>
+                  <a href="javascript:;" color="primary" mat-raised-button class="btn-icon mat-elevation-z custom"
+                    (click)="showCustom()"><span class="material-symbols-outlined">
+                      calendar_month
+                    </span> Custom</a>
+                </div> -->
+              </div>
+              <div class="col-md-5">
+                <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Type</mat-label>
+                    <mat-select (selectionChange)="selectType($event)" tabindex="1" [(value)]="filterType">
+                        <mat-option [ngStyle]="hideDaily ? {display: 'none'} : {}"
+                            value="Daily">Daily</mat-option>
+                        <mat-option [ngStyle]="hideWeekly ? {display: 'none'} : {}"
+                            value="Weekly">Weekly</mat-option>
+                        <mat-option [ngStyle]="hideMonthly ? {display: 'none'} : {}"
+                            value="Monthly">Monthly</mat-option>
+                        <mat-option [ngStyle]="hideQuarterly ? {display: 'none'} : {}"
+                            value="Quarterly">Quarterly</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            </div>
+            <div class="row pt-3 mt-3">
+              <div class="col-md-5" id="custom">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Start Date</mat-label>
+                  <input matInput [matDatepicker]="picker" [(ngModel)]="startDate" [max]="maxDate" required
+                    [disabled]="isDatepickerDisabled" >
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="col-md-5" id="custom1">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>End Date</mat-label>
+                  <input matInput [matDatepicker]="enddatepicker" [(ngModel)]="endDate" [disabled]="!startDate || isDatepickerDisabled"
+                    [max]="maxDate"  [min]="startDate" required>
+                  <mat-datepicker-toggle matSuffix [for]="enddatepicker"></mat-datepicker-toggle>
+                  <mat-datepicker #enddatepicker></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="closePopupModal()">
+              Close
+            </button>
+            <button type="button" class="btn btn-primary" (click)="getStatistics()">
+              Go
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="pageloader" class="loader-outer">
+  <div class="loader-inner">
+    <mat-spinner [diameter]="40"></mat-spinner>
+    <small>Loading</small>
+  </div>
+</div>

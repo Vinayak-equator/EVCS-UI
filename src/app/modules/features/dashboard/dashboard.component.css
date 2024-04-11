@@ -1,0 +1,125 @@
+.widget-content {
+  padding-left: 50px;
+  font-size: medium;
+}
+
+.spc-even {
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-evenly;
+}
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.disable-link {
+  pointer-events: none;
+}
+.hide {
+  display: none;
+}
+.img-wrapper {
+  padding-right: 15px;
+}
+.img-size {
+  width: 55px;
+  height: 50px;
+}
+.dashboard-img-size {
+  width: 12px;
+  height: 12px;
+}
+.dflex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dashboard h1 {
+  font-size: 18px;
+}
+.tile {
+  margin-top: 24px;
+}
+.tile a {
+  width: 100%;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.tile h3 {
+  font-size: 15px;
+  font-weight: bold;
+  color: #757272;
+}
+.tile p {
+  font-size: 14px;
+  line-height: 1.3em;
+  color: #989898;
+}
+
+.tile:hover {
+  background: #fff;
+  box-shadow: 0px 1px 5px #cecece;
+}
+
+@media screen and (min-width: 1200px) {
+  .tile.col-xl-4 {
+    flex: 0 0 33.333333%;
+    max-width: 30.333333%;
+    margin-right: 3%;
+  }
+}
+.mat-card {
+  padding: 10px;
+}
+.ucg-status-card {
+  max-width: 30%;
+  width: 100%;
+}
+.ucg-status-card-2 {
+  max-width: 23%;
+  width: 100%;
+}
+.pointer {
+  cursor: pointer;
+}
+.card-stats .card-header-1 {
+  font-size: 18px;
+  font-weight: 400;
+}
+.card-stats .card-footer-1 p {
+  font-size: 40px;
+  font-weight: 200;
+}
+.tenants-green-icon {
+  background: url("/assets/tenant-green-icon.png");
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  background-repeat: no-repeat;
+}
+.site-icon {
+  background: url("/assets/green-sitemap.png");
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  background-repeat: no-repeat;
+}
+.chargepoint-icon {
+  background: url("/assets/recharging.svg");
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  background-repeat: no-repeat;
+}
+.circle-icon {
+  background: #fff;
+  height: 47px;
+  width: 47px;
+  display: block;
+  border-radius: 50px;
+  text-align: center;
+  padding: 10px;
+}

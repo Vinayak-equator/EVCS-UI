@@ -1,0 +1,168 @@
+<div class="mt-3">
+  <div class="card mat-elevation-z mb-3">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6 lg-6">
+          <h2 class="h2">PromoCode List</h2>
+        </div>
+        <!-- <div *ngIf="createTenant" class="col-md-6 lg-6 text-end">
+            <span class="creation-button">
+              <button mat-raised-button color="primary" class="btn-primary"
+                (click)="navigateTenant();">{{'button.newTenant' | translate}}</button>
+            </span>
+          </div> -->
+        <div class="col-md-6 lg-6 text-end">
+          <div class="head-right-outer">
+            <a class="btn-border mat-elevation-z icon-right" mat-raised-button data-bs-toggle="collapse"(click)="togglechnage()"  href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Filter<span
+                class="material-symbols-outlined">{{this.chnageicon}}</span></a>
+            <a (click)="sendDetails({}, 'new')" class="btn-border mat-elevation-z" mat-raised-button
+              href="javascript:;"><span class="material-symbols-outlined">add</span> {{'button.newPromoCode' | translate
+              }}</a>
+            <!-- <a class="btn-back mat-elevation-z" mat-raised-button href="javascript:;"><span
+                class="material-symbols-outlined">keyboard_backspace</span> Back</a> -->
+          </div>
+        </div>
+      </div>
+      <div class="filter-outer">
+        <div class="collapse" id="multiCollapseExample1">
+        <div class="row">
+          <div class="col-md-3 lg-3">
+            <!-- <mat-form-field class="w-100 ucg-input" appearance="outline">
+                    <mat-label>Filter by Name</mat-label>
+                    <input matInput placeholder="Filter by Name" maxlength="150" min="3" max="150"
+                    [formControl]="nameControl">
+                  </mat-form-field> -->
+
+            <mat-form-field appearance="outline" class="w-100 ucg-input">
+              <mat-label>Filter by PromoCode</mat-label>
+              <input type="text" matInput [formControl]="promoCodeControl">
+            </mat-form-field>
+
+
+          </div>
+
+          <div class="col-md-3 lg-3">
+            <div class="form-check form-switch">
+              <mat-slide-toggle [color]="'primary'" [(ngModel)]="showDeleted" (change)="getPromoCodes('0')">Show
+                Deleted Records</mat-slide-toggle>
+              <!-- <input class="form-check-input" (change)="getPromoCodes()" type="checkbox" id="flexSwitchCheckDefault"
+                checked="">
+              <label class="form-check-label" for="flexSwitchCheckDefault">Show Deleted Records</label> -->
+            </div>
+          </div>
+          <div class="col-md-3 lg-3">
+            <a href="javascript:;" mat-raised-button class="reset-btn mat-elevation-z" (click)="resetFilters()"><span
+                class="material-symbols-outlined">restart_alt</span> Reset</a>
+          </div>
+        </div>
+        </div>
+      </div>
+      <div class="body-content-outer">
+        <div class="row">
+          <div class="col-md-12 lg-12">
+
+            <div class="ucg-table">
+              <mat-table #table [dataSource]="dataSource" matSort matSortDirection="asc">
+
+                <ng-container matColumnDef="promoCode">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> PromoCode </mat-header-cell>
+                  <mat-cell *matCellDef="let element" (click)="sendDetails(element, 'view')" style="cursor:pointer;"> {{
+                    element.promoCode }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="discountPercentage">
+                  <mat-header-cell class="alignCenter Col-number " *matHeaderCellDef mat-sort-header> Discount&nbsp;(%) </mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element"> {{ element.discountPercentage }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="flatDiscount">
+                  <mat-header-cell class="alignCenter Col-number" *matHeaderCellDef mat-sort-header> Flat&nbsp;Discount </mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element"> {{ element.flatDiscount }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="validityStartDate">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Start&nbsp;Date </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{ element.validityStartDate }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="validityEndDate">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Stop&nbsp;Date </mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <label *ngIf="element.validityEndDate != null" class="form-label">{{ element.validityEndDate
+                      }}</label>
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="maxUsage">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Max&nbsp;Usage </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{ element.maxUsage }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="used">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Used </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{ element.used }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+                  <mat-cell *matCellDef="let element" style="pointer-events: none;">
+                    <label class="form-label">
+                      <mat-slide-toggle [color]="'primary'" [checked]="element.isActive">
+                      </mat-slide-toggle>
+                    </label>
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="action" style="cursor: default;cursor:pointer;">
+                  <mat-header-cell *matHeaderCellDef class="action-column"> Action </mat-header-cell>
+                  <mat-cell *matCellDef="let element" class="action-column">
+                    <div class="table-action promo-action">
+                      <a *ngIf="!showDeleted && (element.used === 0)" matTooltip="Edit Promo Code Details" mat-mini-fab color="primary" href="javascript:;" (click)="sendDetails(element,'edit');" class="table-action-btn">
+                        <span class="material-symbols-outlined">info</span>
+                      </a>
+                      <a *ngIf="!showDeleted && (element.used === 0)" href="javascript:;" mat-mini-fab color="warn" matTooltip="Delete Promo Code"  (click)="deletePromocode(element)" class="table-action-btn">
+                        <span class="material-symbols-outlined">delete</span>
+                      </a>
+                      <!-- <img matTooltip="Undo Delete Promo Code"  width="24" src="/assets/undelete.png"
+                      (click)="undeletePromocode(element.promoCodeID)" /> -->
+                      <a *ngIf="showDeleted" href="javascript:;" mat-mini-fab color="success" matTooltip="Undo Delete Promo Code" 
+                          (click)="undeletePromocode(element.promoCodeID)" class="table-action-btn">
+                        <span class="material-symbols-outlined">undo</span>
+                      </a>
+                      <!-- <img *ngIf="element.used !== 0" src="/assets/zoom-in.svg" (click)="edit(element); viewRecord = true;"/> -->
+                      <a *ngIf="element.used !== 0" href="javascript:;" mat-mini-fab color="primary" matTooltip="Promo Code Details" 
+                          (click)="sendDetails(element, 'view')" class="table-action-btn">
+                          <span class="material-symbols-outlined">info</span>
+                      </a>
+                    </div>
+                    <!-- <img matTooltip="Promo Code Details"  src="/assets/zoom-in.svg"
+                      (click)="sendDetails(element, 'view')" /> -->
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+              <div *ngIf="process" class="text-center norecord table-loader">
+               
+                <div class="loader-inner">
+                    <mat-spinner [diameter]="40"></mat-spinner>
+                    <small>Loading</small>
+                </div>
+              </div>
+              <div *ngIf="!process && (dataSource.data.length == 0 || dataSource.filteredData.length == 0)"
+                class="norecord">
+                {{'table.noRecordFound' | translate}}</div>
+              <mat-paginator #paginator [length]="dataSource.data.length" [pageSize]="5"
+                [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true" >
+              </mat-paginator>
+
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

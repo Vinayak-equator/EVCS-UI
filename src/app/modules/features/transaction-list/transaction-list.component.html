@@ -1,0 +1,311 @@
+
+<!-- New Design -->
+
+<div class="mt-3">
+    <div class="card mat-elevation-z mb-3">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 lg-6">
+            <h2 class="h2">Transactions</h2>
+          </div>
+        </div>
+        <!-- <div *ngIf="createTenant" class="col-md-6 lg-6 text-end">
+            <span class="creation-button">
+              <button mat-raised-button color="primary" class="btn-primary"
+                (click)="navigateTenant();">{{'button.newTenant' | translate}}</button>
+            </span>
+        </div> -->
+        <div class="row">
+            <form [formGroup]="transactionForm" #transaction="ngForm" class="margin-bottom-40 ucg-container">
+                <div class="ucgHeader-1">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field class="w-100" appearance="outline">
+                                <input *ngIf="hasTenantAdmin" matInput readonly [value]="tenantName">
+                                <mat-label>Select Organization</mat-label>
+                                <mat-select *ngIf="!hasTenantAdmin" multiple formControlName="tenantName"  tabindex="1" required
+                                    [disabled]="hasTenantAdmin">
+                                    <mat-option (click)="toggleAllTenantSelection()" value="select-all">Select All</mat-option>
+                                    <mat-option *ngFor="let tenant of tenants" [value]="tenant.tenantId" (click)="tenantSelection()">
+                                        {{tenant.name}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    <span *ngIf="!transactionForm.get('tenantName')?.valid">
+                                        Organization name is required.</span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Select Site</mat-label>
+                                <mat-select formControlName="siteName" multiple required tabindex="2">
+                                    <mat-option (click)="toggleAllSiteSelection()" value="select-all">Select All</mat-option>
+                                    <mat-option *ngFor="let site of sites" [value]="site.siteId" (click)="siteSelection()">
+                                        {{site.name}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    <span *ngIf="!transactionForm.get('siteName')?.valid">
+                                        Site name is required.</span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Select Charge Point</mat-label>
+                                <mat-select formControlName="chargePointName" multiple required tabindex="2">
+                                    <mat-option (click)="toggleAllCharPointSelection()" value="select-all">Select All</mat-option>
+                                    <mat-option *ngFor="let chargePoint of chargePoints" [value]="chargePoint.id" (click)="charPointSelection()">
+                                        {{chargePoint.id}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    <span *ngIf="!transactionForm.get('chargePointName')?.valid">
+                                        ChargePoint is required.</span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="w-100" appearance="outline">
+                              <mat-label>Select Transaction Type</mat-label>
+                              <mat-select (selectionChange)="selectType($event)" tabindex="1" formControlName="selectedType">
+                                <mat-option value="EVCPORTAL">EVCMS Portal</mat-option>
+                                <mat-option value="REMOTE">Remote Start</mat-option>
+                                <mat-option value="POS">POS Terminal</mat-option>
+                                <mat-option value="OTHER">Others</mat-option>
+                              </mat-select>
+                              <mat-error *ngIf="transactionForm.get('selectedType').hasError('required')">
+                                Transaction Type is required.
+                              </mat-error>
+                            </mat-form-field>
+                          </div>                          
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Select Duration</mat-label>
+                                <mat-select (selectionChange)="selectDuration($event)" tabindex="1" [(value)]="selected">
+                                  <mat-option value="last30Days">Last 30 days</mat-option>
+                                  <mat-option value="last2Weeks">Last 2 weeks</mat-option>
+                                  <mat-option value="lastWeek">Last week</mat-option>
+                                  <mat-option value="monthToDate">Month till date</mat-option>
+                                  <mat-option value="yearToDate">Year till date</mat-option>
+                                  <mat-option value="custom">Custom</mat-option>
+                                </mat-select>
+                              </mat-form-field>                              
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Select Transaction Start Date</mat-label>
+                                <input matInput [matDatepicker]="picker" formControlName="date" placeholder="Choose a date"
+                                [disabled]="isDatepickerDisabled" [max]="maxDate" required readonly>
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                                <mat-error>
+                                    <span *ngIf="!transactionForm.get('date')?.valid">
+                                        Transaction Start Date is required.</span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Select Transaction End Date</mat-label>
+                                <input matInput [matDatepicker]="enddatepicker" formControlName="enddate" placeholder="Choose a date"
+                                [disabled]="!transactionForm.get('date')?.value || isDatepickerDisabled"
+                                [min]="transactionForm.get('date')?.value" [max]="maxDate" required readonly>
+                                <mat-datepicker-toggle matSuffix [for]="enddatepicker"></mat-datepicker-toggle>
+                                <mat-datepicker #enddatepicker></mat-datepicker>
+                                <mat-error>
+                                    <span *ngIf="!transactionForm.get('enddate')?.valid">
+                                       Transaction End Date is required.</span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 lg-12">
+                            <div class="sub-btn text-right">
+                                <a href="javascript:;" mat-raised-button color="primary" class="mat-elevation-z btn-icon" (click)="transactions()"><span class="material-symbols-outlined">check</span> Show Transactions</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="process" class="loader-outer static-loader">
+
+        <div class="loader-inner">
+            <mat-spinner [diameter]="40"></mat-spinner>
+            <small>Loading</small>
+        </div>
+    </div>
+
+    <div class="card mat-elevation-z mb-3 hidedive" id = "showDiv">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <h2 class="h2">Transaction List</h2>
+                </div>
+                <div class="col-md-9 lg-9 text-right">
+                    <a [disabled]="dataSource.data.length === 0" href="javascript:;" mat-raised-button class="btn-border mat-elevation-z" (click)="downloadReport()"><span class="material-symbols-outlined">arrow_downward</span> Download</a>
+                </div>
+            </div>
+            <div class="filter-outer">
+                <div class="row">
+                    
+                    <div class="col-md-3 lg-3">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Filter by UniqueTransaction Id</mat-label>
+                            <input type="text" matInput [formControl]="transactionLogIdControl"
+                                [matAutocomplete]="autoTransactionLogId" (change)="filterChange(filterSelectObj[1], $event)">
+                            <mat-autocomplete autoActiveFirstOption #autoTransactionLogId="matAutocomplete"
+                                (optionSelected)="filterChange(filterSelectObj[1], $event)">
+                                <mat-option *ngFor="let option of uniqueTransactionId | async" [value]="option">
+                                    {{option}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                      <!-- <div class="input-group input-group-outline my-3">
+                        <label class="form-label">Filter by Name</label>
+                        <input type="text" [formControl]="nameControl" class="form-control">
+                      </div> -->
+                    </div>
+                    <div class="col-md-3 lg-3">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Filter by Status</mat-label>
+                            <input type="text" matInput [formControl]="statusControl" [matAutocomplete]="autoStatus"
+                                (change)="filterChange(filterSelectObj[2], $event)">
+                            <mat-autocomplete autoActiveFirstOption #autoStatus="matAutocomplete"
+                                (optionSelected)="filterChange(filterSelectObj[2], $event)">
+                                <mat-option *ngFor="let option of filteredByStatus | async" [value]="option">
+                                    {{option}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                    
+                    <div class="col-md-3 lg-3">
+                        <a href="javascript:;" mat-raised-button class="reset-btn mat-elevation-z" (click)="resetFilters()"><span class="material-symbols-outlined">restart_alt</span> Reset</a>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="body-content-outer">
+                <div class="row">
+                    <div class="col-md-12 lg-12">
+                        
+                      <div class="ucg-table">
+                        <mat-table #table [dataSource]="dataSource"  matSort matSortActive="transactionId" matSortDirection="asc">
+    
+                            <ng-container matColumnDef="uniqueTransactionId">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> Unique Transaction Id </mat-header-cell>
+                                <mat-cell *matCellDef="let element" class="break-word"> {{ element.uniqueTransactionId }} </mat-cell>
+                            </ng-container>
+        
+                            <!-- <ng-container matColumnDef="id">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> TransactionLogId </mat-header-cell>
+                                <mat-cell *matCellDef="let element" (click)="transationById(element);" style="cursor:pointer;"> {{ element.id }} </mat-cell>
+                            </ng-container> -->
+        
+                            <ng-container matColumnDef="connectorId">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> Connector Id </mat-header-cell>
+                                <mat-cell *matCellDef="let element" class="just-cent"> {{ element.connectorId }} </mat-cell>
+                            </ng-container>
+        
+                            <ng-container matColumnDef="startTime">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> Start Time </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{ element.startTransactionMin |
+                                    date:"MM-dd-yyyy hh:mm a"}} </mat-cell>
+                            </ng-container>
+        
+                            <ng-container matColumnDef="stopTime">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> Stop Time </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> 
+                                    <label *ngIf="element.stopTime != null" class="form-label">{{ element.stopTransactionMin |
+                                        date:"MM-dd-yyyy hh:mm a"}}</label> 
+                                    <label *ngIf="element.stopTime== null" class="form-label">Not Available</label>
+                                </mat-cell>
+                            </ng-container>
+        
+                            <ng-container matColumnDef="meterStart">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> Meter Start </mat-header-cell>
+                                <mat-cell *matCellDef="let element" class="just-cent"> {{ element.meterStart }} </mat-cell>
+                            </ng-container>
+        
+                            <ng-container matColumnDef="meterStop">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> Meter Stop </mat-header-cell>
+                                <mat-cell *matCellDef="let element" class="just-cent"> 
+                                    <label *ngIf="element.meterStop != null" class="form-label">{{ element.meterStop }}</label> 
+                                    <label *ngIf="element.meterStop== null" class="form-label">Not Available</label>    
+                                </mat-cell>
+                            </ng-container>
+        
+                            <ng-container matColumnDef="chargingRate">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> Charging Rate </mat-header-cell>
+                                <mat-cell *matCellDef="let element" class="just-cent"> {{ element.chargingRate }} </mat-cell>
+                            </ng-container>
+        
+                            <ng-container matColumnDef="amount">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> Amount </mat-header-cell>
+                                <mat-cell *matCellDef="let element" class="just-cent"> {{ element.amount.toFixed(2) }} </mat-cell>
+                            </ng-container>
+        
+                            <ng-container matColumnDef="status">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{ element.status }} </mat-cell>
+                            </ng-container>
+        
+                            <ng-container matColumnDef="detail" style="cursor: default;cursor:pointer;">
+                                <mat-header-cell *matHeaderCellDef class="wd-200 action-column">Action</mat-header-cell>
+                                <mat-cell class="wd-200 action-column" *matCellDef="let element"> 
+                                    <div class="table-action">
+                                        <a matTooltip="Transaction Details" mat-mini-fab color="primary" href="javascript:;" (click)="transationById(element);" class="table-action-btn">
+                                            <span class="material-symbols-outlined">info</span>
+                                        </a>
+                                        <!-- <a matTooltip="Transaction Details" *ngIf="element.status == 'InProgress' && element.authCode == 'NOCODE'" mat-mini-fab color="primary" href="javascript:;" (click)="GetInProgressTransactionDetail(element)" class="table-action-btn"> -->
+                                        <a matTooltip="Transaction Details" *ngIf="element.status == 'InProgress' && element.startTagId.startsWith('NOCODE')" mat-mini-fab color="primary" href="javascript:;" (click)="GetInProgressTransactionDetail(element)" class="table-action-btn">
+                                            <span class="material-symbols-outlined">check</span>
+                                        </a>
+                                    </div>
+                                </mat-cell>
+                            </ng-container>
+                           
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                        </mat-table>
+                
+                        <!-- <div *ngIf="process" class="text-center norecord table-loader">
+                          
+
+                          <div class="loader-inner">
+                            <mat-spinner [diameter]="40"></mat-spinner>
+                            <small>Loading</small>
+                          </div>
+
+                        </div> -->
+                
+                        <div *ngIf="!process && (dataSource.data.length == 0 || dataSource.filteredData.length == 0)" class="norecord">
+                          {{'table.noRecordFound' | translate}}</div>
+                
+                          <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+                        </mat-paginator>
+                      </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div> 
+
+  <!-- OLD Design -->
+
+

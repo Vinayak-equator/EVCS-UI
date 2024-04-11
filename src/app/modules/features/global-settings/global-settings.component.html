@@ -1,0 +1,275 @@
+<div class="mt-3">
+    <div class="card mat-elevation-z mb-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 lg-6">
+                    <h2 class="h2">{{'allTypeContent.global' | translate }}</h2>
+                </div>
+            </div>
+            <div class="filter-outer">
+                <fieldset>
+                    <legend>&nbsp;Infrastructure Fees&nbsp;</legend>
+                    <div class="row">
+                        <div class="col-md-3 lg-3">
+                            <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                <mat-label>{{'formFields.processingFees' | translate}}</mat-label>
+                                <input matInput autocomplete="off" type="text" [(ngModel)]="processingFees"
+                                    placeholder="{{'formFields.processingFees' | translate}}" tabindex="2">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3 lg-3">
+                            <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                <mat-label>{{'formFields.cloudServiceFees' | translate}}</mat-label>
+                                <input matInput autocomplete="off" type="text" [(ngModel)]="cloudServiceFees"
+                                    placeholder="{{'formFields.cloudServiceFees' | translate}}" tabindex="2">
+                                <!-- <mat-hint>Emails should be comma separated.</mat-hint> -->
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3 lg-3">
+                            <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                <mat-label>{{'formFields.networkingFees' | translate}}</mat-label>
+                                <input matInput autocomplete="off" type="text" [(ngModel)]="networkingFees"
+                                    placeholder="{{'formFields.networkingFees' | translate}}" tabindex="2">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3 lg-3">
+                            <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                <mat-label>{{'formFields.salesTax' | translate}}</mat-label>
+                                <input matInput autocomplete="off" type="text" [(ngModel)]="salesTax"
+                                    placeholder="{{'formFields.salesTax' | translate}}" tabindex="2">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3 lg-3">
+                            <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                <mat-label>{{'formFields.meterServiceFees' | translate}}</mat-label>
+                                <input matInput autocomplete="off" type="text" [(ngModel)]="meterServiceFees"
+                                    placeholder="{{'formFields.meterServiceFees' | translate}}" tabindex="2">
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-3 lg-3">
+                            <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                <mat-label>{{'formFields.utilityFees' | translate}}</mat-label>
+                                <input matInput autocomplete="off" type="text" [(ngModel)]="utilityFees"
+                                    placeholder="{{'formFields.utilityFees' | translate}}" tabindex="2">
+                            </mat-form-field>
+                        </div> -->
+                        <div class="col-md-3 lg-3">
+                            <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                <mat-label>{{'formFields.utilityOtherCost' | translate}}</mat-label>
+                                <input matInput autocomplete="off" type="text" [(ngModel)]="utilityOtherCost"
+                                    placeholder="{{'formFields.utilityOtherCost' | translate}}" tabindex="2">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3 lg-3">
+                            <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                <mat-label>{{'formFields.utilityUniversalEVCost' | translate}}</mat-label>
+                                <input matInput autocomplete="off" type="text" [(ngModel)]="utilityUniversalEVCost"
+                                    placeholder="{{'formFields.utilityUniversalEVCost' | translate}}" tabindex="2">
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-3 lg-3">
+                            <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                <mat-label>{{'formFields.transactionfees' | translate}}</mat-label>
+                                <input matInput autocomplete="off" type="text" [(ngModel)]="transactionfees"
+                                    placeholder="{{'formFields.transactionfees' | translate}}" tabindex="2">
+                            </mat-form-field>
+                        </div> -->
+                    </div>
+                </fieldset>
+                <br />
+                <fieldset>
+                    <legend>&nbsp;Pricing&nbsp;</legend>
+                    <mat-radio-group [(ngModel)]="priceType">
+                        <mat-radio-button color="primary" value="1">
+                            &nbsp;{{'allTypeContent.consumptionBasedPricing' | translate}}&nbsp;
+                        </mat-radio-button>
+                        <br />
+                        <mat-radio-button color="primary" value="2">
+                            &nbsp;{{'allTypeContent.timeOfUsePricing' | translate}}&nbsp;
+                        </mat-radio-button>
+                        <br />
+                        <mat-radio-button class="mb-15" color="primary" value="3">
+                            &nbsp;{{'allTypeContent.differentialPricing' | translate}}&nbsp;
+                        </mat-radio-button>
+                    </mat-radio-group>
+                    <div *ngIf="priceType === '1'">
+                        <div class="row">
+                            <div class="col-md-6 lg-6">
+                                <div class="row">
+                                    <div class="col-md-8 lg-8">
+                                        <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                            <mat-label>{{'formFields.level2Rate' | translate}}</mat-label>
+                                            <input matInput autocomplete="off" type="text" [(ngModel)]="level2Rate"
+                                                placeholder="{{'formFields.level2Rate' | translate}}" tabindex="2">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4 lg-4">
+                                        <mat-form-field class="w-100" appearance="outline">
+                                            <mat-label>{{'formFields.level2RateUnit' | translate }}</mat-label>
+                                            <mat-select [(ngModel)]="level2RateUnit" tabindex="6" autocomplete="off">
+                                                <mat-option disabled>{{'formFields.level2RateUnit' | translate
+                                                    }}</mat-option>
+                                                <mat-option value="{{'formFields.KWH' | translate }}">{{'formFields.KWH'
+                                                    |
+                                                    translate }}
+                                                </mat-option>
+                                                <mat-option value="{{'formFields.min' | translate }}">{{'formFields.min'
+                                                    |
+                                                    translate }}
+                                                </mat-option>
+                                                <mat-option value="{{'formFields.hr' | translate }}">{{'formFields.hr' |
+                                                    translate }}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 lg-6">
+                                <div class="row">
+                                    <div class="col-md-8 lg-8">
+                                        <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                            <mat-label>{{'formFields.dcFastRate' | translate}}</mat-label>
+                                            <input matInput autocomplete="off" type="text" [(ngModel)]="dcFastRate"
+                                                placeholder="{{'formFields.dcFastRate' | translate}}" tabindex="2">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4 lg-4">
+                                        <mat-form-field class="w-100" appearance="outline">
+                                            <mat-label>{{'formFields.dcFastRateUnit' | translate }}</mat-label>
+                                            <mat-select [(ngModel)]="dcFastRateUnit" tabindex="6" autocomplete="off">
+                                                <mat-option disabled>{{'formFields.dcFastRateUnit' | translate
+                                                    }}</mat-option>
+                                                <mat-option value="{{'formFields.KWH' | translate }}">{{'formFields.KWH'
+                                                    |
+                                                    translate }}
+                                                </mat-option>
+                                                <mat-option value="{{'formFields.min' | translate }}">{{'formFields.min'
+                                                    |
+                                                    translate }}
+                                                </mat-option>
+                                                <mat-option value="{{'formFields.hr' | translate }}">{{'formFields.hr' |
+                                                    translate }}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="priceType === '2'">
+                        <div class="row" *ngFor="let time of timePricing; let i = index">
+                            <div class="col-md-12 lg-12 cross-div">
+                                <button mat-mini-fab color="warn" class="cancel-fab-btn" (click)="removeTime(i)">
+                                    <img class="cross-icon"
+                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAACaklEQVR4nO3cy2oUQRTG8YOXGF3oQpeZgOgD6IspEhQRzErjk7mQBKNCFMXGji/hhcR/KKgWF2Yu3dVVp6e+3z6TU19Oqqt7qtpMRERERERERERERERkGcAl4KL3tIAN4IJNCXAdeAZ8An4Dp8AH4DFw1ZwItQBPgKNY4y/gM/AUuGGeAXeAr5zvPTBzUOcs/vHP8wW4ax4B14BvLNYA2wXr3I41LFOnm//Av4DnSxRfNOwVQu7smjfAO1bTArczTxfzprX/OTSHq4twQVlVk6Oze3Ry59TdagT4ST/tmJ3ds5M7P8wb4C39NWN09oBO7hyYN8DDAQNKHnaCkIMH5g1wGXg9cGBtimlk4HTReRPuGM0jYCtBFzVDOjtRJ4ef3zLPEnVT26ezS/7uIkoMmNpCLjFwag05ZwDUHnKOIFDI4weCQh6/s1HI2da4TYLPKPZMPAvSdGPdF74JhN1WE3LBsOsLuUDY9YacMWyFnCFshZwhbIWcIWyFPI+CzgBNHZMMuaMppKPlXQbohmWtQq53GkEPldY65Ho6Gz34zxLyTF9lTShkG/EzJ03bDTLQBpoMtCUsA21yzEDbdjPQRvQMgE1g38NyizRLv8NwGti8iQfYi4ecOOwd8ya+zWDdjr99NE+AK8DJGh7oPHF1Miu+++KPt5AThB3GtGmeAN89b52l3zRybN4Ar7w/zGH1zn5h3gC3luzqZiIvRgljuWkeAfcXhL3v4URqvLE6mFPnMXDPPIudvReL7a7cR8AjTxeWeIO1E5Zw/6yYQs0v3XbygsFs2DRex+amCURERERERERERERExHw7AzryqGBf7gnyAAAAAElFTkSuQmCC">
+                                </button>
+                            </div>
+                            <div class="col-md-4 lg-4">
+                                <div class="row">
+                                    <div class="col-md-6 lg-6">
+                                        <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                            <mat-label>{{'formFields.startTime' | translate}}</mat-label>
+                                            <input matInput autocomplete="off" type="time" [(ngModel)]="time.startTime"
+                                                placeholder="{{'formFields.startTime' | translate}}" tabindex="2">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-6 lg-6">
+                                        <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                            <mat-label>{{'formFields.endTime' | translate}}</mat-label>
+                                            <input matInput autocomplete="off" type="time" [(ngModel)]="time.endTime"
+                                                placeholder="{{'formFields.endTime' | translate}}" tabindex="2">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 lg-4">
+                                <div class="row">
+                                    <div class="col-md-7 lg-7">
+                                        <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                            <mat-label>{{'formFields.level2Rate' | translate}}</mat-label>
+                                            <input matInput autocomplete="off" type="text" [(ngModel)]="time.level2Rate"
+                                                placeholder="{{'formFields.level2Rate' | translate}}" tabindex="2">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-5 lg-5">
+                                        <mat-form-field class="w-100" appearance="outline">
+                                            <mat-label>{{'formFields.level2RateUnit' | translate }}</mat-label>
+                                            <mat-select [(ngModel)]="time.level2RateUnit" tabindex="6"
+                                                autocomplete="off">
+                                                <mat-option disabled>{{'formFields.level2RateUnit' | translate
+                                                    }}</mat-option>
+                                                <mat-option value="{{'formFields.KWH' | translate }}">{{'formFields.KWH'
+                                                    |
+                                                    translate }}
+                                                </mat-option>
+                                                <mat-option value="{{'formFields.min' | translate }}">{{'formFields.min'
+                                                    |
+                                                    translate }}
+                                                </mat-option>
+                                                <mat-option value="{{'formFields.hr' | translate }}">{{'formFields.hr' |
+                                                    translate }}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 lg-4">
+                                <div class="row">
+                                    <div class="col-md-7 lg-7">
+                                        <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                            <mat-label>{{'formFields.dcFastRate' | translate}}</mat-label>
+                                            <input matInput autocomplete="off" type="text" [(ngModel)]="time.dcFastRate"
+                                                placeholder="{{'formFields.dcFastRate' | translate}}" tabindex="2">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-5 lg-5">
+                                        <mat-form-field class="w-100" appearance="outline">
+                                            <mat-label>{{'formFields.dcFastRateUnit' | translate }}</mat-label>
+                                            <mat-select [(ngModel)]="time.dcFastRateUnit" tabindex="6"
+                                                autocomplete="off">
+                                                <mat-option disabled>{{'formFields.dcFastRateUnit' | translate
+                                                    }}</mat-option>
+                                                <mat-option value="{{'formFields.KWH' | translate }}">{{'formFields.KWH'
+                                                    |
+                                                    translate }}
+                                                </mat-option>
+                                                <mat-option value="{{'formFields.min' | translate }}">{{'formFields.min'
+                                                    |
+                                                    translate }}
+                                                </mat-option>
+                                                <mat-option value="{{'formFields.hr' | translate }}">{{'formFields.hr' |
+                                                    translate }}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2 lg-2">
+                                <button mat-mini-fab color="primary" (click)="addTime()">
+                                    <img width="25px"
+                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAABLElEQVR4nO3dwU0EMRREwckDyIcV6SLIZ5c8mgMcueGl8fyqDDxPfbKlOQ4AAAAAKEvykuQjv3dLcmmfZzv5+nCrXNvn2U4Wa59nOxFAgNFiAQKMFgsQYLRYgACjxQIEGC0WIMBosQABRosFCDBaLECA0WIBAowWC6h+/KfVAZI8Fo+03cd/v0OAt1NEWPhi7Wz+5gXe4hdrZ3P/F3jtE/53ApQJUCZAmQBlApQJUCZAmQBlApQJUCZAmQBlApQJUCbAgAAuZMoXMhcRfnRN8nzsLsnj9wX6aq9JHtrn20I8S+nLYu3zbCcCCDBaLECA0WIBAowWCxBgtFiAAKPFAgQYLRYgwGixAAFGiwUIMFosQIDRYgH1ALeFDfzEp/gC73qKF2sAAAAAHLv7BL6Hu57nEIu6AAAAAElFTkSuQmCC">
+                                </button>
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                </fieldset>
+                <br />
+                <div class="row">
+                    <div class="text-center">
+                        <!-- *ngIf="updateSetting" -->
+                        <a href="javascript:;" mat-raised-button class="reset-btn mat-elevation-z"
+                            (click)="updateSettings()"><span class="material-symbols-outlined">restart_alt</span>
+                            Update</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

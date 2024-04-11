@@ -1,0 +1,129 @@
+{
+    "sidebar":{
+        "dashboard":"Tableau de bord",
+        "sites": "Des sites",
+        "transactions":"Transactions",
+        "logmanagement":"Log Management",
+        "chargePoints":"Bornes de recharge",
+        "chargepoint-utilization-report":"Chargepoint Utilization",
+        "site-utilization-report":"Site Utilization Report"
+    },
+    "navbar":{
+        "title":"Gestion UGG EVCS"
+    },
+    "button": {
+        "newTenant": "Enregistrer le locataire",
+        "newSite": "Nouveau site",
+        "newCharger":"Nouveau chargeur",
+        "save": "Sauvegarder",
+        "signUpInvite": "Inscription Inviter",
+        "update": "Mettre à jour",
+        "reset": "Reset",
+        "cancel": "Annuler"
+    },
+    "cards": {
+        "tenant": "Locataires",
+        "sites": "Des sites",
+        "chargePoints": "Points de charge"
+    },
+    "requiredFields": {
+        "name": "Le nom est requis.",
+        "company": "La société est requise.",
+        "email": "L'e-mail est requis.",
+        "phone": "Le téléphone est requis.",
+        "street": "L'adresse est requise.",
+        "state": "L'état est requis.",
+        "country": "Le pays est requis.",
+        "city": "La ville est obligatoire.",
+        "zipCode": "Le code postal est requis.",
+        "zipCodeLength": "La longueur minimale du code postal est de 5.",
+        "phoneLength": "La longueur minimale du téléphone est de 10.",
+        "cityLength": "La longueur minimale de City est de 3.",
+        "countryLength": "La longueur minimale de Country est de 3.",
+        "emailInvalid": "L'adresse email n'est pas valide.",
+        "stateLength": "La durée minimale de l'État est de 3.",
+        "companyLength": "La durée minimale de la Société est de 3.",
+        "streetLength": " La longueur minimale de l'adresse est de 15.",
+        "nameLength": "La longueur minimale du nom est 3.",
+        "utilityBill":"Une facture de services publics est requise.",
+        "utilityProvider":"Le fournisseur de services publics est requis.",
+        "level2Rate":"Le taux de charge de niveau 2 est requis.",
+        "level2RateUnit":"L'unité de taux de niveau 2 est requise.",
+        "dcFastRate":"Le taux de charge rapide DC est requis.",
+        "dcRateUnit":"L'unité de taux de charge rapide CC est requise."
+    },
+    "formFields": {
+        "name": "Nom",
+        "address": "Adresse",
+        "company": "Nom de la compagnie",
+        "country": "Pays",
+        "state": "État",
+        "email": "E-mail",
+        "city": "Ville",
+        "phone": "Téléphoner",
+        "zipCode": "Code postal",
+        "status": "Statut",
+        "active": "Active",
+        "pending": "En attente",
+        "inactive": "Inactive",
+        "level2Rate":"Taux de charge de niveau 2",
+        "dcFastRate":"Taux de charge rapide CC",
+        "RateUnit":"Unité de taux",
+        "utilityProvider":"Fournisseur de services publics",
+        "utilityBill":"Facture de services publics",
+        "KWH":"KWH",
+        "min":"Min"
+    },
+    "table": {
+        "noRecordFound": "Aucun enregistrement trouvé",
+        "header": {
+            "tenantId": "Identifiant du locataire",
+            "siteId": "ID du site",
+            "chargePointId":"ChargePoint Id",
+            "name": "Nom",
+            "email": "E-mail",
+            "location": "Emplacement",
+            "sites": "Des sites",
+            "chargePoints": "Points de charge",
+            "chargerType":"Type de chargeur",
+            "noOfConnectors":"Nombre de connecteurs",
+            "status":"Statut",
+            "customerId":"Customer Id",
+            "level2Rate" : "Charging Rate Level 2",
+            "DCFastRate" : "DC Fast Rate",
+            "utilityOwner" :"Utility Owner",
+            "numberChargePorts" : "Number of Ports"
+        },
+        "cell": {
+            "tenantId": "{{tenantId}}",
+            "siteId": "{{siteId}}",
+            "name": "{{name}}",
+            "email": "{{email}}",
+            "location": "{{city}} - {{state}}",
+            "sites": "{{numberofSites}}",
+            "chargePoints": "{{numberofChargePoints}}",
+            "chargePointId":"{{chargePointId}}",
+            "chargerType":"{{chargerType}}",
+            "numberOfConnectors":"{{numberOfConnectors}}",
+            "status":"{{status}}"
+        }
+    },
+    "allTypeContent": {
+        "searchSection.label": "Recherche de locataire",
+        "tenantList": "Liste des locataires",
+        "tenantTitle": "Page d'inscription du locataire",
+        "tenantDetail": "Détail du locataire",
+        "siteList": "Liste des sites",
+        "siteSearch": "Recherche de sites",
+        "firstSite": "Premier site",
+        "siteCreation":"Création de sites",
+        "siteDetail":"Détails du site",
+        "tenant":"Locataire",
+        "chargerList":"Liste des chargeurs",
+        "chargeSearch":"Recherche de chargeur"
+    },
+    "singleBinding":{
+        "tenantName":"{{tenantName}}",
+        "itemPage":"objets par page:"
+    }
+}

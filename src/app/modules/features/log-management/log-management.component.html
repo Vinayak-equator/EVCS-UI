@@ -1,0 +1,242 @@
+<div class="mt-3">
+  <div class="card mat-elevation-z mb-3">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6 lg-6">
+          <h2 class="h2">Log Management</h2>
+        </div>
+        <!-- <div class="col-md-6 lg-6 text-end">
+          <div class="head-right-outer">
+            <a class="btn-border mat-elevation-z icon-right" mat-raised-button data-bs-toggle="collapse"
+              (click)="togglechnage()" href="#multiCollapseExample1" role="button" aria-expanded="false"
+              aria-controls="multiCollapseExample1">Filter<span
+                class="material-symbols-outlined">{{this.chnageicon}}</span></a>
+          </div>
+        </div> -->
+      </div>
+      <form [formGroup]="logManagementForm" #logManagement="ngForm" class="margin-bottom-40 ucg-container">
+        <!-- <div class="filter-outer"> -->
+          <div class="" id="multiCollapseExample1">
+            <div class="row">
+              <div class="col-md-4 lg-3">
+                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                  <mat-label>Select Organization</mat-label>
+                  <mat-select formControlName="tenants" tabindex="1" required>
+                    <mat-option *ngFor="let tenant of tenants" [value]="tenant" (click)="tenantSelection()">
+                      {{tenant.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4 lg-3">
+                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                  <mat-label>Select Site</mat-label>
+                  <mat-select formControlName="sites" [disabled]="!logManagementForm.get('tenants')?.value" tabindex="1"
+                    required>
+                    <mat-option *ngFor="let site of sites" [value]="site" (click)="siteSelection()">
+                      {{site.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4 lg-3">
+                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                  <mat-label>Select ChargePoint</mat-label>
+                  <mat-select formControlName="chargePoints" [disabled]="!logManagementForm.get('sites')?.value"
+                    tabindex="1" required>
+                    <mat-option *ngFor="let chargePoint of chargePoints" [value]="chargePoint">
+                      {{chargePoint.id}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <!-- <div class="col-md-3 lg-3">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Error Type</mat-label>
+                  <mat-select (selectionChange)="selectErrorType($event)" tabindex="1"
+                    formControlName="selectedErrorType">
+                    <mat-option value="exception">Exception</mat-option>
+                    <mat-option value="info">Info</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div> -->
+            </div>
+            <div class="row">
+              <div class="col-md-4 lg-3">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Error Type</mat-label>
+                  <mat-select (selectionChange)="selectErrorType($event)" tabindex="1"
+                    formControlName="selectedErrorType">
+                    <mat-option value="exception">Exception</mat-option>
+                    <mat-option value="info">Info</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4 lg-3">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Severity</mat-label>
+                  <mat-select (selectionChange)="selectSeverity($event)" tabindex="1"
+                    formControlName="selectedSeverity">
+                    <mat-option value="low">Low</mat-option>
+                    <mat-option value="medium">Medium</mat-option>
+                    <mat-option value="high">High</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4 lg-3">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Source Project</mat-label>
+                  <mat-select (selectionChange)="selectSource($event)" tabindex="1" formControlName="selectedSource">
+                    <mat-option value="OCPP">OCPP</mat-option>
+                    <mat-option value="management">Management</mat-option>
+                    <mat-option value="driverApp">Driver APP</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Select Duration</mat-label>
+                  <mat-select (selectionChange)="selectDuration($event)" tabindex="1" [(value)]="selected">
+                    <mat-option value="last30Days">Last 30 days</mat-option>
+                    <mat-option value="last2Weeks">Last 2 weeks</mat-option>
+                    <mat-option value="lastWeek">Last week</mat-option>
+                    <mat-option value="monthToDate">Month till date</mat-option>
+                    <mat-option value="yearToDate">Year till date</mat-option>
+                    <mat-option value="custom">Custom</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Select Transaction Start Date</mat-label>
+                  <input matInput [matDatepicker]="picker" formControlName="date" placeholder="Choose a date"
+                    [disabled]="isDatepickerDisabled" [max]="maxDate" required>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-error>
+                    <span *ngIf="!logManagementForm.get('date')?.valid">
+                      Transaction Start Date is required.</span>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Select Transaction End Date</mat-label>
+                  <input matInput [matDatepicker]="enddatepicker" formControlName="enddate" placeholder="Choose a date"
+                    [disabled]="!logManagementForm.get('date')?.value || isDatepickerDisabled"
+                    [min]="logManagementForm.get('date')?.value" [max]="maxDate" required>
+                  <mat-datepicker-toggle matSuffix [for]="enddatepicker"></mat-datepicker-toggle>
+                  <mat-datepicker #enddatepicker></mat-datepicker>
+                  <mat-error>
+                    <span *ngIf="!logManagementForm.get('enddate')?.valid">
+                      Transaction End Date is required.</span>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <!-- <div class="row mb-2"> -->
+                <div class="col-md-3 lg-3 mb-2">
+                  <a href="javascript:;" mat-raised-button color="primary" class="reset-btn mat-elevation-z float-right"
+                    (click)="getFilterLogs()">
+                    <span class="material-symbols-outlined">check</span> Filter Logs</a>
+                  <a href="javascript:;" mat-raised-button class="reset-btn mat-elevation-z float-right mr-2"
+                    (click)="resetFilters()"><span class="material-symbols-outlined">restart_alt</span> Reset</a>
+                </div>
+              <!-- </div> -->
+            </div>
+            
+          </div>
+        <!-- </div> -->
+      </form>
+      <div class="body-content-outer">
+        <div class="row">
+          <div class="col-md-12 lg-12">
+
+            <div class="ucg-table">
+              <mat-table #table [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="chargePointId">
+                  <mat-header-cell class="alignCenter Col-number " *matHeaderCellDef mat-sort-header> ChargePoint Id
+                  </mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element"> {{ element.chargePointId }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="connectorId">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Connector Id </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{ element.connectorId }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="transactionId">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Transaction Id </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{ element.transactionId }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="errorMessage">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Error Message </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{ element.errorMessage }} </mat-cell>
+                </ng-container>
+
+                <!-- <ng-container matColumnDef="errorDescription">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Error Description </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{ element.errorDescription }} </mat-cell>
+                </ng-container> -->
+
+                <ng-container matColumnDef="errorType">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Error Type </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{ element.errorType }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="errorDate">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Error Date </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{ element.errorDate|date:"MM-dd-yyyy hh:mm a"}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="severity">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Severity </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{ element.severity }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="errorSource">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Error Source </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{ element.errorSource }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="action" style="cursor: default;cursor:pointer;">
+                  <mat-header-cell *matHeaderCellDef class="action-column"> Action </mat-header-cell>
+                  <mat-cell *matCellDef="let element" class="action-column" style="text-align: end;">
+                      <div class="table-action">
+                          <a matTooltip="Error Description" mat-mini-fab color="primary"
+                              href="javascript:;" (click)="getErrDescription(element)" class="table-action-btn">
+                              <span class="material-symbols-outlined">info</span>
+                          </a>
+                      </div>
+                  </mat-cell>
+              </ng-container>
+
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+              <div *ngIf="process" class="text-center norecord table-loader">
+
+                <div class="loader-inner">
+                  <mat-spinner [diameter]="40"></mat-spinner>
+                  <small>Loading</small>
+                </div>
+              </div>
+              <div *ngIf="!process && (dataSource.data.length == 0 || dataSource.filteredData.length == 0)"
+                class="norecord">
+                {{'table.noRecordFound' | translate}}</div>
+              <mat-paginator #paginator [length]="totalCount" [pageIndex]="pageNumber" [pageSize]="pageSize"
+                [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true" (page)="pageChanged($event)">
+              </mat-paginator>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

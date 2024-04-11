@@ -1,0 +1,30 @@
+fieldset {
+  padding: 30px 20px 10px 20px;
+  border-radius: 20px;
+  border: solid 1px #00000055;
+}
+
+fieldset legend {
+  color: #00000066;
+  margin-top: -40px;
+  background: white;
+  width: fit-content;
+  font-size: 20px;
+}
+
+.cross-div {
+  text-align: right;
+  margin-bottom: -22px;
+  padding-right: 0px;
+  z-index: 1;
+}
+
+.cancel-fab-btn {
+  width: 25px;
+  height: 25px;
+}
+
+.cross-icon {
+  width: 20px;
+  margin-top: -15px;
+}

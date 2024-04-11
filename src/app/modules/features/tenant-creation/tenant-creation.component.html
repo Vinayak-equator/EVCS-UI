@@ -1,0 +1,248 @@
+
+
+
+<!-- New Design -->
+
+<div class="mt-3">
+    <div class="card mat-elevation-z mb-3">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 lg-6">
+            <h2 class="h2">{{'allTypeContent.tenantTitle' | translate }}</h2>
+          </div>
+          
+          <!-- <div *ngIf="createTenant" class="col-md-6 lg-6 text-end">
+            <span class="creation-button">
+              <button mat-raised-button color="primary" class="btn-primary"
+                (click)="navigateTenant();">{{'button.newTenant' | translate}}</button>
+            </span>
+          </div> -->
+
+        </div>
+        
+        <div class="body-content-outer">
+            <form [formGroup]="tenantForm" #tenantRegistration="ngForm" class="margin-bottom-40 ucg-container"
+        autocomplete="off">
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-xs-12 left-section">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <!-- [ngClass]="{'has-error' : name && isSubmitClicked}" -->
+                        <mat-form-field class="w-100 ucg-input" appearance="outline">
+                            <mat-label>{{'formFields.name' | translate}}</mat-label>
+                            <input matInput autocomplete="off" placeholder="{{'formFields.name' | translate}}"
+                                tabindex="1" maxlength="150" min="3" max="150" formControlName="name" required>
+                            <mat-error>
+                                <span
+                                    *ngIf="(!tenantForm.get('name')?.valid && !tenantForm.get('name')?.errors?.serverError) && !name">
+                                    {{'requiredFields.name' | translate }}</span>
+                                <span
+                                    *ngIf="!tenantForm.get('name')?.errors?.serverError && (name || (tenantForm.get('name')?.valid && !name))">
+                                    {{'requiredFields.nameLength' | translate }}</span>
+                            </mat-error>
+                            <mat-error>
+                                <span *ngIf="tenantForm.get('name')?.errors?.serverError | translate">
+                                    {{tenantForm.get('name')?.errors?.serverError | translate}}</span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <mat-form-field class="w-100 ucg-input" appearance="outline">
+                            <mat-label>{{'formFields.address' | translate}}</mat-label>
+                            <input matInput autocomplete="off" placeholder="{{'formFields.address' | translate}}"
+                                tabindex="5" maxlength="250" max="250" min="1" formControlName="street" required>
+                            <mat-error>
+                                <span
+                                    *ngIf="(!tenantForm.get('street')?.errors?.serverError && !tenantForm.get('street')?.valid) && !street">
+                                    {{'requiredFields.street' | translate }}</span>
+                                <span
+                                    *ngIf="!tenantForm.get('street')?.errors?.serverError && (street || (tenantForm.get('street')?.valid && !street))">
+                                    {{'requiredFields.streetLength' | translate }}</span>
+                            </mat-error>
+                            <mat-error>
+                                <span *ngIf="tenantForm.get('street')?.errors?.serverError | translate">
+                                    {{tenantForm.get('street')?.errors?.serverError | translate}}</span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <mat-form-field class="w-100 ucg-input" appearance="outline">
+                            <mat-label>{{'formFields.company' | translate}}</mat-label>
+                            <input matInput autocomplete="off" placeholder="{{'formFields.company' | translate}}"
+                                tabindex="2" maxlength="250" min="15" max="250" formControlName="company" required>
+                            <mat-error>
+                                <span
+                                    *ngIf="(!tenantForm.get('company')?.valid && !tenantForm.get('company')?.errors?.serverError) && !companyName">
+                                    {{'requiredFields.company' | translate }}</span>
+                                <span
+                                    *ngIf="!tenantForm.get('company')?.errors?.serverError && (companyName || (tenantForm.get('company')?.valid && !companyName))">
+                                    {{'requiredFields.companyLength' | translate }}</span>
+                            </mat-error>
+                            <mat-error>
+                                <span *ngIf="tenantForm.get('company')?.errors?.serverError | translate">
+                                    {{tenantForm.get('company')?.errors?.serverError | translate}}</span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <mat-form-field class="w-100 ucg-input" appearance="outline">
+                            <mat-label>{{'formFields.city' | translate}}</mat-label>
+                            <input matInput autocomplete="off" placeholder="{{'formFields.city' | translate}}"
+                                tabindex="6" maxlength="100" min="2" max="100" formControlName="city" required>
+                            <mat-error>
+                                <span
+                                    *ngIf="(!tenantForm.get('city')?.errors?.serverError && !tenantForm.get('city')?.valid) && !city">
+                                    {{'requiredFields.city' | translate }}</span>
+                                <span
+                                    *ngIf="!tenantForm.get('city')?.errors?.serverError && (city || (tenantForm.get('city')?.valid && !city))">
+                                    {{'requiredFields.cityLength' | translate }}</span>
+                            </mat-error>
+                            <mat-error>
+                                <span *ngIf="tenantForm.get('city')?.errors?.serverError | translate">
+                                    {{tenantForm.get('city')?.errors?.serverError | translate}}</span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <mat-form-field class="w-100 ucg-input" appearance="outline">
+                            <mat-label>{{'formFields.email' | translate}}</mat-label>
+                            <input matInput autocomplete="off" placeholder="{{'formFields.email' | translate}}"
+                                tabindex="3" formControlName="email" required>
+                            <mat-error>
+                                <span
+                                    *ngIf="(tenantForm.get('email')?.invalid || tenantForm.get('email')?.touched) && !email">
+                                    {{'requiredFields.email' | translate }}</span>
+                                <span
+                                    *ngIf="!tenantForm.get('email')?.errors?.serverError && tenantForm.get('email')?.errors?.email">
+                                    {{'requiredFields.emailInvalid' | translate }}</span>
+                            </mat-error>
+                            <mat-error>
+                                <span *ngIf="tenantForm.get('email')?.errors?.serverError | translate">
+                                    {{tenantForm.get('email')?.errors?.serverError | translate}}</span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <mat-form-field class="w-100 ucg-input" appearance="outline">
+                            <mat-label>{{'formFields.state' | translate}}</mat-label>
+                            <input matInput autocomplete="off" placeholder="{{'formFields.state' | translate}}"
+                                tabindex="7" maxlength="100" min="2" max="100" formControlName="state" required>
+                            <mat-error>
+                                <span
+                                    *ngIf="(!tenantForm.get('state')?.errors?.serverError && !tenantForm.get('state')?.valid) && !state">
+                                    {{'requiredFields.state' | translate }}</span>
+                                <span
+                                    *ngIf="!tenantForm.get('state')?.errors?.serverError && (state || (tenantForm.get('state')?.valid && !state))">
+                                    {{'requiredFields.stateLength' | translate }}</span>
+                            </mat-error>
+                            <mat-error>
+                                <span *ngIf="tenantForm.get('state')?.errors?.serverError | translate">
+                                    {{tenantForm.get('state')?.errors?.serverError | translate}}</span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <mat-form-field class="w-100 ucg-input" appearance="outline">
+                            <mat-label>{{'formFields.phone' | translate}}</mat-label>
+                            <input matInput autocomplete="off" placeholder="{{'formFields.phone' | translate}}"
+                                tabindex="4" type="text" (keypress)="onKeyPress($event)" maxlength="10" min="10"
+                                max="10" formControlName="phone" required>
+                            <mat-error>
+                                <span
+                                    *ngIf="(!tenantForm.get('phone')?.errors?.serverError && !tenantForm.get('phone')?.valid) && !tenantForm.get('phone')?.errors?.pattern && !phone">
+                                    {{'requiredFields.phone' | translate }}</span>
+                                <span
+                                    *ngIf="!tenantForm.get('phone')?.errors?.serverError && (phone || tenantForm.get('phone')?.valid && !phone)">
+                                    {{'requiredFields.phoneLength' | translate }}</span>
+                                <span *ngIf="tenantForm.get('phone')?.errors?.pattern | translate">
+                                    {{'requiredFields.phonePattern' | translate}}</span>
+                            </mat-error>
+                            <mat-error>
+                                <span *ngIf="tenantForm.get('phone')?.errors?.serverError | translate">
+                                    {{tenantForm.get('phone')?.errors?.serverError | translate}}</span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group col-md-6 ucg-input">
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>{{'formFields.country' | translate }}</mat-label>
+                            <mat-select autocomplete="off" formControlName="country" tabindex="8" required>
+                                <mat-option *ngFor="let countryName of countryList" [value]="countryName.country">
+                                    {{countryName.country}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error>
+                                <span
+                                    *ngIf="(!tenantForm.get('country')?.errors?.serverError && !tenantForm.get('country')?.valid) && !country">
+                                    {{'requiredFields.country' | translate }}</span>
+                                <span
+                                    *ngIf="!tenantForm.get('country')?.errors?.serverError && (country || (tenantForm.get('country')?.valid && !country))">
+                                    {{'requiredFields.countryLength' | translate }}</span>
+                            </mat-error>
+                            <mat-error>
+                                <span *ngIf="tenantForm.get('country')?.errors?.serverError">
+                                    {{tenantForm.get('country')?.errors?.serverError | translate }}</span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group col-md-6 ucg-input">
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>{{'formFields.zipCode' | translate}}</mat-label>
+                            <input matInput autocomplete="off" placeholder="{{'formFields.zipCode' | translate}}"
+                                tabindex="9" type="text" (keypress)="onKeyPress($event)" minlength="5" maxlength="6"
+                                formControlName="zipCode" required>
+                            <mat-error>
+                                <span
+                                    *ngIf="(!tenantForm.get('zipCode')?.errors?.serverError && !tenantForm.get('zipCode')?.valid) && !tenantForm.get('zipCode')?.errors?.pattern && !zip">
+                                    {{'requiredFields.zipCode' | translate }}</span>
+                                <span
+                                    *ngIf="!tenantForm.get('zipCode')?.errors?.serverError && (zip || (tenantForm.get('zipCode')?.valid && !zip))">
+                                    {{'requiredFields.zipCodeLength' | translate }}</span>
+                                <span *ngIf="tenantForm.get('zipCode')?.errors?.pattern | translate">
+                                    {{'requiredFields.zipCodePattern' | translate}}</span>
+                            </mat-error>
+                            <mat-error>
+                                <span *ngIf="tenantForm.get('zipCode')?.errors?.serverError | translate">
+                                    {{tenantForm.get('zipCode')?.errors?.serverError | translate}}</span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group col-md-6 ucg-input merchant-cls d-flex justify-content-between">
+                        <div>Merchant Key</div>
+                        <div class="last-elemnt">
+                            <span *ngIf="!tenant?.isOwnMerchantKey">Universal EV &nbsp; </span>
+                            <span *ngIf="tenant?.isOwnMerchantKey">Own Merchant Key &nbsp; </span>
+                            <img width="23px" class="pointer" style="filter: brightness(0.5);" (click)="openMerchantPopup()" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAABy0lEQVR4nO2Zz0oDMRDGgyffQPEPoiC+glfvvoEnqz34CM1UZ2gVD4qnasm01rsU30ZBES+eBetdK6l/WHTb7CbZdhfywZwWkt+X+SYLu0IURBJVCVC9AfE5Ik6JIgmIdyTxOxD3dUlUncKYAOKtKHykLgthAurtJYnqKcaA7kRD5FUSed1oAvlV5FFAXAZUH5L4ZJiJr1i1tkcvVO8sAnL3e/r7PksiPyC258wDy2dRHon8qM0BqT0jvCT14hvcAF+OHVjk02gn9GCb26hPPgv4A/Vcr/Oy6eThv+nfTiRSJrEZDl8eBf+T+ehgmw38WaCKvOlSlX21gXg1nfbkYRChBJnP0sAweImqlAm8TwMTgfdlYGLwWj4GFo8vVsQk4LUKDa/l+yXlAo8x6xllCy8Pm/N+4RuzEtWds4HUC3iArxy1ZjS81f7eDCR6w6rdOHggvrXe35cB24EFUvdO+2duwHDbwOB5Xg0kuCohtwYS3vOQFwO2gmCAQgecBCFCFCLkJAgRohAhJ0GIEIUIOQlChND/x13rQos/MYDqJkcGuqkNVGvttax+cKQpSeqlWmuuChsh8gIgX0vi3vjBuadP3ho+KCgoSIxDn1BaWVkh3LxMAAAAAElFTkSuQmCC">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-group d-grid gap-2 d-md-flex justify-content-md-end">
+            <button mat-raised-button color="primary" class="mat-elevation-z btn-icon" (click)="saveTenant();">
+                <span class="material-symbols-outlined">check</span> {{'button.save' | translate}}
+            </button>
+            <button mat-raised-button color="secondary" class="btn-secondary mat-elevation-z" (click)="cancel()">
+                <span class="material-symbols-outlined">close</span> {{'button.cancel' | translate}}
+            </button>
+        </div>
+
+    </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- OLD Design -->
+  

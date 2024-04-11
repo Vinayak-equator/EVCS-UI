@@ -1,0 +1,68 @@
+.spc-even {
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-evenly;
+}
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.disable-link {
+  pointer-events: none;
+}
+.hide {
+  display: none;
+}
+.m-0 {
+  margin: 0;
+}
+.spc-even {
+  justify-content: space-around;
+}
+.sub-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 20px;
+  padding: 1rem;
+}
+.ucg-container {
+  border: none;
+}
+::ng-deep .mat-expansion-indicator::after {
+  color: rgba(0, 0, 0, 0.54) !important;
+}
+::ng-deep .mat-expansion-panel-header {
+  padding-left: 15px !important;
+}
+::ng-deep .no-line .mat-form-field-underline {
+  display: none;
+}
+fieldset {
+  padding: 30px 20px 10px 20px;
+  border-radius: 20px;
+  border: solid 1px #00000055;
+}
+fieldset legend {
+  color: #00000066;
+  margin-top: -40px;
+  background: white;
+  width: fit-content;
+  font-size: 20px;
+}
+.cross-div {
+  text-align: right;
+  margin-bottom: -22px;
+  padding-right: 0px;
+  z-index: 1;
+}
+.cancel-fab-btn {
+  width: 25px;
+  height: 25px;
+}
+.cross-icon {
+  width: 20px;
+  margin-top: -15px;
+}

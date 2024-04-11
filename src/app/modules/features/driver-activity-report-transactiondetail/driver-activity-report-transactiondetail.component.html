@@ -1,0 +1,116 @@
+<div class="mt-3">
+    <div class="card mat-elevation-z mb-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 lg-6">
+                    <h2 class="h2">Transaction Details</h2>
+                </div>
+                <div class="col-md-6 lg-6 text-end">
+                    <div class="head-right-outer">
+                        <a class="btn-back mat-elevation-z" (click)="navigateBack();" mat-raised-button
+                            href="javascript:;"><span class="material-symbols-outlined">keyboard_backspace</span>
+                            Back</a>
+                    </div>
+                </div>
+            </div>
+            <div class="devider mb-3"></div>
+            <div class="body-content-outer">
+                <div class="row">
+                    <div class="col-md-12 lg-12">
+                        <div class="ucg-table">
+                            <mat-table #table [dataSource]="dataSource" matSort matSortDirection="asc">
+                                <ng-container matColumnDef="uniquetransactionid">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Unique Transaction Id </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{ element.transactionLogId }} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="chargepointid">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Charge Point Id </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" > {{ element.chargePointId }} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="sitelocation">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Site Location </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{ element.siteAddress }} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="chargertype">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Charger Type </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{ element.chargerType }} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="connectorid">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Connector Id </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" > {{ element.connectorId }} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="connectortype">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header > Connector Type </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" > {{ element.connectorType1 }} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="date">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header > Date </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" > {{ element.transactionDate }} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="starttime" >
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header > Start Time </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" > {{ element.startTime }} </mat-cell>
+                                </ng-container>
+
+
+                                <ng-container matColumnDef="endtime">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> End Time </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{ element.stopTime }} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="meterstart">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Meter Start </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{ element.meterStart }} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="meterend">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Meter End </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" > {{ element.meterStop }} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="unitconsumed">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header > Unit Consumed </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" > {{ element.unitsConsumed }} </mat-cell>
+                                </ng-container>
+
+                                <!-- <ng-container matColumnDef="duration">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header > Duration </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" > {{ element.chargePointId }} </mat-cell>
+                                </ng-container> -->
+
+                                <ng-container matColumnDef="amount" >
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header > Amount </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" > {{ element.amount }} </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                            </mat-table>
+                            <div *ngIf="process" class="text-center norecord table-loader">
+                                <div class="loader-inner">
+                                    <mat-spinner [diameter]="40"></mat-spinner>
+                                    <small>Loading</small>
+                                </div>
+                            </div>
+                            <div *ngIf="!process && (dataSource.data.length == 0 || dataSource.filteredData.length == 0)"
+                                class="norecord">
+                                {{'table.noRecordFound' | translate}}
+                            </div>
+                            <mat-paginator *ngIf="dataSource.data.length" #paginator [pageSize]="10"
+                                [length]="dataSource.data.length" [pageSizeOptions]="[5, 10, 20]"
+                                [showFirstLastButtons]="true">
+                            </mat-paginator>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

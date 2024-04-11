@@ -1,0 +1,31 @@
+.font-18 {
+  font-size: 18px;
+  margin: 0;
+  line-height: 18px;
+  padding-top: 15px;
+}
+.arrow-img {
+  margin-top: -15px;
+}
+.btn-primary.disabled,
+.btn-primary:disabled {
+  background-color: #f5f5f7 !important;
+  color: #545a6d;
+}
+.spc-even {
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-evenly;
+}
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.disable-link {
+  pointer-events: none;
+}
+.hide {
+  display: none;
+}

@@ -1,0 +1,64 @@
+<!-- New Design -->
+
+<div class="mt-3">
+    <div class="card mat-elevation-z mb-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 lg-6">
+                    <h2 class="h2">{{'allTypeContent.roles' | translate }}</h2>
+                </div>
+
+            </div>
+            <div class="filter-outer">
+                <mat-accordion multi="false">
+                    <mat-expansion-panel *ngFor="let role of roles; let i = index">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <h4 class="hcust">
+                                    <img width="28" height="28" style="margin-right: 5px;"
+                                        src="data:image/png;base64,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">
+                                    {{ role.name }}
+                                </h4>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="t-form text">
+                            <div class="form-wd" *ngFor="let permission of role.rolePermissions">
+                                <mat-form-field class="w-100 ucg-input no-line">
+                                    <mat-checkbox [color]="'primary'" [checked]="permission.all === 0"
+                                        (change)="checkallpermission(i, permission.feature)">
+                                        <span class="per-title">{{ permission.feature }}</span>
+                                    </mat-checkbox>
+                                    <input matInput hidden />
+                                    <div style="margin-left: 3px;" *ngFor="let privilege of permission.previlleges">
+                                        <img *ngIf="privilege.key !== 'Markup Threshold'" class="arrow-img" width="24"
+                                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABmJLR0QA/wD/AP+gvaeTAAADdUlEQVR4nO2cwWsVVxSHvzPJqqWQrW50paIY/QsEkwrFvqwqBV1GCyKCJlJE6iLQUgQxKkiL7cZ9eYmrFKqkqy6KLozkvZCsbIVCAkJAi1Dad1yUrEw0M2/mnrl3zpf1nXPe7+PMmXkkAcdxHMdxHMdxHMdxHMdxnCYgRQ7NfrK0+1/p3RZhFPhwW4UKVdoWfwMvgBWE37THzyfmDvxeWbWSyR1L+3h3l6JPgKFchaoTsFmtZVWm//uAe5//dOCfcJXzk+U9oDBNzvBDo8pe4O7gaxbax7tHrPt5F7kFgB4rv43K2CeZzs+Mdb+ybmQrCgjgo9K7qJYBVL+ZaXW+n5rSIp+3UmrXUIWcHX7c/bFuEmrVTADGDz7q/lAnCbVpJBQinB5+3LmraMDnsq1pnID/kTOzraVaSGioAAD9YrbVvWndRYMFAHBhdmzRVELTBaAqF2c+7U5b1S8i4GXpXVgjOjEz1r1mUbqIgF9K76IOqF5utzrfhi6bW4Agl4D1CnoxR+BKu7X4dciauQV8Nrf/D0EOA/cRXlXQkymCXG23OlPh6iXK5O7vtI/jveln5wZKa+YdDIYoYkEmQfLrm2QFDLgAW3wCjMkyF2BKJnG85KcrIJJvWZIVID4BtvgtyBjxW5AtWcjfBOuDZAX4DjDGb0HG+BI2x3eAKZHs4IQF+ARY05eAYPaSFeATYIxEsgSSFeBPQcbEEX/CAmJ5Dk1WQCxLOI739YRxAca4AGNcgDG+hI3xCTDGBRjjAoxxAcYku4Qj2cE+Ada4gM0JNj+RDCrcPPRgXJAb1O+/da2ryMTEk9F7RQ5HMwEZ2XVBhoTa/QxlSuG/tI9GAOif1h1sifC86NFoBPQG9BSwat3HJqyK6Mmih6PZAQC3huf3ivR+Bdlh3QuAwppoNnrh6dHFoteISgDUR0IZ4UOEAsBeQlnhQ6QCwE5CmeFDxAIgvISyw4fIBUA4CVWEDwkIgOolVBU+JCIAqpNQZfiQkADYkKDzwM4yrld1+BDRm/B2uPh0ZFlVRoC/+r2WwloPGakyfEhsAjbodxI2wp9cGOmU3NpbJCkAiksIGT4kLADySwgdPiQuALYvwSJ8aIAAeL8Eq/ChIQJgawmW4UODBMDbEqzDh4YJALhz6OGensh1gEz1y/MLH69Y9+Q4juM4juM4TrN4A5xTHFAWO0pDAAAAAElFTkSuQmCC">
+                                        <mat-checkbox *ngIf="privilege.key !== 'Markup Threshold'" [color]="'primary'" [checked]="privilege.value"
+                                            (change)="checkpermission(i, permission.feature, privilege.key)">
+                                            {{ privilege.key }}</mat-checkbox>
+                                        <input matInput hidden />
+                                    </div>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <mat-action-row *ngIf="editRole">
+                            <button mat-raised-button color="primary" (click)="updateRole(i)">Update</button>
+                        </mat-action-row>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+
+            <div *ngIf="process" class="loader-outer static-loader">
+                <div class="loader-inner">
+                  <mat-spinner [diameter]="40"></mat-spinner>
+                  <small>Loading</small>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- OLD Design -->
+
+
+

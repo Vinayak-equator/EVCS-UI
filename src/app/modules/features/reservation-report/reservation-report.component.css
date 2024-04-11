@@ -1,0 +1,16 @@
+.centerdiv{
+    display: flex;
+    align-items: center;    
+}
+.ml-2{
+    margin-left: 10px !important;
+}
+
+mat-cell{
+    display: block !important;
+}
+
+.active{
+    border-radius: 5px;
+    background: #ededed;
+}

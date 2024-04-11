@@ -1,0 +1,114 @@
+<div class="ucg-dialog-box">
+    <div class="dialog-header-primary">
+        <h4 style="margin: 0;">Transfer ChargePoint</h4>
+    </div>
+    
+       
+            
+                <div class="form-row">
+                    <mat-radio-group [(ngModel)]="chargerType" (change)="radioChange($event)">
+                        <mat-radio-button [color]="'primary'" value="1">New Charger</mat-radio-button>
+                        &nbsp; &nbsp;
+                        <mat-radio-button [color]="'primary'" value="2">Replacement Charger</mat-radio-button>
+                    </mat-radio-group>
+                    <br /><br />
+                    <mat-form-field *ngIf="chargerType === '1'" class="w-100" appearance="outline">
+                        <mat-label>Select Site</mat-label>
+                        <mat-select [(ngModel)]="selectedSite" tabindex="2">
+                            <mat-option *ngFor="let site of sites" [value]="site">
+                                {{site.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field *ngIf="chargerType === '2'" class="w-100" appearance="outline">
+                        <mat-label>Select ChargePoint</mat-label>
+                        <mat-select [(ngModel)]="selectedChargepoint" tabindex="2">
+                            <mat-option *ngFor="let chargepoint of chargepoints" [value]="chargepoint">
+                                {{chargepoint.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="w-100 ucg-input" appearance="outline">
+                        <mat-label>{{'formFields.revenueSharePercentage' | translate}}</mat-label>
+                        <input matInput autocomplete="off" [(ngModel)]="revenueSharePercentage" ThreeDigitDecimalNumber
+                            onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))"
+                            maxlength="6" placeholder="{{'formFields.revenueSharePercentage' | translate}}" tabindex="1"
+                            required max="6">
+                        <mat-error>
+                            <span>
+                                {{'requiredFields.revenueSharePercentage' | translate }}</span>
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="w-100 ucg-input" appearance="outline">
+                        <mat-label>{{'formFields.transactionFees' | translate}}</mat-label>
+                        <input matInput autocomplete="off" [(ngModel)]="transactionFees"
+                            placeholder="{{'formFields.transactionFees' | translate}}" tabindex="1"
+                            ThreeDigitDecimalNumber
+                            onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))"
+                            maxlength="6" placeholder="{{'formFields.transactionFees' | translate}}" tabindex="2"
+                            required max="6">
+                        <mat-error>
+                            <span>
+                                {{'requiredFields.transactionFees' | translate }}</span>
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="w-100 ucg-input" appearance="outline">
+                        <mat-label>{{'formFields.utilityFees' | translate}}</mat-label>
+                        <input matInput autocomplete="off" [(ngModel)]="utilityFees"
+                            placeholder="{{'formFields.utilityFees' | translate}}" tabindex="1" ThreeDigitDecimalNumber
+                            onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))"
+                            maxlength="6" placeholder="{{'formFields.utilityFees' | translate}}" tabindex="3" required
+                            max="6">
+                        <mat-error>
+                            <span>
+                                {{'requiredFields.utilityFees' | translate }}</span>
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="w-100 ucg-input" appearance="outline">
+                        <mat-label>{{'formFields.cloudServicesFees' | translate}}</mat-label>
+                        <input matInput autocomplete="off" [(ngModel)]="cloudServicesFees"
+                            placeholder="{{'formFields.cloudServicesFees' | translate}}" tabindex="1"
+                            ThreeDigitDecimalNumber
+                            onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))"
+                            maxlength="6" placeholder="{{'formFields.cloudServicesFees' | translate}}" tabindex="4"
+                            required max="6">
+                        <mat-error>
+                            <span>
+                                {{'requiredFields.cloudServicesFees' | translate }}</span>
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="w-100 ucg-input" appearance="outline">
+                        <mat-label>{{'formFields.customerId' | translate}}</mat-label>
+                        <input matInput autocomplete="off" [(ngModel)]="customerId"
+                            placeholder="{{'formFields.customerId' | translate}}" tabindex="5" required>
+                        <mat-error>
+                            <span>
+                                {{'requiredFields.customerId' | translate }}</span>
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="w-100 ucg-input" appearance="outline">
+                        <mat-label>{{'formFields.vendorId' | translate}}</mat-label>
+                        <input matInput autocomplete="off" [(ngModel)]="vendorId"
+                            placeholder="{{'formFields.vendorId' | translate}}" tabindex="6" required>
+                        <mat-error>
+                            <span>
+                                {{'requiredFields.vendorId' | translate }}</span>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            
+            <div class="btn-group d-grid gap-2 d-md-flex justify-content-md-end m-20">
+                <button mat-raised-button color="primary" class="btn-primary btn-popup mat-elevation-z"
+                    [disabled]="(!selectedSite && !selectedChargepoint) || !revenueSharePercentage || !transactionFees || !utilityFees || !cloudServicesFees || !customerId || !vendorId"
+                    (click)="transfer()"><span class="material-symbols-outlined">check</span> Transfer</button>
+                <button mat-raised-button color="secondary" class="btn-secondary btn-popup mat-elevation-z"
+                    [mat-dialog-close]="false"><span class="material-symbols-outlined">close</span> Cancel</button>
+            </div>
+            <div *ngIf="process" class="loader-outer static-loader">
+                <div class="loader-inner">
+                    <mat-spinner [diameter]="40"></mat-spinner>
+                    <small>Loading</small>
+                </div>
+            </div>
+   
+</div>

@@ -1,0 +1,303 @@
+<div class="mt-3">
+    <div class="card mat-elevation-z mb-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 lg-6">
+                    <h2 class="h2">Driver Activity Report</h2>
+                </div>
+            </div>
+            <div class="filter-outer">
+                <form [formGroup]="driverActivityForm" #driverActivity="ngForm" class="margin-bottom-40 ucg-container">
+                    <div class="row">
+                        <div class="ucgHeader-1">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4">
+                                    <mat-form-field class="w-100" appearance="outline">
+                                        <mat-label>Report Type</mat-label>
+                                        <mat-select formControlName="reportType" (selectionChange)="changeReportType($event)" tabindex="1">
+                                            <!-- <mat-option value="all">All</mat-option> -->
+                                            <mat-option value="RegisterDriver">Registered Driver</mat-option>
+                                            <mat-option value="NonRegisterDriver">Non Registered Driver</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-lg-4 col-md-4">
+                                    <mat-form-field class="w-100" appearance="outline">
+                                        <mat-label>Organization</mat-label>
+                                        <mat-select formControlName="tenantName" tabindex="1">
+                                            <mat-option *ngFor="let tenant of tenants" (click)="tenantSelection()"
+                                                [value]="tenant.tenantId">
+                                                {{tenant.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>
+                                            <span *ngIf="!driverActivityForm.get('tenantName')?.valid">
+                                                Organization name is required.</span>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-lg-4 col-md-4">
+                                    <mat-form-field class="w-100" appearance="outline">
+                                        <mat-label>Site</mat-label>
+                                        <mat-select formControlName="siteName" multiple required tabindex="2">
+                                            <mat-option (click)="toggleAllSiteSelection()" value="select-all">Select
+                                                All</mat-option>
+                                            <mat-option *ngFor="let site of sites" [value]="site.siteId"
+                                                (click)="siteSelection()">
+                                                {{site.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>
+                                            <span *ngIf="!driverActivityForm.get('siteName')?.valid">
+                                                Site name is required.</span>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row align-items-start">
+                        <div class="col-lg-4 col-md-4">
+                            <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Charge Point</mat-label>
+                                <mat-select formControlName="chargePointName" multiple required tabindex="2">
+                                    <mat-option (click)="toggleAllChargePointSelection()" value="select-all">Select
+                                        All</mat-option>
+                                    <mat-option *ngFor="let chargePoint of chargePoints" [value]="chargePoint.id"
+                                        (click)="chargePointSelection()">
+                                        {{chargePoint.id}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    <span *ngIf="!driverActivityForm.get('chargePointName')?.valid">
+                                        ChargePoint is required.</span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Duration</mat-label>
+                                <mat-select formControlName="duration" tabindex="1"  (selectionChange)="selectDuration($event)" [(value)]="selected">
+                                    <mat-option value="thisweek">This week</mat-option>
+                                    <mat-option value="lastWeek">Last week</mat-option>
+                                    <mat-option value="monthToDate">This Month</mat-option>
+                                    <mat-option value="last30Days">Last Month</mat-option>
+                                    <mat-option value="thisQuater">This Quater</mat-option>
+                                    <mat-option value="lastQuarter">Last Quarter</mat-option>
+                                    <mat-option value="yearToDate">Year To Date</mat-option>
+                                    <mat-option value="lastYear">Last Year</mat-option>
+                                    <mat-option value="custom">Custom</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Type</mat-label>
+                                <mat-select formControlName="type" (selectionChange)="selectType($event)" tabindex="1" [(value)]="FilterType">
+                                    <mat-option [ngStyle]="hideDaily ? {display: 'none'} : {}"
+                                        value="Daily">Daily</mat-option>
+                                    <mat-option [ngStyle]="hideWeekly ? {display: 'none'} : {}"
+                                        value="Weekly">Weekly</mat-option>
+                                    <mat-option [ngStyle]="hideMonthly ? {display: 'none'} : {}"
+                                        value="Monthly">Monthly</mat-option>
+                                    <mat-option [ngStyle]="hideQuarterly ? {display: 'none'} : {}"
+                                        value="Quarterly">Quarterly</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+                    <div class="row align-items-start">
+                        <div class="col-lg-4 col-md-4">
+                            <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                <mat-label>Select Start Date</mat-label>
+                                <input matInput [matDatepicker]="picker" [(ngModel)]="startDate" [max]="maxDate"
+                                 [disabled]="isDatepickerDisabled" required >
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                <mat-label>Select End Date</mat-label>
+                                <input matInput [matDatepicker]="enddatepicker" [(ngModel)]="endDate"
+                                    [disabled]="!startDate || isDatepickerDisabled" [max]="maxDate"  [min]="startDate"
+                                    required>
+                                <mat-datepicker-toggle matSuffix [for]="enddatepicker"></mat-datepicker-toggle>
+                                <mat-datepicker #enddatepicker></mat-datepicker>
+                               
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3 lg-3 centerdiv ">
+                            <img class="download-btn" *ngIf="dataSource.data.length" style="width: 40px;" title="CSV" type="button"
+                                (click)="downloadCsvReport()"
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAEyklEQVR4nO2dW0xURxjH18RXH3zts4lJzRk4B2hQsRiTasFF17QYm1SttPpk4t1oPGdXVPDWaLxgEy0abQtGhW1FsASNilSMUbxBlBIVlQApKlDKRWCZZkgwIjN7O7vOgfP/JfPCzsnu+f/n++Y7M7uDwwEAAAAAAAAAAAAAwChC9aifEENNUwx1q2KoRYqhNsr+TGOSZE/y+Bg9ZgrRY5counqAGFoZMdRXxNDoh032Zx31TN4wbQLZEpekGNoKJraiqxVEV7t5YsMAkyiblImDYuvaKkXXTim6VkN0zRes2DDAZL4mJoSGARHI1wQGyM3XBAbIzdcEBgSPbGFJkM3pdX3kNv+ls9CV4og2soUlljXARecWul7AAEOeAazBAAMGSE8/BBEAA6KG7JFNEAHyxSVIQfIFJpgDrN2cKEPlGiDiQ2PCBc8BBgyQnmYIIkC+0AQpaLgIroNf035fvzB37i89EFC8GHccvf/iAfd634CPfnt0KQzwJ2DezdNCA151vKYJ26b6vX796Y3C68/eOocICDSCk7Jn0tbOVqGIWUU7hdfGeuLpk3+ecq9r7Wyjn++cFZQBti9DdxRlCw1obGui2tbPuMJtO58lvM7tzQx6DrC9AWwkP26qFYq5pcA9QjSWmprbm7n9qxuqaaw7HgaEUoksObaMDgwMcAV92vJshKAHyw5z+/p8PrrwyDchVUG2j4AhIf58WCqMgjX564fNG+1d7dx+v1XmowwNdzn6i70ptOttF1fYR42PB0tO1u9kxS/Cqml6VjIMMLMfkHP5J2EUZBxfTmdkz6Q9fW+5r28+p4f8fqyJsOVaUEJmIm1408C9Ee+d3+n28/yK6U591bsIgQEmd8TW5m/gitzR3UGrG2pG/L2vv48uOJQe1nshAgSi3KirDDrET1w/Gbb4MMDPOhEb2YFo+beFTt0xw5QBKEMFwuRV5gc0YOOZzabEhwF+hCm47Q1owKFLOTAgklXQUFuW+4Pwyfh9enp7aOq+NERAJA2Iz0wUrnLy+KvuBibhSBpw7FouV+iSBxfpfz2d3NdW561DFRQJA746vFBY/az8dRUtq7nEfa2prZkmbk9CGWrGALbieff5Pa7Az1rqqepJoEt/zqCRfh4QYbuliF3Fe4Q3sfq9FFNee53bh+0vp+csggHhGDDnx1Rhfn/4snrYOg9LU2zDnUdV/d2Q14SCHbljOgKuPLoqvIHvj68Y0b/4/kVhf6PQE5IBtn8SZk+zIsprK7iipexLo739vaY35G1vAFvfZxspPFia8be9eObWWdNfSbG9Ad6qP4QiXrhX7Fe4WXtm0+7ebqF5i49+BwP8CZiRu1y43MDSy9z98wIKmFt+Qmjg3811g6UrJmHBcgP7toOIYDfXp2cl0zbBBj1jd8leGGD1JsJWZSgMiAKyhSWIAPniEqQg6zcnfqQHA6KC7JFNEAHyxSVIQfIFJpgDrN2cmIRhQFSQPbIJIkC+uMSiKQiH9hnyDGDipxYs+NIRbXBwq0WPLlYMLW7onGgcXWyxw7uJoe1iJ6Xj8G4LHl9PdPVJNCZh2fc5qlDwDxzG3rziAHLnFQf4aIz71KNOUtxx6YqhZhNdKyG62gT9AQAAAAAAAAAAAIDDYvwPUvjjcRhYfFIAAAAASUVORK5CYII=">
+                            <img class="download-btn" *ngIf="dataSource.data.length" style="width: 40px;" title="PDF" type="button"
+                                (click)="downloadPdfReport()"
+                                src="data:image/png;base64,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">
+                           
+                            <div style="border: 1px solid #184EA2;width: 124px;display: flex;border-radius: 5px; height: 40px;margin-left: 
+                            30px;">
+                                <div [ngClass]="{'active': ShowChart}" class="d-flex align-items-center">
+                                    <img class="download-btn ml-3 mr-3" style="width: 28px;" title="Chart View" type="button"
+                                        (click)="ShowChart = true" src="assets/img/bar-chart.png">
+                                </div>
+                                <div class="border"></div>
+                                <div [ngClass]="{'active': !ShowChart}" class="d-flex align-items-center">
+                                    <img class="download-btn ml-3 mr-3" style="width: 28px;" title="Tabular View" type="button"
+                                        (click)="ShowChart = false" src="assets/img/table.png">
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row align-items-end">
+                        <div>
+                            <a href="javascript:;" mat-raised-button color="primary"
+                                class="mat-elevation-z btn-icon float-right" (click)="Generatechart()">Go</a>
+                            <a href="javascript:;" mat-raised-button color="primary" class="btn-icon float-right mr-2"
+                                (click)="Clear()">Clear</a>
+                        </div>
+                    </div>
+            </div>
+
+            <div *ngIf="process" class="loader-outer">
+                <div class="loader-inner">
+                  <mat-spinner [diameter]="40"></mat-spinner>
+                  <small>Loading</small>
+                </div>
+              </div>
+
+              
+            <div *ngIf="ShowChart && showchartsection">
+                <div class="chart mb-5">
+                    <div class="chartjs-container">
+                    
+                        <canvas id="ChartJs" baseChart [datasets]="stateWiseDriverActivitychartData"
+                            [labels]="stateWiseDriverActivitychartLabel" [options]="stateWiseDriverActivityOptions"
+                            [colors]="stateWiseDriverActivitychartColors"
+                            [legend]="stateWiseDriverActivitychartLegend" [chartType]="'bar'"
+                            [plugins]="stateWiseDriverActivitychartPlugins">
+                        </canvas>
+
+                        <canvas id="ChartJs" baseChart [datasets]="cityWiseDriverActivitychartData"
+                            [labels]="cityWiseDriverActivitychartLabel" [options]="cityWiseDriverActivityOptions"
+                            [colors]="cityWiseDriverActivitychartColors" [legend]="cityWiseDriverActivitychartLegend"
+                            [chartType]="'bar'" [plugins]="cityWiseDriverActivitychartPlugins">
+                        </canvas>
+
+                        <canvas id="ChartJs" baseChart [datasets]="dateWiseDriverActivitychartData"
+                            [labels]="dateWiseDriverActivitychartLabel"
+                            [options]="dateWiseDriverActivityOptions"
+                            [colors]="dateWiseDriverActivitychartColors"
+                            [legend]="dateWiseDriverActivitychartLegend" [chartType]="'bar'"
+                            [plugins]="dateWiseDriverActivitychartPlugins">
+                        </canvas>
+
+                        <canvas id="ChartJs" baseChart [datasets]="customerWiseDriverActivitychartData"
+                            [labels]="customerWiseDriverActivitychartLabel"
+                            [options]="customerWiseDriverActivityOptions"
+                            [colors]="customerWiseDriverActivitychartColors"
+                            [legend]="customerWiseDriverActivitychartLegend" [chartType]="'bar'"
+                            [plugins]="customerWiseDriverActivitychartPlugins">
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="body-content-outer mt-3" *ngIf="showchartsection && !ShowChart">
+                <div class="row">
+                    <div class="col-md-12 lg-12">
+                        <div class="ucg-table">
+                            <mat-table #table [dataSource]="dataSource" matSort matSortDirection="asc">
+
+                                <ng-container matColumnDef="name">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Customer Name </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{ element.customerName }} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="reporttype">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Registered / Non-Registered
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{ element.reportType }} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="email">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Email Address </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{ element.email }} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="mobile">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Mobile Number </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{ element.cellPhoneNumber }} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="transactions">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Transactions </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{ element.numofTransactions }} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="chargingTime">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Charging Time (Hr)
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" class="just-cent"> {{ element.totalTime }}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="kwhConsumed">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Consumption (KwH)
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" class="just-cent"> {{
+                                        element.totalKWH }}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="amount">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Amount ($) </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" class="just-cent"> {{ element.totalAmount }}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- <ng-container matColumnDef="chargerlocation">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Charger Location </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" class="just-cent"> 
+                                        <mat-checkbox [color]="'primary'" 
+                                            (change)="checkChargerLocation($event)">
+                                        </mat-checkbox>
+                                    </mat-cell>
+                                </ng-container> -->
+
+                                <ng-container matColumnDef="type">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Type </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" class="just-cent"> 
+                                        <div class="table-action">
+                                            <a matTooltip="Show Transaction" mat-mini-fab color="primary" href="javascript:;" 
+                                                (click)="openPopup(element);" class="table-action-btn">
+                                                <span class="material-symbols-outlined" routerLink="['/driveractivityreport-transactiondetail']"
+                                                    (click)="openPopup(element)">info</span>
+                                                
+                                            </a>
+                                        </div>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                            </mat-table>
+                            
+                            <div *ngIf="!process && (dataSource.data.length == 0 || dataSource.filteredData.length == 0)"
+                                class="norecord">
+                                {{'table.noRecordFound' | translate}}
+                            </div>
+                            <mat-paginator *ngIf="dataSource.data.length" #paginator [pageSize]="10"
+                                [length]="dataSource.data.length" [pageSizeOptions]="[5, 10, 20]"
+                                [showFirstLastButtons]="true">
+                            </mat-paginator>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

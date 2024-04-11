@@ -1,0 +1,50 @@
+<!-- New Design -->
+
+<div class="mt-3">
+    <div class="card mat-elevation-z mb-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 lg-6">
+                    <h2 class="h2">{{'allTypeContent.financial' | translate }}</h2>
+                </div>
+
+            </div>
+            <div class="filter-outer">
+                <div class="row">
+                    <div class="col-md-4 lg-4">
+                        <mat-form-field class="w-100 ucg-input" appearance="outline">
+                            <mat-label>{{'formFields.authamount' | translate}}</mat-label>
+                            <input matInput autocomplete="off" [(ngModel)]="authAmount" ThreeDigitDecimalNumber max="6"
+                                onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))"
+                                maxlength="6" placeholder="{{'formFields.authamount' | translate}}" tabindex="1"
+                                onkeyup="
+                            var date = this.value;
+                            if (event.keyCode !== 8 && date.match(/^\d{3}$/) !== null) {
+                               this.value = date + '.';
+                            }">
+                        </mat-form-field>
+
+                    </div>
+                    <div class="col-md-4 lg-4">
+
+                        <mat-form-field class="w-100 ucg-input" appearance="outline">
+                            <mat-label>{{'formFields.accountTeamEmail' | translate}}</mat-label>
+                            <input matInput autocomplete="off" type="text" [(ngModel)]="accountTeamEmail"
+                                placeholder="{{'formFields.accountTeamEmail' | translate}}" tabindex="2">
+                            <mat-hint>Emails should be comma separated.</mat-hint>
+                        </mat-form-field>
+                    </div>
+                    
+                    <div class="col-md-4 lg-4">
+                        <a *ngIf="updateSetting" href="javascript:;" mat-raised-button class="reset-btn mat-elevation-z"
+                            (click)="updateSettings()"><span class="material-symbols-outlined">restart_alt</span>
+                            Update`</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- OLD Design -->

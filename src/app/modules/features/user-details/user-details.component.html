@@ -1,0 +1,189 @@
+<!-- New Design -->
+
+<div class="mt-3">
+    <div class="card mat-elevation-z mb-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 lg-6">
+                    <h2 class="h2">{{'allTypeContent.userDetails' | translate }}</h2>
+                </div>
+
+
+            </div>
+            <div class="filter-outer">
+                <form [formGroup]="userForm" #userGeneration="ngForm" class="margin-bottom-40 ucg-container"
+                    autocomplete="off">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-xs-12 left-section">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                        <mat-label>{{'formFields.name' | translate}}</mat-label>
+                                        <input matInput autocomplete="off"
+                                            placeholder="{{'formFields.name' | translate}}" tabindex="1"
+                                            formControlName="name" required>
+                                        <mat-error>
+                                            <span
+                                                *ngIf="(!userForm.get('name')?.valid && !userForm.get('name')?.errors?.serverError) && !name">
+                                                {{'requiredFields.name' | translate }}</span>
+                                            <span
+                                                *ngIf="!userForm.get('name')?.errors?.serverError && (name || (userForm.get('name')?.valid && !name))">
+                                                {{'requiredFields.name' | translate }}</span>
+                                        </mat-error>
+                                        <mat-error>
+                                            <span *ngIf="userForm.get('name')?.errors?.serverError | translate">
+                                                {{userForm.get('name')?.errors?.serverError | translate}}</span>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group col-md-6"
+                                    [ngClass]="{'disableemail': userDetails.action === 'edit'}">
+                                    <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                        <mat-label>{{'formFields.email' | translate}}</mat-label>
+                                        <input matInput autocomplete="off" (focusout)="validateuser()"
+                                            placeholder="{{'formFields.email' | translate}}" tabindex="2"
+                                            formControlName="email" required (ngModelChange)="userExistErr = false">
+                                        <div class="existerr" *ngIf="!userForm.get('email')?.valid && userExistErr">
+                                            {{'requiredFields.userExist' | translate }}</div>
+                                        <mat-error>
+                                            <span *ngIf="userForm.get('email')?.errors?.pattern && !userExistErr">
+                                                {{'requiredFields.invalidEmail' | translate }}</span>
+                                            <span
+                                                *ngIf="!userForm.get('email')?.errors?.pattern && (!userForm.get('email')?.valid && !userForm.get('email')?.errors?.serverError) && !email && !userExistErr">
+                                                {{'requiredFields.email' | translate }}</span>
+                                            <span
+                                                *ngIf="!userForm.get('email')?.errors?.pattern && !userForm.get('email')?.errors?.serverError && (email || (userForm.get('email')?.valid && !email)) && !userExistErr">
+                                                {{'requiredFields.email' | translate }}</span>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                        <mat-label>Select Role</mat-label>
+                                        <mat-select formControlName="role" tabindex="3" required
+                                            (selectionChange)="roleSelection($event.value)">
+                                            <mat-option *ngFor="let role of roles" [value]="role.id">
+                                                {{role.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>
+                                            <span *ngIf="!userForm.get('role')?.valid">
+                                                User role is required.</span>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <mat-form-field class="w-100 ucg-input no-line" floatLabel="always">
+                                        <mat-label>{{'formFields.status' | translate}}</mat-label>
+                                        <mat-slide-toggle tabindex="4" [color]="'primary'" formControlName="status"
+                                            [disabled]="!userDetails.id">
+                                        </mat-slide-toggle>
+                                        <input matInput hidden />
+                                    </mat-form-field>
+                                </div>
+                                <div *ngIf="showTenantSelection" class="form-group col-md-6">
+                                    <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                        <mat-label>Select Organization</mat-label>
+                                        <mat-select formControlName="tenants" multiple tabindex="1"
+                                            (selectionChange)="tenantSelection($event.value)"
+                                            [disabled]="isDefaultTenant">
+                                            <mat-option *ngFor="let tenant of tenants" [value]="tenant.tenantId">
+                                                {{tenant.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>
+                                            <span *ngIf="!userForm.get('tenants')?.valid">
+                                                Organization name is required.</span>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div *ngIf="showMakeDefaultTenant" class="form-group col-md-6">
+                                    <mat-form-field class="w-100 ucg-input no-line">
+                                        <mat-checkbox [color]="'primary'" [checked]="isDefaultTenant"
+                                            (change)="changeDefaultTenant()">
+                                            <span class="per-title">Make default organization</span>
+                                        </mat-checkbox>
+                                        <input matInput hidden />
+                                    </mat-form-field>
+                                </div>
+                                <div *ngIf="showSiteSelection" class="form-group col-md-6">
+                                    <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                        <mat-label>Select Site</mat-label>
+                                        <mat-select formControlName="sites" multiple tabindex="1"
+                                            (selectionChange)="siteSelection($event.value)">
+                                            <mat-option *ngFor="let site of sites" [value]="site.siteId">
+                                                {{site.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>
+                                            <span *ngIf="!userForm.get('sites')?.valid">
+                                                Site is required.</span>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div *ngIf="showChargePointSelection" class="form-group col-md-6">
+                                    <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                        <mat-label>Select ChargePoints</mat-label>
+                                        <mat-select formControlName="chargePoints" multiple tabindex="1"
+                                            (selectionChange)="chargePointSelection($event.value)">
+                                            <mat-option *ngFor="let chargePoint of chargePoints"
+                                                [value]="chargePoint.chargePointId">
+                                                {{chargePoint.chargePointId}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>
+                                            <span *ngIf="!userForm.get('chargePoints')?.valid">
+                                                ChargePoints are required.</span>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="rolePermissions && rolePermissions.length" class="t-form text">
+                        <div class="form-wd" *ngFor="let permission of rolePermissions">
+                            <mat-form-field class="w-100 ucg-input no-line">
+                                <mat-checkbox [color]="'primary'" [checked]="permission.all === 0"
+                                    (change)="checkallpermission(permission.feature)">
+                                    <span class="per-title">{{ permission.feature }}</span>
+                                </mat-checkbox>
+                                <input matInput hidden />
+                                <div style="margin-left: 3px;" *ngFor="let privilege of permission.previlleges">
+                                    <img *ngIf="privilege.key !== 'Markup Threshold'" class="arrow-img" width="24"
+                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABmJLR0QA/wD/AP+gvaeTAAADdUlEQVR4nO2cwWsVVxSHvzPJqqWQrW50paIY/QsEkwrFvqwqBV1GCyKCJlJE6iLQUgQxKkiL7cZ9eYmrFKqkqy6KLozkvZCsbIVCAkJAi1Dad1yUrEw0M2/mnrl3zpf1nXPe7+PMmXkkAcdxHMdxHMdxHMdxHMdxnCYgRQ7NfrK0+1/p3RZhFPhwW4UKVdoWfwMvgBWE37THzyfmDvxeWbWSyR1L+3h3l6JPgKFchaoTsFmtZVWm//uAe5//dOCfcJXzk+U9oDBNzvBDo8pe4O7gaxbax7tHrPt5F7kFgB4rv43K2CeZzs+Mdb+ybmQrCgjgo9K7qJYBVL+ZaXW+n5rSIp+3UmrXUIWcHX7c/bFuEmrVTADGDz7q/lAnCbVpJBQinB5+3LmraMDnsq1pnID/kTOzraVaSGioAAD9YrbVvWndRYMFAHBhdmzRVELTBaAqF2c+7U5b1S8i4GXpXVgjOjEz1r1mUbqIgF9K76IOqF5utzrfhi6bW4Agl4D1CnoxR+BKu7X4dciauQV8Nrf/D0EOA/cRXlXQkymCXG23OlPh6iXK5O7vtI/jveln5wZKa+YdDIYoYkEmQfLrm2QFDLgAW3wCjMkyF2BKJnG85KcrIJJvWZIVID4BtvgtyBjxW5AtWcjfBOuDZAX4DjDGb0HG+BI2x3eAKZHs4IQF+ARY05eAYPaSFeATYIxEsgSSFeBPQcbEEX/CAmJ5Dk1WQCxLOI739YRxAca4AGNcgDG+hI3xCTDGBRjjAoxxAcYku4Qj2cE+Ada4gM0JNj+RDCrcPPRgXJAb1O+/da2ryMTEk9F7RQ5HMwEZ2XVBhoTa/QxlSuG/tI9GAOif1h1sifC86NFoBPQG9BSwat3HJqyK6Mmih6PZAQC3huf3ivR+Bdlh3QuAwppoNnrh6dHFoteISgDUR0IZ4UOEAsBeQlnhQ6QCwE5CmeFDxAIgvISyw4fIBUA4CVWEDwkIgOolVBU+JCIAqpNQZfiQkADYkKDzwM4yrld1+BDRm/B2uPh0ZFlVRoC/+r2WwloPGakyfEhsAjbodxI2wp9cGOmU3NpbJCkAiksIGT4kLADySwgdPiQuALYvwSJ8aIAAeL8Eq/ChIQJgawmW4UODBMDbEqzDh4YJALhz6OGensh1gEz1y/MLH69Y9+Q4juM4juM4TrN4A5xTHFAWO0pDAAAAAElFTkSuQmCC">
+                                    <mat-checkbox *ngIf="privilege.key !== 'Markup Threshold'" [color]="'primary'"
+                                        [checked]="privilege.value"
+                                        (change)="checkpermission(permission.feature, privilege.key)">
+                                        {{ privilege.key }}</mat-checkbox>
+                                    <input matInput hidden />
+                                    <mat-form-field *ngIf="privilege.key === 'Markup Threshold'" class="w-100 ucg-input"
+                                        appearance="outline">
+                                        <mat-label>{{'formFields.markupThreshold' | translate}}</mat-label>
+                                        <input matInput autocomplete="off"
+                                            placeholder="{{'formFields.markupThreshold' | translate}}"
+                                            formControlName="markupThreshold">
+                                    </mat-form-field>
+                                </div>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="btn-group d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button tabindex="5" *ngIf="userDetails.action === 'new'" mat-raised-button color="primary"
+                            class="btn-primary mx-3" (click)="saveupdate()">
+                            {{'button.save' | translate}}
+                        </button>
+                        <button tabindex="5" *ngIf="userDetails.action === 'edit'" mat-raised-button color="primary"
+                            class="btn-primary mx-3" (click)="saveupdate()">
+                            {{'button.update' | translate}}
+                        </button>
+                        <button tabindex="6" mat-raised-button color="secondary" class="btn-secondary"
+                            (click)="cancel(userGeneration)">
+                            {{'button.cancel' | translate}}
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

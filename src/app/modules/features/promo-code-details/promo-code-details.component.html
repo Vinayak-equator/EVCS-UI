@@ -1,0 +1,536 @@
+<!-- <div class="margin-top-16 member-info-section">
+    <div class="ucgHeader">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="margin-top-16">{{'allTypeContent.promoCodeDetails' | translate }}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tenantListContainer ucg-container">
+        <div class="tenantFilterSection container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <span class="title-section">
+                        <h4>Promo Code Details</h4>
+                    </span>
+                </div>
+            </div>
+            <form [formGroup]="promocodeForm" #promocodeGeneration="ngForm" class="margin-bottom-40 ucg-container"
+                autocomplete="off">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-xs-12 left-section">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>{{'formFields.promoCode' | translate}}</mat-label>
+                                    <input matInput autocomplete="off" (focusout)="validatepromocode()"
+                                        placeholder="{{'formFields.promoCode' | translate}}" tabindex="1"
+                                        formControlName="promoCode" required>
+                                    <div class="existerr"
+                                        *ngIf="!promocodeForm.get('promoCode')?.valid && promoExistErr">
+                                        {{'requiredFields.promoCodeExist' | translate }}</div>
+                                    <mat-error>
+                                        <span
+                                            *ngIf="(!promocodeForm.get('promoCode')?.valid && !promocodeForm.get('promoCode')?.errors?.serverError) && !promoCode && !promoExistErr">
+                                            {{'requiredFields.promoCode' | translate }}</span>
+                                        <span
+                                            *ngIf="!promocodeForm.get('promoCode')?.errors?.serverError && (promoCode || (promocodeForm.get('promoCode')?.valid && !promoCode))">
+                                            {{'requiredFields.promoCode' | translate }}</span>
+                                    </mat-error>
+                                    <mat-error>
+                                        <span *ngIf="promocodeForm.get('promoCode')?.errors?.serverError | translate">
+                                            {{promocodeForm.get('promoCode')?.errors?.serverError | translate}}</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>{{'formFields.promocodedesc' | translate}}</mat-label>
+                                    <input matInput autocomplete="off"
+                                        placeholder="{{'formFields.promocodedesc' | translate}}" tabindex="1"
+                                        formControlName="promocodedesc" required>
+                                    <mat-error>
+                                        <span
+                                            *ngIf="(!promocodeForm.get('promocodedesc')?.valid && !promocodeForm.get('promocodedesc')?.errors?.serverError) && !promocodedesc">
+                                            {{'requiredFields.promocodedesc' | translate }}</span>
+                                        <span
+                                            *ngIf="!promocodeForm.get('promocodedesc')?.errors?.serverError && (promocodedesc || (promocodeForm.get('promocodedesc')?.valid && !promocodedesc))">
+                                            {{'requiredFields.promocodedesc' | translate }}</span>
+                                    </mat-error>
+                                    <mat-error>
+                                        <span
+                                            *ngIf="promocodeForm.get('promocodedesc')?.errors?.serverError | translate">
+                                            {{promocodeForm.get('promocodedesc')?.errors?.serverError |
+                                            translate}}</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <mat-radio-group class="radio-group" formControlName="radioGroup"
+                                    [(ngModel)]="selectedValue" (change)="radioChange($event)">
+                                    <mat-radio-button [color]="'primary'" class="col-md-6" *ngFor="let value of values"
+                                        [value]="value">
+                                        <mat-form-field *ngIf="value === 'Percentage'" class="ucg-input w-250"
+                                            appearance="outline">
+                                            <mat-label>{{'formFields.discountpercentage' | translate}}</mat-label>
+                                            <input matInput autocomplete="off"
+                                                placeholder="{{'formFields.discountpercentage' | translate}}"
+                                                tabindex="1" formControlName="discountpercentage" required>
+                                            <mat-error>
+                                                <span
+                                                    *ngIf="(!promocodeForm.get('discountpercentage')?.valid && !promocodeForm.get('discountpercentage')?.errors?.serverError) && !discountpercentage">
+                                                    {{'requiredFields.discountpercentage' | translate }}</span>
+                                                <span
+                                                    *ngIf="!promocodeForm.get('discountpercentage')?.errors?.serverError && (discountpercentage || (promocodeForm.get('discountpercentage')?.valid && !discountpercentage))">
+                                                    {{'requiredFields.discountpercentage' | translate }}</span>
+                                            </mat-error>
+                                            <mat-error>
+                                                <span
+                                                    *ngIf="promocodeForm.get('discountpercentage')?.errors?.serverError | translate">
+                                                    {{promocodeForm.get('discountpercentage')?.errors?.serverError |
+                                                    translate}}</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field *ngIf="value === 'Flat'" class="w-250 ucg-input"
+                                            appearance="outline">
+                                            <mat-label>{{'formFields.flatdiscount' | translate}}</mat-label>
+                                            <input matInput autocomplete="off"
+                                                placeholder="{{'formFields.flatdiscount' | translate}}" tabindex="1"
+                                                formControlName="flatdiscount" required>
+                                            <mat-error>
+                                                <span
+                                                    *ngIf="(!promocodeForm.get('flatdiscount')?.valid && !promocodeForm.get('flatdiscount')?.errors?.serverError) && !flatdiscount">
+                                                    {{'requiredFields.flatdiscount' | translate }}</span>
+                                                <span
+                                                    *ngIf="!promocodeForm.get('flatdiscount')?.errors?.serverError && (flatdiscount || (promocodeForm.get('flatdiscount')?.valid && !flatdiscount))">
+                                                    {{'requiredFields.flatdiscount' | translate }}</span>
+                                            </mat-error>
+                                            <mat-error>
+                                                <span
+                                                    *ngIf="promocodeForm.get('flatdiscount')?.errors?.serverError | translate">
+                                                    {{promocodeForm.get('flatdiscount')?.errors?.serverError |
+                                                    translate}}</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>{{'formFields.validitystartdate' | translate}}</mat-label>
+                                    <input matInput [matDatepicker]="startdatepicker" autocomplete="off"
+                                        placeholder="{{'formFields.validitystartdate' | translate}}" tabindex="1"
+                                        formControlName="validitystartdate" [min]="today" required>
+                                    <mat-datepicker-toggle matSuffix [for]="startdatepicker"></mat-datepicker-toggle>
+                                    <mat-datepicker #startdatepicker></mat-datepicker>
+                                    <mat-error>
+                                        <span
+                                            *ngIf="(!promocodeForm.get('validitystartdate')?.valid && !promocodeForm.get('validitystartdate')?.errors?.serverError) && !validitystartdate">
+                                            {{'requiredFields.validitystartdate' | translate }}</span>
+                                        <span
+                                            *ngIf="!promocodeForm.get('validitystartdate')?.errors?.serverError && (validitystartdate || (promocodeForm.get('validitystartdate')?.valid && !validitystartdate))">
+                                            {{'requiredFields.validitystartdate' | translate }}</span>
+                                    </mat-error>
+                                    <mat-error>
+                                        <span
+                                            *ngIf="promocodeForm.get('validitystartdate')?.errors?.serverError | translate">
+                                            {{promocodeForm.get('validitystartdate')?.errors?.serverError |
+                                            translate}}</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>{{'formFields.validityenddate' | translate}}</mat-label>
+                                    <input matInput [matDatepicker]="enddatepicker" autocomplete="off"
+                                        placeholder="{{'formFields.validityenddate' | translate}}" tabindex="1"
+                                        formControlName="validityenddate"
+                                        [disabled]="!promocodeForm.get('validitystartdate')?.value"
+                                        [min]="promocodeForm.get('validitystartdate')?.value" required>
+                                    <mat-datepicker-toggle matSuffix [for]="enddatepicker"></mat-datepicker-toggle>
+                                    <mat-datepicker #enddatepicker></mat-datepicker>
+                                    <mat-error>
+                                        <span
+                                            *ngIf="(!promocodeForm.get('validityenddate')?.valid && !promocodeForm.get('validityenddate')?.errors?.serverError) && !validityenddate">
+                                            {{'requiredFields.validityenddate' | translate }}</span>
+                                        <span
+                                            *ngIf="!promocodeForm.get('validityenddate')?.errors?.serverError && (validityenddate || (promocodeForm.get('validityenddate')?.valid && !validityenddate))">
+                                            {{'requiredFields.validityenddate' | translate }}</span>
+                                    </mat-error>
+                                    <mat-error>
+                                        <span
+                                            *ngIf="promocodeForm.get('validityenddate')?.errors?.serverError | translate">
+                                            {{promocodeForm.get('validityenddate')?.errors?.serverError |
+                                            translate}}</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>Select Organization</mat-label>
+                                    <mat-select formControlName="tenants" multiple tabindex="1" required>
+                                        <mat-option (click)="toggleAllTenantSelection()" value="select-all">Select All</mat-option>
+                                        <mat-option *ngFor="let tenant of tenants" [value]="tenant.tenantId" (click)="tenantSelection()">
+                                            {{tenant.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                        <span *ngIf="!promocodeForm.get('tenants')?.valid">
+                                            Organization name is required.</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>Select Site</mat-label>
+                                    <mat-select formControlName="sites" multiple tabindex="1" required>
+                                        <mat-option (click)="toggleAllSiteSelection()" value="select-all">Select All</mat-option>
+                                        <mat-option *ngFor="let site of sites" [value]="site.siteId" (click)="siteSelection()">
+                                            {{site.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                        <span *ngIf="!promocodeForm.get('sites')?.valid">
+                                            Site is required.</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>Select ChargePoints</mat-label>
+                                    <mat-select formControlName="chargePoints" multiple tabindex="1" required>
+                                        <mat-option (click)="toggleAllChargePointSelection()" value="select-all">Select All</mat-option>
+                                        <mat-option *ngFor="let chargePoint of chargePoints"
+                                            [value]="chargePoint.chargePointId" (click)="chargePointSelection()">
+                                            {{chargePoint.chargePointId}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                        <span *ngIf="!promocodeForm.get('chargePoints')?.valid">
+                                            ChargePoints are required.</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                    <mat-label>{{'formFields.maxusage' | translate}}</mat-label>
+                                    <input matInput autocomplete="off"
+                                        placeholder="{{'formFields.maxusage' | translate}}" tabindex="1"
+                                        formControlName="maxusage" required>
+                                    <mat-error>
+                                        <span
+                                            *ngIf="(!promocodeForm.get('maxusage')?.valid && !promocodeForm.get('maxusage')?.errors?.serverError) && !maxusage">
+                                            {{'requiredFields.maxusage' | translate }}</span>
+                                        <span
+                                            *ngIf="!promocodeForm.get('maxusage')?.errors?.serverError && (maxusage || (promocodeForm.get('maxusage')?.valid && !maxusage))">
+                                            {{'requiredFields.maxusage' | translate }}</span>
+                                    </mat-error>
+                                    <mat-error>
+                                        <span *ngIf="promocodeForm.get('maxusage')?.errors?.serverError | translate">
+                                            {{promocodeForm.get('maxusage')?.errors?.serverError |
+                                            translate}}</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <mat-form-field class="w-100 ucg-input no-line" floatLabel="always">
+                                    <mat-label>{{'formFields.status' | translate}}</mat-label>
+                                    <mat-slide-toggle [color]="'primary'" formControlName="status">
+                                    </mat-slide-toggle>
+                                    <input matInput hidden />
+                                    <mat-error>
+                                        <span *ngIf="!promocodeForm.get('status')?.valid">
+                                            Promocode status is required.</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-group d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button *ngIf="promoCodeDetails.action === 'new'" mat-raised-button color="primary" class="btn-primary mx-3"
+                        (click)="saveupdate()">
+                        {{'button.save' | translate}}
+                    </button>
+                    <button *ngIf="promoCodeDetails.action === 'edit'" mat-raised-button color="primary" class="btn-primary mx-3"
+                        (click)="saveupdate()">
+                        {{'button.update' | translate}}
+                    </button>
+                    <button mat-raised-button color="secondary" class="btn-secondary"
+                        (click)="cancel(promocodeGeneration)">
+                        {{'button.cancel' | translate}}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> -->
+
+
+
+<!-- New -->
+
+<div class="container-fluid mt-4">
+    <div class="card">
+      <div class="card-body">
+        <div class="row mb-3">
+          <div class="col-md-6 lg-6">
+            <h2 class="h2">{{'allTypeContent.promoCodeDetails' | translate }}</h2>
+          </div>
+          <div class="col-md-6 lg-6 text-end"></div>
+        </div>
+        <div class="body-content-outer">
+            <form [formGroup]="promocodeForm" #promocodeGeneration="ngForm" class="margin-bottom-40 ucg-container"
+            autocomplete="off">
+            <div class="row" [ngClass]="{ 'isEditable': promoCodeDetails.action !== 'edit' && promoCodeDetails.action !== 'new' && this.promoCodeDetails.used !== 0 }">
+                <div class="col-lg-12 col-md-12 col-xs-12 left-section">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                <mat-label>{{'formFields.promoCode' | translate}}</mat-label>
+                                <input matInput autocomplete="off" (focusout)="validatepromocode()"
+                                    placeholder="{{'formFields.promoCode' | translate}}" tabindex="1"
+                                    formControlName="promoCode" required>
+                                <div class="existerr"
+                                    *ngIf="!promocodeForm.get('promoCode')?.valid && promoExistErr">
+                                    {{'requiredFields.promoCodeExist' | translate }}</div>
+                                <mat-error>
+                                    <span
+                                        *ngIf="(!promocodeForm.get('promoCode')?.valid && !promocodeForm.get('promoCode')?.errors?.serverError) && !promoCode && !promoExistErr">
+                                        {{'requiredFields.promoCode' | translate }}</span>
+                                    <span
+                                        *ngIf="!promocodeForm.get('promoCode')?.errors?.serverError && (promoCode || (promocodeForm.get('promoCode')?.valid && !promoCode))">
+                                        {{'requiredFields.promoCode' | translate }}</span>
+                                </mat-error>
+                                <mat-error>
+                                    <span *ngIf="promocodeForm.get('promoCode')?.errors?.serverError | translate">
+                                        {{promocodeForm.get('promoCode')?.errors?.serverError | translate}}</span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                <mat-label>{{'formFields.promocodedesc' | translate}}</mat-label>
+                                <input matInput autocomplete="off"
+                                    placeholder="{{'formFields.promocodedesc' | translate}}" tabindex="2"
+                                    formControlName="promocodedesc" required>
+                                <mat-error>
+                                    <span
+                                        *ngIf="(!promocodeForm.get('promocodedesc')?.valid && !promocodeForm.get('promocodedesc')?.errors?.serverError) && !promocodedesc">
+                                        {{'requiredFields.promocodedesc' | translate }}</span>
+                                    <span
+                                        *ngIf="!promocodeForm.get('promocodedesc')?.errors?.serverError && (promocodedesc || (promocodeForm.get('promocodedesc')?.valid && !promocodedesc))">
+                                        {{'requiredFields.promocodedesc' | translate }}</span>
+                                </mat-error>
+                                <mat-error>
+                                    <span
+                                        *ngIf="promocodeForm.get('promocodedesc')?.errors?.serverError | translate">
+                                        {{promocodeForm.get('promocodedesc')?.errors?.serverError |
+                                        translate}}</span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <mat-radio-group class="radio-group" formControlName="radioGroup"
+                                [(ngModel)]="selectedValue" (change)="radioChange($event)">
+                                <mat-radio-button [color]="'primary'" class="col-md-6" *ngFor="let value of values"
+                                    [value]="value">
+                                    <mat-form-field *ngIf="value === 'Percentage'" class="ucg-input mb-slam"
+                                        appearance="outline">
+                                        <mat-label>{{'formFields.discountpercentage' | translate}}</mat-label>
+                                        <input matInput autocomplete="off"
+                                            placeholder="{{'formFields.discountpercentage' | translate}}"
+                                            tabindex="3" formControlName="discountpercentage" required>
+                                        <mat-error>
+                                            <span
+                                                *ngIf="(!promocodeForm.get('discountpercentage')?.valid && !promocodeForm.get('discountpercentage')?.errors?.serverError) && !discountpercentage">
+                                                {{'requiredFields.discountpercentage' | translate }}</span>
+                                            <span
+                                                *ngIf="!promocodeForm.get('discountpercentage')?.errors?.serverError && (discountpercentage || (promocodeForm.get('discountpercentage')?.valid && !discountpercentage))">
+                                                {{'requiredFields.discountpercentage' | translate }}</span>
+                                        </mat-error>
+                                        <mat-error>
+                                            <span
+                                                *ngIf="promocodeForm.get('discountpercentage')?.errors?.serverError | translate">
+                                                {{promocodeForm.get('discountpercentage')?.errors?.serverError |
+                                                translate}}</span>
+                                        </mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field *ngIf="value === 'Flat'" class="ucg-input mb-slam"
+                                        appearance="outline">
+                                        <mat-label>{{'formFields.flatdiscount' | translate}}</mat-label>
+                                        <input matInput autocomplete="off"
+                                            placeholder="{{'formFields.flatdiscount' | translate}}" tabindex="4"
+                                            formControlName="flatdiscount" required>
+                                        <mat-error>
+                                            <span
+                                                *ngIf="(!promocodeForm.get('flatdiscount')?.valid && !promocodeForm.get('flatdiscount')?.errors?.serverError) && !flatdiscount">
+                                                {{'requiredFields.flatdiscount' | translate }}</span>
+                                            <span
+                                                *ngIf="!promocodeForm.get('flatdiscount')?.errors?.serverError && (flatdiscount || (promocodeForm.get('flatdiscount')?.valid && !flatdiscount))">
+                                                {{'requiredFields.flatdiscount' | translate }}</span>
+                                        </mat-error>
+                                        <mat-error>
+                                            <span
+                                                *ngIf="promocodeForm.get('flatdiscount')?.errors?.serverError | translate">
+                                                {{promocodeForm.get('flatdiscount')?.errors?.serverError |
+                                                translate}}</span>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                <mat-label>{{'formFields.validitystartdate' | translate}}</mat-label>
+                                <input matInput [matDatepicker]="startdatepicker" autocomplete="off"
+                                    placeholder="{{'formFields.validitystartdate' | translate}}" tabindex="5"
+                                    formControlName="validitystartdate" [min]="today" required>
+                                <mat-datepicker-toggle matSuffix [for]="startdatepicker"></mat-datepicker-toggle>
+                                <mat-datepicker #startdatepicker></mat-datepicker>
+                                <mat-error>
+                                    <span
+                                        *ngIf="(!promocodeForm.get('validitystartdate')?.valid && !promocodeForm.get('validitystartdate')?.errors?.serverError) && !validitystartdate">
+                                        {{'requiredFields.validitystartdate' | translate }}</span>
+                                    <span
+                                        *ngIf="!promocodeForm.get('validitystartdate')?.errors?.serverError && (validitystartdate || (promocodeForm.get('validitystartdate')?.valid && !validitystartdate))">
+                                        {{'requiredFields.validitystartdate' | translate }}</span>
+                                </mat-error>
+                                <mat-error>
+                                    <span
+                                        *ngIf="promocodeForm.get('validitystartdate')?.errors?.serverError | translate">
+                                        {{promocodeForm.get('validitystartdate')?.errors?.serverError |
+                                        translate}}</span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                <mat-label>{{'formFields.validityenddate' | translate}}</mat-label>
+                                <input matInput [matDatepicker]="enddatepicker" autocomplete="off"
+                                    placeholder="{{'formFields.validityenddate' | translate}}" tabindex="6"
+                                    formControlName="validityenddate"
+                                    [disabled]="!promocodeForm.get('validitystartdate')?.value"
+                                    [min]="promocodeForm.get('validitystartdate')?.value" required>
+                                <mat-datepicker-toggle matSuffix [for]="enddatepicker"></mat-datepicker-toggle>
+                                <mat-datepicker #enddatepicker></mat-datepicker>
+                                <mat-error>
+                                    <span
+                                        *ngIf="(!promocodeForm.get('validityenddate')?.valid && !promocodeForm.get('validityenddate')?.errors?.serverError) && !validityenddate">
+                                        {{'requiredFields.validityenddate' | translate }}</span>
+                                    <span
+                                        *ngIf="!promocodeForm.get('validityenddate')?.errors?.serverError && (validityenddate || (promocodeForm.get('validityenddate')?.valid && !validityenddate))">
+                                        {{'requiredFields.validityenddate' | translate }}</span>
+                                </mat-error>
+                                <mat-error>
+                                    <span
+                                        *ngIf="promocodeForm.get('validityenddate')?.errors?.serverError | translate">
+                                        {{promocodeForm.get('validityenddate')?.errors?.serverError |
+                                        translate}}</span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                <mat-label>Select Organization</mat-label>
+                                <mat-select formControlName="tenants" multiple tabindex="7" required>
+                                    <mat-option (click)="toggleAllTenantSelection()" value="select-all">Select All</mat-option>
+                                    <mat-option *ngFor="let tenant of tenants" [value]="tenant.tenantId" (click)="tenantSelection()">
+                                        {{tenant.name}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    <span *ngIf="!promocodeForm.get('tenants')?.valid">
+                                        Organization name is required.</span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                <mat-label>Select Site</mat-label>
+                                <mat-select formControlName="sites" multiple tabindex="8" required>
+                                    <mat-option (click)="toggleAllSiteSelection()" value="select-all">Select All</mat-option>
+                                    <mat-option *ngFor="let site of sites" [value]="site.siteId" (click)="siteSelection()">
+                                        {{site.name}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    <span *ngIf="!promocodeForm.get('sites')?.valid">
+                                        Site is required.</span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                <mat-label>Select ChargePoints</mat-label>
+                                <mat-select formControlName="chargePoints" multiple tabindex="9" required>
+                                    <mat-option (click)="toggleAllChargePointSelection()" value="select-all">Select All</mat-option>
+                                    <mat-option *ngFor="let chargePoint of chargePoints"
+                                        [value]="chargePoint.chargePointId" (click)="chargePointSelection()">
+                                        {{chargePoint.chargePointId}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    <span *ngIf="!promocodeForm.get('chargePoints')?.valid">
+                                        ChargePoints are required.</span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <mat-form-field class="w-100 ucg-input" appearance="outline">
+                                <mat-label>{{'formFields.maxusage' | translate}}</mat-label>
+                                <input matInput autocomplete="off"
+                                    placeholder="{{'formFields.maxusage' | translate}}" tabindex="10"
+                                    formControlName="maxusage" required>
+                                <mat-error>
+                                    <span
+                                        *ngIf="(!promocodeForm.get('maxusage')?.valid && !promocodeForm.get('maxusage')?.errors?.serverError) && !maxusage">
+                                        {{'requiredFields.maxusage' | translate }}</span>
+                                    <span
+                                        *ngIf="!promocodeForm.get('maxusage')?.errors?.serverError && (maxusage || (promocodeForm.get('maxusage')?.valid && !maxusage))">
+                                        {{'requiredFields.maxusage' | translate }}</span>
+                                </mat-error>
+                                <mat-error>
+                                    <span *ngIf="promocodeForm.get('maxusage')?.errors?.serverError | translate">
+                                        {{promocodeForm.get('maxusage')?.errors?.serverError |
+                                        translate}}</span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <mat-form-field class="w-100 ucg-input no-line" floatLabel="always">
+                                <mat-label>{{'formFields.status' | translate}}</mat-label>
+                                <mat-slide-toggle tabindex="11" [color]="'primary'" formControlName="status">
+                                </mat-slide-toggle>
+                                <input tabindex="11" matInput hidden />
+                                <mat-error>
+                                    <span *ngIf="!promocodeForm.get('status')?.valid">
+                                        Promocode status is required.</span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-group d-grid gap-2 d-md-flex justify-content-md-end">
+                <button *ngIf="promoCodeDetails.action === 'new'" tabindex="12" mat-raised-button color="primary" class="btn-primary mx-3"
+                    (click)="saveupdate()">
+                    {{'button.save' | translate}}
+                </button>
+                <button *ngIf="promoCodeDetails.action === 'edit' || this.promoCodeDetails.used == 0" tabindex="12" mat-raised-button color="primary" class="btn-primary mx-3"
+                    (click)="saveupdate()">
+                    {{'button.update' | translate}}
+                </button>
+                <button mat-raised-button color="secondary" tabindex="13" class="btn-secondary"
+                    (click)="cancel(promocodeGeneration)">
+                    {{'button.cancel' | translate}}
+                </button>
+            </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,45 @@
+.font-18 {
+  font-size: 18px;
+  margin: 0;
+  line-height: 18px;
+  padding-top: 15px;
+}
+.arrow-img {
+  margin-top: -15px;
+}
+.btn-primary.disabled,
+.btn-primary:disabled {
+  background-color: #f5f5f7 !important;
+  color: #545a6d;
+}
+.user {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+.mb-2 {
+  margin-bottom: 2rem !important;
+}
+.profile-circle {
+  border: #1951a1 solid 4px;
+  border-radius: 50%;
+}
+.circle-edit {
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  width: 40px;
+  margin-left: 15px;
+  margin-bottom: -10px;
+}
+.circle-edit-icon {
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  width: 20px;
+  margin-left: 26px;
+}
