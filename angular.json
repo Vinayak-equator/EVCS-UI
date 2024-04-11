@@ -106,21 +106,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "EVCS:build"
+            "buildTarget": "EVCS:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "EVCS:build:production"
+              "buildTarget": "EVCS:build:production"
             },
             "staging": {
-              "browserTarget": "EVCS:build:staging"
+              "buildTarget": "EVCS:build:staging"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "EVCS:build"
+            "buildTarget": "EVCS:build"
           }
         },
         "test": {
