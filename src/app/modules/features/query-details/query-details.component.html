@@ -73,7 +73,7 @@
                             <div *ngIf="(isMasterAdmin && queryDetails?.reply?.length) || queryDetails?.reply?.length" class="form-group col-md-12">
                                 <h4>Replies</h4>
                                 <div *ngFor="let item of queryDetails.reply">
-                                    <mat-card>
+                                    <mat-card appearance="outlined">
                                         <mat-card-content>
                                             <b>{{item.createdby}}:</b>&nbsp;
                                             {{item.replyDescription}}

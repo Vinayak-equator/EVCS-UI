@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatLegacySlideToggleModule as MatSlideToggleModule } from '@angular/material/legacy-slide-toggle';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DriverActivityReportTransactiondetailRoutingModule } from './driver-activity-report-transactiondetail-routing.module';

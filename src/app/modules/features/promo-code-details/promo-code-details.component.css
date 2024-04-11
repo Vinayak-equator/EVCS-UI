@@ -1,7 +1,10 @@
+
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
 ::ng-deep .no-line .mat-form-field-underline {
   display: none;
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of radio that may no longer apply for the MDC version. */
 ::ng-deep .mat-radio-label-content {
   width: 100%;
 }
@@ -21,11 +24,12 @@
   margin-bottom: -15px;
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of radio that may no longer apply for the MDC version. */
 .mat-radio-label-content {
   width: 100% !important  ;
 }
 
-.mat-form-field {
+.mat-mdc-form-field {
   width: 100% !important;
 }
 
