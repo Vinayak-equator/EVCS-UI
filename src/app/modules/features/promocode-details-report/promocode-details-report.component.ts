@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import Helper from '@app/shared/utility/Helper';
 import { AppConstants } from 'src/app/constants';
 import { HttpDataService } from '@app/shared/services/http-data.service';
@@ -36,7 +36,7 @@ export class PromocodeDetailsReportComponent {
   selectedTenants: any = [];
   selectedSites: any = [];
   selectedPromoCodes: any = [];
-  promocodeForm: FormGroup;
+  promocodeForm: UntypedFormGroup;
   dataSource = new MatTableDataSource();
   displayedColumns: string[] = [
     'promocode',
@@ -84,7 +84,7 @@ export class PromocodeDetailsReportComponent {
   }
 
   constructor(
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
     private httpDataService: HttpDataService,
     private cdref: ChangeDetectorRef,
     private routerExtService: RouterExtService,

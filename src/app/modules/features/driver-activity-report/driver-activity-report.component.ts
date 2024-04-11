@@ -9,7 +9,7 @@ import { Tenant } from '@app/models/tenant.model';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { SiteList } from '@app/models/sitelist.model';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { TranslateConfigService } from '@app/shared/services/translate-config.service';
 import { GridFilterService } from '@app/shared/utility/grid-filter.service';
@@ -27,7 +27,7 @@ import { Color, Label } from 'ng2-charts';
 })
 export class DriverActivityReportComponent {
 
-  driverActivityForm: FormGroup;
+  driverActivityForm: UntypedFormGroup;
   process = false;
   process1 = false;
   tenants: Tenant[];
@@ -136,7 +136,7 @@ export class DriverActivityReportComponent {
   }
 
   constructor(
-    private readonly formBuilder: FormBuilder, 
+    private readonly formBuilder: UntypedFormBuilder, 
     private translate: TranslateService, 
     public translateConfigService: TranslateConfigService, 
     public filterService: GridFilterService,

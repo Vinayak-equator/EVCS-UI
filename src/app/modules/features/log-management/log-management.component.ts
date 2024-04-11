@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import {
   FormControl,
-  FormGroup,
-  FormBuilder,
+  UntypedFormGroup,
+  UntypedFormBuilder,
   Validators,
 } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
@@ -30,13 +30,13 @@ import { TranslateConfigService } from '@app/shared/services/translate-config.se
 })
 export class LogManagementComponent implements OnInit {
 
-  logManagementForm: FormGroup;
+  logManagementForm: UntypedFormGroup;
   showDeleted = false;
   promoExistErr = false;
   viewRecord = false;
   process = true;
   promocodeId = '';
-  promocodeForm: FormGroup;
+  promocodeForm: UntypedFormGroup;
   promocodeObj: any = {};
   today = new Date();
   tenantList: any;
@@ -97,7 +97,7 @@ export class LogManagementComponent implements OnInit {
   constructor(
     public filterService: GridFilterService,
     private cdref: ChangeDetectorRef,
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
     private httpDataService: HttpDataService,
     public dialog: MatDialog,
     public dataService: DataService,

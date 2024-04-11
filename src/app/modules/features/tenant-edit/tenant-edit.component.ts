@@ -1,9 +1,9 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import {
   AbstractControl,
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -39,7 +39,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./tenant-edit.component.css'],
 })
 export class TenantEditComponent implements OnInit,AfterViewInit {
-  tenantForm: FormGroup;
+  tenantForm: UntypedFormGroup;
   tenantId: Guid;
   tenant: Tenant;
   sites: Site[];
@@ -207,15 +207,15 @@ export class TenantEditComponent implements OnInit,AfterViewInit {
   ];
 
   filterValues: any = {};
-  siteNameControl = new FormControl();
-  locationControl = new FormControl();
+  siteNameControl = new UntypedFormControl();
+  locationControl = new UntypedFormControl();
   filterName = '';
   filterLocation = '';
   popUpData: string;
   
   filteredSiteList : any = []
   constructor(
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
     private httpDataService: HttpDataService,
     public dialog: MatDialog,
     private toastr: ToastrService,

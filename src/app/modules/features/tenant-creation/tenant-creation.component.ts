@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, FormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, of, throwError } from 'rxjs';
@@ -19,7 +19,7 @@ import { MatMerchantDialogComponent } from '@app/mat-merchant-dialog/mat-merchan
   styleUrls: ['./tenant-creation.component.css']
 })
 export class TenantCreationComponent implements OnInit {
-  tenantForm: FormGroup;
+  tenantForm: UntypedFormGroup;
   tenant: Tenant;
   stringJson: any;
   msg: string;
@@ -81,7 +81,7 @@ export class TenantCreationComponent implements OnInit {
     return !Helper.isNullOrWhitespace(this.tenantForm.get('street')?.value) && (this.tenantForm.get('street')?.value.length <= 15 || this.tenantForm.get('street')?.value.length > 250);
   }
 
-  constructor(private readonly formBuilder: FormBuilder, private readonly httpDataService: HttpDataService, public dialog: MatDialog,
+  constructor(private readonly formBuilder: UntypedFormBuilder, private readonly httpDataService: HttpDataService, public dialog: MatDialog,
     private toastr: ToastrService, private dialogService: DialogService, private router: Router, private popUpService: PopUpService) {
     this.tenant = new Tenant();
   }

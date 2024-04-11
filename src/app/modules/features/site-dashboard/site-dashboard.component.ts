@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -44,7 +44,7 @@ import { IndexedDBService } from '@app/shared/utility/indexed-db.service';
   ],
 })
 export class SiteDashboardComponent implements OnInit {
-  siteDashboardForm: FormGroup;
+  siteDashboardForm: UntypedFormGroup;
   tenantCount: number;
   sitesCount: number;
   chargePointsCount: number;
@@ -106,20 +106,20 @@ export class SiteDashboardComponent implements OnInit {
 
   filterValues: any = {};
 
-  siteNameControl = new FormControl();
+  siteNameControl = new UntypedFormControl();
   filteredBySiteName: Observable<string[]>;
   sitename: any[];
   siteNameValues: any[];
 
-  locationControl = new FormControl();
-  statusControl = new FormControl();
+  locationControl = new UntypedFormControl();
+  statusControl = new UntypedFormControl();
   filteredByLocation: Observable<string[]>;
   filteredByStatus: Observable<string[]>;
   locationValues: any[];
   statusValues: any[];
   location: any[];
 
-  chargePointControl = new FormControl();
+  chargePointControl = new UntypedFormControl();
   filteredByChargePoint: Observable<string[]>;
   chargePointValues: any[];
   chargePoint: any[];
@@ -151,7 +151,7 @@ export class SiteDashboardComponent implements OnInit {
   long: any;
 
   constructor(
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
     private indexedDBService: IndexedDBService,
     private httpDataService: HttpDataService,
     public filterService: GridFilterService,

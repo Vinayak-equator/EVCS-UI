@@ -7,7 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { TranslateConfigService } from '@app/shared/services/translate-config.service';
 import { GridFilterService } from '@app/shared/utility/grid-filter.service';
@@ -23,7 +23,7 @@ import { RouterExtService } from '@app/shared/services/routerExt.service';
 })
 export class ChargePointUptimeReportComponent implements OnInit{
 
-  uptimeForm: FormGroup;
+  uptimeForm: UntypedFormGroup;
   userRole: string;
   process = false;
   process1 = true;
@@ -83,7 +83,7 @@ export class ChargePointUptimeReportComponent implements OnInit{
   }
 
   constructor(
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
     private httpDataService: HttpDataService,
     private cdref: ChangeDetectorRef,
     private translate: TranslateService, 

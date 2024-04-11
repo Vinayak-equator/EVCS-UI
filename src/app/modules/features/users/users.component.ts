@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import {
-  FormControl,
-  FormGroup,
-  FormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
+  UntypedFormBuilder,
   Validators,
 } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -27,11 +27,11 @@ import { Router } from '@angular/router';
 export class UsersComponent implements OnInit {
   process = false;
   showDeleted = false;
-  userForm: FormGroup;
+  userForm: UntypedFormGroup;
   filteredByUserName: Observable<string[]>;
-  userControl = new FormControl();
+  userControl = new UntypedFormControl();
   userNameValues: any[];
-  userRoleControl = new FormControl();
+  userRoleControl = new UntypedFormControl();
   userRoleValues: any[];
   errors: string[];
   dialogRef: MatDialogRef<any>;
@@ -60,7 +60,7 @@ export class UsersComponent implements OnInit {
   constructor(
     public filterService: GridFilterService,
     private cdref: ChangeDetectorRef,
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
     private httpDataService: HttpDataService,
     public dialog: MatDialog,
     public dataService: DataService,

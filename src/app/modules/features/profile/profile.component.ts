@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  FormGroup,
-  FormBuilder,
+  UntypedFormGroup,
+  UntypedFormBuilder,
   Validators,
   FormGroupDirective,
 } from '@angular/forms';
@@ -16,13 +16,13 @@ import { PopUpService } from '@app/shared/utility/popup.service';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  profileForm: FormGroup;
+  profileForm: UntypedFormGroup;
   user: any  = [];
 
   constructor(
     private httpDataService: HttpDataService,
     private popUpService: PopUpService,
-    private readonly formBuilder: FormBuilder
+    private readonly formBuilder: UntypedFormBuilder
   ) {}
 
   ngOnInit(): void {

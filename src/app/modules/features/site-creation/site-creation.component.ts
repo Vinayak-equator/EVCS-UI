@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppConstants } from '@app/constants';
 import { RouterExtService } from '@app/shared/services/routerExt.service';
@@ -19,7 +19,7 @@ import Helper from 'src/app/shared/utility/Helper';
 })
 export class SiteCreationComponent implements OnInit {
 
-  siteForm: FormGroup;
+  siteForm: UntypedFormGroup;
   site: Site;
   stringJson: any;
   msg: string;
@@ -170,7 +170,7 @@ export class SiteCreationComponent implements OnInit {
   }
 
   constructor(
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
     private readonly httpDataService: HttpDataService,
     private toastr: ToastrService,
     private router: Router,

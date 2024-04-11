@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import {
-  FormControl,
-  FormGroup,
-  FormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
+  UntypedFormBuilder,
   Validators,
 } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
@@ -31,7 +31,7 @@ export class PromoCodeComponent implements OnInit {
   viewRecord = false;
   process = true;
   promocodeId = '';
-  promocodeForm: FormGroup;
+  promocodeForm: UntypedFormGroup;
   promocodeObj: any = {};
   today = new Date();
   tenantList: any;
@@ -41,7 +41,7 @@ export class PromoCodeComponent implements OnInit {
   totalCount: number = 0;
   filterPromocode = '';
   chnageicon = 'keyboard_arrow_right';
-  promoCodeControl = new FormControl();
+  promoCodeControl = new UntypedFormControl();
   tenants: Tenant[];
   sites: Site[];
   chargePoints: ChargePoint[];
@@ -77,7 +77,7 @@ export class PromoCodeComponent implements OnInit {
   constructor(
     public filterService: GridFilterService,
     private cdref: ChangeDetectorRef,
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
     private httpDataService: HttpDataService,
     public dialog: MatDialog,
     public dataService: DataService,

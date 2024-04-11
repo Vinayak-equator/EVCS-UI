@@ -8,7 +8,7 @@ import { HttpDataService } from '@app/shared/services/http-data.service';
 import { RouterExtService } from '@app/shared/services/routerExt.service';
 import { AppConstants } from '@app/constants';
 import { PopUpService } from '@app/shared/utility/popup.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import Helper from 'src/app/shared/utility/Helper';
 import { GridFilterService } from '@app/shared/utility/grid-filter.service';
 import { SiteList } from '@app/models/sitelist.model';
@@ -20,7 +20,7 @@ import { ChargePoint } from '@app/models/chargepoint.model';
   styleUrls: ['./smart-charging.component.css']
 })
 export class SmartChargingComponent implements OnInit {
-  smartChargingForm: FormGroup;
+  smartChargingForm: UntypedFormGroup;
   popUpData: string;
   tenantName: string;
   siteName: string;
@@ -69,7 +69,7 @@ export class SmartChargingComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
     private httpDataService: HttpDataService,
     private popUpService: PopUpService,
     public filterService: GridFilterService,

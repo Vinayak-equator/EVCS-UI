@@ -6,9 +6,9 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -39,7 +39,7 @@ import { MatDeleteDialogComponent } from '@app/mat-delete-dialog/mat-delete-dial
   styleUrls: ['./site-edit.component.css'],
 })
 export class SiteEditComponent implements OnInit {
-  siteForm: FormGroup;
+  siteForm: UntypedFormGroup;
   tenantId: Guid;
   siteId: Guid;
   site: Site;
@@ -268,17 +268,17 @@ export class SiteEditComponent implements OnInit {
 
   filterValues: any = {};
 
-  chargePointIdControl = new FormControl();
+  chargePointIdControl = new UntypedFormControl();
   filteredByChargePointId: Observable<string[]>;
   chargePointId: any[];
   chargePointIdValues: any[];
 
-  chargeTypeControl = new FormControl();
+  chargeTypeControl = new UntypedFormControl();
   filteredByChargeType: Observable<string[]>;
   chargeTypeValues: any[];
   chargeType: any[];
 
-  statusControl = new FormControl();
+  statusControl = new UntypedFormControl();
   filteredByStatus: Observable<string[]>;
   statusValues: any[];
   status: any[];
@@ -294,7 +294,7 @@ export class SiteEditComponent implements OnInit {
   }
 
   constructor(
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
     private readonly httpDataService: HttpDataService,
     private toastr: ToastrService,
     private translate: TranslateService,

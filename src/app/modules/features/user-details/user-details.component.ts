@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import {
-  FormGroup,
-  FormBuilder,
+  UntypedFormGroup,
+  UntypedFormBuilder,
   Validators,
   FormGroupDirective,
 } from '@angular/forms';
@@ -37,7 +37,7 @@ export class UserDetailsComponent implements OnInit {
   chargePoints: ChargePoint[];
   tenantList: any;
   siteList: any;
-  userForm: FormGroup;
+  userForm: UntypedFormGroup;
   displayedColumns: string[] = ['name', 'email', 'role', 'status', 'action'];
   subscription: Subscription;
   userDetails: any;
@@ -62,7 +62,7 @@ export class UserDetailsComponent implements OnInit {
   constructor(
     public filterService: GridFilterService,
     private cdref: ChangeDetectorRef,
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
     private popUpService: PopUpService,
     private httpDataService: HttpDataService,
     public dialog: MatDialog,

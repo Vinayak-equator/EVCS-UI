@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppConstants } from '@app/constants';
 import { RouterExtService } from '@app/shared/services/routerExt.service';
@@ -18,7 +18,7 @@ import Helper from 'src/app/shared/utility/Helper';
 })
 export class ChargerCreationComponent implements OnInit {
 
-  chargerForm: FormGroup;
+  chargerForm: UntypedFormGroup;
   stringJson: any;
   chargePoint: ChargePoint;
   msg: string;
@@ -40,7 +40,7 @@ export class ChargerCreationComponent implements OnInit {
     return !Helper.isNullOrWhitespace(this.chargerForm.get('chargePointId')?.value) && (this.chargerForm.get('chargePointId')?.value.length < 3 || this.chargerForm.get('chargePointId')?.value.length > 20);
   }
 
-  constructor(private readonly formBuilder: FormBuilder, private readonly httpDataService: HttpDataService,
+  constructor(private readonly formBuilder: UntypedFormBuilder, private readonly httpDataService: HttpDataService,
     private router: Router, private popUpService: PopUpService, private location: Location,
     private routerExtService: RouterExtService) {
     this.chargePoint = new ChargePoint();

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { TranslateConfigService } from '@app/shared/services/translate-config.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { IndexedDBService } from '@app/shared/utility/indexed-db.service';
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class NavbarComponent implements OnInit {
-  hearderForm: FormGroup;
+  hearderForm: UntypedFormGroup;
 
   languages = [
     { value: 'en', text: 'English' },
@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit {
   lang: string = "en" // Default language is en.
 
   // This component is used for Navbar - Notifications, Name display, Initials
-  constructor(private readonly formBuilder: FormBuilder,
+  constructor(private readonly formBuilder: UntypedFormBuilder,
     public translate: TranslateService, public router: Router,
     public translateConfigService: TranslateConfigService,
     private indexedDBService: IndexedDBService) {

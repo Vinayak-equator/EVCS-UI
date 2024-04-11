@@ -6,7 +6,7 @@ import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 
@@ -35,7 +35,7 @@ import { AppConstants } from '@app/constants';
 })
 export class SiteUtilizationReportComponent implements OnInit {
 
-  SiteUtilizationForm: FormGroup;
+  SiteUtilizationForm: UntypedFormGroup;
   userRole: string;
   process = false;
   process1 = true
@@ -160,37 +160,37 @@ export class SiteUtilizationReportComponent implements OnInit {
   
   filterValues: any = {};
 
-  transactionIdControl = new FormControl();
+  transactionIdControl = new UntypedFormControl();
   filteredByTransactionId: Observable<string[]>;
   transactionId: any[];
   transactionIdValues: any[];
 
-  transactionLogIdControl = new FormControl();
+  transactionLogIdControl = new UntypedFormControl();
   filteredByTransactionLogId: Observable<string[]>;
   transactionLogId: any[];
   transactionLogIdValues: any[];
 
-  statusControl = new FormControl();
+  statusControl = new UntypedFormControl();
   filteredByStatus: Observable<string[]>;
   statusValues: any[];
   status: any[];
 
-  startTimeControl = new FormControl();
+  startTimeControl = new UntypedFormControl();
   filteredByStartTime: Observable<string[]>;
   startTimeValues: any[];
   startTime: any[];
 
-  stopTimeControl = new FormControl();
+  stopTimeControl = new UntypedFormControl();
   filteredByStopTime: Observable<string[]>;
   stopTimeValues: any[];
   stopTime: any[];
 
-  meterStartControl = new FormControl();
+  meterStartControl = new UntypedFormControl();
   filteredByMeterStart: Observable<string[]>;
   meterStartValues: any[];
   meterStart: any[];
 
-  meterStopControl = new FormControl();
+  meterStopControl = new UntypedFormControl();
   filteredByMeterStop: Observable<string[]>;
   meterStopValues: any[];
   meterStop: any[];
@@ -237,7 +237,7 @@ export class SiteUtilizationReportComponent implements OnInit {
 
 
   
-  constructor(private readonly formBuilder: FormBuilder, private httpDataService: HttpDataService,
+  constructor(private readonly formBuilder: UntypedFormBuilder, private httpDataService: HttpDataService,
     private translate: TranslateService, public translateConfigService: TranslateConfigService, public filterService: GridFilterService,
     private router: Router, private popUpService: PopUpService,    private cdref: ChangeDetectorRef,
 

@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { TranslateConfigService } from '@app/shared/services/translate-config.service';
 import { GridFilterService } from '@app/shared/utility/grid-filter.service';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { RouterExtService } from '@app/shared/services/routerExt.service';
 import { IndexedDBService } from '@app/shared/utility/indexed-db.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -69,8 +69,8 @@ export class DashboardComponent implements OnInit {
   }
   data: Tenant[] = [];
   options: any[] = [];
-  nameControl = new FormControl();
-  locationControl = new FormControl();
+  nameControl = new UntypedFormControl();
+  locationControl = new UntypedFormControl();
 
   ngOnInit(): void {
     localStorage.removeItem('parentTenantRequest');

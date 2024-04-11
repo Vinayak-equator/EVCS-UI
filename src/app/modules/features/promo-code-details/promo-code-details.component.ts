@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import {
-  FormGroup,
-  FormBuilder,
+  UntypedFormGroup,
+  UntypedFormBuilder,
   Validators,
   FormGroupDirective,
 } from '@angular/forms';
@@ -30,7 +30,7 @@ export class PromoCodeDetailsComponent implements OnInit {
   promoExistErr = false;
   promocodeId = '';
   PromocodeCreatedOn = '';
-  promocodeForm: FormGroup;
+  promocodeForm: UntypedFormGroup;
   promocodeObj: any = {};
   tenantList: any;
   siteList: any;
@@ -57,7 +57,7 @@ export class PromoCodeDetailsComponent implements OnInit {
   constructor(
     public filterService: GridFilterService,
     private cdref: ChangeDetectorRef,
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
     private popUpService: PopUpService,
     private httpDataService: HttpDataService,
     public dialog: MatDialog,

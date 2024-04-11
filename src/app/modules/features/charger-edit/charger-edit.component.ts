@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -40,11 +40,11 @@ export class ChargerEditComponent implements OnInit {
   chargerPoint: ChargePoint;
   siteId: Guid;
   chargePointId: any;
-  chargerForm: FormGroup;
-  triggerForm: FormGroup;
-  firmwareForm: FormGroup;
-  chargerMessageForm: FormGroup;
-  chargerImageForm: FormGroup;
+  chargerForm: UntypedFormGroup;
+  triggerForm: UntypedFormGroup;
+  firmwareForm: UntypedFormGroup;
+  chargerMessageForm: UntypedFormGroup;
+  chargerImageForm: UntypedFormGroup;
   // smartChargingForm: FormGroup;
   canUpdateChargepoint = false;
   canViewConnector = false;
@@ -101,7 +101,7 @@ export class ChargerEditComponent implements OnInit {
   JSONData: any;
 
   constructor(
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
     private readonly httpDataService: HttpDataService,
     public translateConfigService: TranslateConfigService,
     public filterService: GridFilterService,

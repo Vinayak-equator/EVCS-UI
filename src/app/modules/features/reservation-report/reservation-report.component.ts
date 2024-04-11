@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -25,7 +25,7 @@ import jsPDF from 'jspdf';
 })
 export class ReservationReportComponent implements OnInit {
 
-  ReservationForm: FormGroup;
+  ReservationForm: UntypedFormGroup;
   process = false;
   dataSource = new MatTableDataSource();
   isDatepickerDisabled: boolean = false;
@@ -72,7 +72,7 @@ export class ReservationReportComponent implements OnInit {
     return this.userRole == 'Tenant_Admin';
   }
   
-  constructor(private readonly formBuilder: FormBuilder, private httpDataService: HttpDataService,
+  constructor(private readonly formBuilder: UntypedFormBuilder, private httpDataService: HttpDataService,
     private translate: TranslateService, public translateConfigService: TranslateConfigService, public filterService: GridFilterService,
     private router: Router, private popUpService: PopUpService,    private cdref: ChangeDetectorRef,
 

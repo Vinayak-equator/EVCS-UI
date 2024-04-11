@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Tenant } from '@app/models/tenant.model';
 import { HttpDataService } from '@app/shared/services/http-data.service';
@@ -30,7 +30,7 @@ import { error } from 'console';
 })
 export class TransactionListComponent implements OnInit {
 
-  transactionForm: FormGroup;
+  transactionForm: UntypedFormGroup;
   tenantCount: number; 
   sitesCount: number;
   chargePointsCount: number;
@@ -117,40 +117,40 @@ export class TransactionListComponent implements OnInit {
   
   filterValues: any = {};
 
-  transactionIdControl = new FormControl();
+  transactionIdControl = new UntypedFormControl();
   filteredByTransactionId: Observable<string[]>;
   transactionId: any[];
   transactionIdValues: any[];
 
-  transactionLogIdControl = new FormControl();
+  transactionLogIdControl = new UntypedFormControl();
   filteredByTransactionLogId: Observable<string[]>;
   uniqueTransactionId: Observable<string[]>;
   transactionLogId: any[];
   transactionLogIdValues: any[];
   uniqTransactionLogIdValues: any[];
 
-  statusControl = new FormControl();
+  statusControl = new UntypedFormControl();
   filteredByStatus: Observable<string[]>;
   statusValues: any[];
   status: any[];
 
-  startTimeControl = new FormControl();
+  startTimeControl = new UntypedFormControl();
   filteredByStartTime: Observable<string[]>;
   startTimeValues: any[];
   startTime: any[];
 
-  stopTimeControl = new FormControl();
+  stopTimeControl = new UntypedFormControl();
   filteredByStopTime: Observable<string[]>;
   stopTimeValues: any[];
   stopTime: any[];
 
-  meterStartControl = new FormControl();
+  meterStartControl = new UntypedFormControl();
   filteredByMeterStart: Observable<string[]>;
   meterStartValues: any[];
   meterStart: any[];
   dialogRef: MatDialogRef<any>;
 
-  meterStopControl = new FormControl();
+  meterStopControl = new UntypedFormControl();
   filteredByMeterStop: Observable<string[]>;
   meterStopValues: any[];
   meterStop: any[];
@@ -167,7 +167,7 @@ export class TransactionListComponent implements OnInit {
     return input?.filter(v => v?.toString().toLowerCase().indexOf(filterValue) === 0);
   }
 
-  constructor(private readonly formBuilder: FormBuilder, private httpDataService: HttpDataService,
+  constructor(private readonly formBuilder: UntypedFormBuilder, private httpDataService: HttpDataService,
     private translate: TranslateService, public translateConfigService: TranslateConfigService,public toast:ToastrService, public filterService: GridFilterService,
     private router: Router, private popUpService: PopUpService, 
     public dialog: MatDialog,

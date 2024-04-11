@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -21,8 +21,8 @@ export class DeletionRequestComponent implements OnInit {
 
   process = true;
   dialogRef: MatDialogRef<any>;
-  userControl = new FormControl();
-  userStatusControl = new FormControl();
+  userControl = new UntypedFormControl();
+  userStatusControl = new UntypedFormControl();
   dataSource = new MatTableDataSource();
   displayedColumns: string[] = [
     'userName',

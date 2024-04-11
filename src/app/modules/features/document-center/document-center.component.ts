@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AppConstants } from 'src/app/constants';
 import { HttpDataService } from '@app/shared/services/http-data.service';
-import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { Site } from '@app/models/site.model';
 import { Tenant } from '@app/models/tenant.model';
 import { jsPDF } from 'jspdf';
@@ -16,13 +16,13 @@ export class DocumentCenterComponent {
 
   process = false;
   apiNoData = false;
-  documentCenterForm: FormGroup;
+  documentCenterForm: UntypedFormGroup;
   tenants: Tenant[];
   sites: Site[];
   documentArray: any = [];
 
   constructor(
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
     private httpDataService: HttpDataService
   ) { }
 

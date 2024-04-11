@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -21,8 +21,8 @@ import { MatDeleteDialogComponent } from '@app/mat-delete-dialog/mat-delete-dial
 export class QueryComponent implements OnInit {
 
   process = true;
-  userControl = new FormControl();
-  userStatusControl = new FormControl();
+  userControl = new UntypedFormControl();
+  userStatusControl = new UntypedFormControl();
   dataSource = new MatTableDataSource();
   displayedColumns: string[] = [
     'userName',

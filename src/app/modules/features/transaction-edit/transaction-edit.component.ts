@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppConstants } from '@app/constants';
 import { Transaction } from '@app/models/transaction.model';
@@ -16,7 +16,7 @@ import { Guid } from 'guid-typescript';
 })
 export class TransactionEditComponent implements OnInit {
 
-  transactionForm: FormGroup;
+  transactionForm: UntypedFormGroup;
   transaction:Transaction;
   tenantId: any;
   siteId: any;
@@ -24,7 +24,7 @@ export class TransactionEditComponent implements OnInit {
   transactionId:string;
   transactionById:string;
   
-  constructor(private readonly formBuilder: FormBuilder, private readonly httpDataService: HttpDataService,
+  constructor(private readonly formBuilder: UntypedFormBuilder, private readonly httpDataService: HttpDataService,
     private router: Router, private activatedRoute: ActivatedRoute, private popUpService: PopUpService,
     private routerExtService: RouterExtService) {
     this.transaction = new Transaction();

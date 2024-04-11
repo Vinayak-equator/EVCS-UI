@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AppConstants } from '@app/constants';
@@ -58,7 +58,7 @@ export class DriverActivityReportTransactiondetailComponent implements OnInit {
   }
 
   constructor(
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
     private readonly httpDataService: HttpDataService,
     public translateConfigService: TranslateConfigService,
     public filterService: GridFilterService,

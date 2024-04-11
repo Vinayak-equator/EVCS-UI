@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -23,7 +23,7 @@ export class ConnectorsComponent implements OnInit {
   process = false;
   tenantId: string;
   filteredByUser: Observable<string[]>;
-  userControl = new FormControl();
+  userControl = new UntypedFormControl();
   userValues: any[];
   filterSelectObj = [
     {
@@ -36,7 +36,7 @@ export class ConnectorsComponent implements OnInit {
   ];
   filterValues: any = {};
   filteredByUserStatus: Observable<string[]>;
-  userStatusControl = new FormControl();
+  userStatusControl = new UntypedFormControl();
   userStatusValues: any[];
   filterstatusSelectObj = [
     {

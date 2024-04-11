@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -23,9 +23,9 @@ export class TransferRequestComponent implements OnInit {
   process = true;
   dialogRef: MatDialogRef<any>;
   filteredByUser: Observable<string[]>;
-  chargePointId = new FormControl();
-  userControl = new FormControl();
-  userStatusControl = new FormControl();
+  chargePointId = new UntypedFormControl();
+  userControl = new UntypedFormControl();
+  userStatusControl = new UntypedFormControl();
   dataSource = new MatTableDataSource();
   displayedColumns: string[] = [
     'username',

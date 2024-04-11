@@ -7,7 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Tenant } from '@app/models/tenant.model';
 import { Site } from '@app/models/site.model';
-import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import * as ExcelJS from 'exceljs';
@@ -27,7 +27,7 @@ export class FinancialRevenueReportComponent {
   tenants: Tenant[];
   sites: Site[];
   reportExtraData: any;
-  financialRevenueForm: FormGroup;
+  financialRevenueForm: UntypedFormGroup;
   dataSource = new MatTableDataSource();
   reportArray: any = [];
   displayedColumns: string[] = [
@@ -54,7 +54,7 @@ export class FinancialRevenueReportComponent {
   }
 
   constructor(
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
     private httpDataService: HttpDataService,
     private cdref: ChangeDetectorRef
   ) {}
