@@ -1,8 +1,8 @@
 import { AppConstants } from 'src/app/constants';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatLegacyPaginator as MatPaginator, LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
 import { Tenant } from 'src/app/models/tenant.model';
 import { HttpDataService } from 'src/app/shared/services/http-data.service';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { GridFilterService } from '@app/shared/utility/grid-filter.service';
 import { UntypedFormControl } from '@angular/forms';
 import { RouterExtService } from '@app/shared/services/routerExt.service';
 import { IndexedDBService } from '@app/shared/utility/indexed-db.service';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
 import { MatDeleteDialogComponent } from '@app/mat-delete-dialog/mat-delete-dialog.component';
 
 @Component({

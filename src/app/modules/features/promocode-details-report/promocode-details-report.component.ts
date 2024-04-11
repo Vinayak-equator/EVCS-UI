@@ -3,8 +3,8 @@ import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms
 import Helper from '@app/shared/utility/Helper';
 import { AppConstants } from 'src/app/constants';
 import { HttpDataService } from '@app/shared/services/http-data.service';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
+import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
 import { MatSort } from '@angular/material/sort';
 import { Tenant } from '@app/models/tenant.model';
 import { Site } from '@app/models/site.model';

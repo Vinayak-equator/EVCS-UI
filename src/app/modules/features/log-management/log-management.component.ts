@@ -5,8 +5,8 @@ import {
   UntypedFormBuilder,
   Validators,
 } from '@angular/forms';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
+import { MatLegacyPaginator as MatPaginator, LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
 import { MatSort } from '@angular/material/sort';
 import Helper from '@app/shared/utility/Helper';
 import { GridFilterService } from '@app/shared/utility/grid-filter.service';
@@ -15,7 +15,7 @@ import { Tenant } from '@app/models/tenant.model';
 import { Site } from '@app/models/site.model';
 import { ChargePoint } from '@app/models/chargepoint.model';
 import { HttpDataService } from '@app/shared/services/http-data.service';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
 import { MatDeleteDialogComponent } from '@app/mat-delete-dialog/mat-delete-dialog.component';
 import{MatLogDialogComponent} from'@app/mat-log-dialog/mat-log-dialog.component';
 import { DataService } from '../../../shared/services/data.service';

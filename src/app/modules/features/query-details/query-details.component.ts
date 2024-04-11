@@ -14,7 +14,7 @@ import { Tenant } from '@app/models/tenant.model';
 import { Site } from '@app/models/site.model';
 import { ChargePoint } from '@app/models/chargepoint.model';
 import { HttpDataService } from '@app/shared/services/http-data.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { DataService } from '@app/shared/services/data.service';
 import { Router } from '@angular/router';
 import { RoleType } from '@app/shared/services/roles.enum';

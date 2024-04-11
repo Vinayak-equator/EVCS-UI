@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
 import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Tenant } from '@app/models/tenant.model';
@@ -18,7 +18,7 @@ import { TranslateConfigService } from '@app/shared/services/translate-config.se
 import { GridFilterService } from '@app/shared/utility/grid-filter.service';
 import { map, startWith } from 'rxjs/operators';
 import { RouterExtService } from '@app/shared/services/routerExt.service';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
 import { MatDeleteDialogComponent } from '@app/mat-delete-dialog/mat-delete-dialog.component';
 import { ToastrService } from 'ngx-toastr';
 import { error } from 'console';

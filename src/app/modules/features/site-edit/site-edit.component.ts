@@ -11,9 +11,9 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatLegacyPaginator as MatPaginator, LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
 import { Router } from '@angular/router';
 import { Guid } from 'guid-typescript';
 import { ToastrService } from 'ngx-toastr';
@@ -30,7 +30,7 @@ import { AppConstants } from '@app/constants';
 import { PopUpService } from '@app/shared/utility/popup.service';
 import { RouterExtService } from '@app/shared/services/routerExt.service';
 import { IndexedDBService } from '@app/shared/utility/indexed-db.service';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
 import { MatDeleteDialogComponent } from '@app/mat-delete-dialog/mat-delete-dialog.component';
 
 @Component({

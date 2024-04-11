@@ -11,7 +11,7 @@ import Helper from '@app/shared/utility/Helper';
 import { Observable } from 'rxjs';
 import { IndexedDBService } from '@app/shared/utility/indexed-db.service';
 import { RoleType } from '@app/shared/services/roles.enum';
-import {TooltipPosition, MatTooltipModule} from '@angular/material/tooltip';
+import {LegacyTooltipPosition as TooltipPosition, MatLegacyTooltipModule as MatTooltipModule} from '@angular/material/legacy-tooltip';
 import { Router } from '@angular/router';
 
 @Component({
