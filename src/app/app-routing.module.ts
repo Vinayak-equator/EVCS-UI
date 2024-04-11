@@ -37,7 +37,7 @@ const isIframe = window !== window.parent && !window.opener;
   imports: [
     RouterModule.forRoot(routes, {
       useHash: false,
-      initialNavigation: !isIframe ? 'enabled' : 'disabled',
+      initialNavigation: !isIframe ? 'enabledBlocking' : 'disabled',
       scrollPositionRestoration: 'top',
       paramsInheritanceStrategy: 'always',
       relativeLinkResolution: 'corrected',
