@@ -36,17 +36,12 @@ const isIframe = window !== window.parent && !window.opener;
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
-      useHash: false,
-      initialNavigation: !isIframe ? 'enabledBlocking' : 'disabled',
-      scrollPositionRestoration: 'top',
-      paramsInheritanceStrategy: 'always',
-      relativeLinkResolution: 'corrected',
-      malformedUriErrorHandler: (
-        error: URIError,
-        urlSerializer: UrlSerializer,
-        url: string
-      ) => urlSerializer.parse('/dashboard'),
-    }),
+    useHash: false,
+    initialNavigation: !isIframe ? 'enabledBlocking' : 'disabled',
+    scrollPositionRestoration: 'top',
+    paramsInheritanceStrategy: 'always',
+    malformedUriErrorHandler: (error: URIError, urlSerializer: UrlSerializer, url: string) => urlSerializer.parse('/dashboard')
+}),
   ],
   exports: [RouterModule],
 })

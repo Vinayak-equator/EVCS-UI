@@ -16,7 +16,7 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2020",
+    "target": "ES2022",
     "module": "es2020",
     "lib": [
       "es7",
@@ -25,9 +25,14 @@
       "ESNext.String"
     ],
     "paths": {
-      "@app/*": ["src/app/*" ],
-      "@env": ["src/environments/environment"],
-    }
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@env": [
+        "src/environments/environment"
+      ]
+    },
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
