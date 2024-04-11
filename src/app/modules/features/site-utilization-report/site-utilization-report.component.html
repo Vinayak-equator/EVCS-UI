@@ -186,15 +186,16 @@
                         
                         <canvas id="ChartJs" baseChart [datasets]="statewiseSiteUtilizationchartData"
                             [labels]="statewiseSiteUtilizationchartLabel" [options]="statewiseSiteUtilizationOptions"
-                            [colors]="statewiseSiteUtilizationchartColors"
-                            [legend]="statewiseSiteUtilizationchartLegend" [chartType]="'bar'"
+                            [legend]="statewiseSiteUtilizationchartLegend" [type]="'bar'"
                             [plugins]="statewiseSiteUtilizationchartPlugins">
+                            <!-- [colors]="statewiseSiteUtilizationchartColors" -->
                         </canvas>
 
                         <canvas id="ChartJs" baseChart [datasets]="citywiseSiteUtilizationchartData"
                             [labels]="citywiseSiteUtilizationchartLabel" [options]="citywiseSiteUtilizationOptions"
-                            [colors]="citywiseSiteUtilizationchartColors" [legend]="citywiseSiteUtilizationchartLegend"
-                            [chartType]="'bar'" [plugins]="citywiseSiteUtilizationchartPlugins">
+                            [legend]="citywiseSiteUtilizationchartLegend"
+                            [type]="'bar'" [plugins]="citywiseSiteUtilizationchartPlugins">
+                            <!-- [colors]="citywiseSiteUtilizationchartColors"  -->
                         </canvas>
                     </div>
                 </div>

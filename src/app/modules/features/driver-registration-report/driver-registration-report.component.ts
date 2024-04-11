@@ -7,9 +7,9 @@ import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-pag
 import { MatSort } from '@angular/material/sort';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Color, Label } from 'ng2-charts';
-
+import { ChartDataset as ChartDataSets, ChartOptions,Color } from 'chart.js';
+//import { Color, Label } from 'ng2-charts';
+type Label = string;
 @Component({
   selector: 'app-driver-registration-report',
   templateUrl: './driver-registration-report.component.html',

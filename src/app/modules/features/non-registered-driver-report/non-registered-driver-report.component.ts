@@ -8,9 +8,9 @@ import { MatSort } from '@angular/material/sort';
 import { Tenant } from '@app/models/tenant.model';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Color, Label } from 'ng2-charts';
-
+import { ChartDataset as ChartDataSets, ChartOptions,Color } from 'chart.js';
+//import { Color, Label } from 'ng2-charts';
+type Label = string;
 @Component({
   selector: 'app-non-registered-driver-report',
   templateUrl: './non-registered-driver-report.component.html',

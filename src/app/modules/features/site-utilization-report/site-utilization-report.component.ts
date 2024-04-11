@@ -4,8 +4,8 @@ import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-pag
 import { MatSort } from '@angular/material/sort';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Color, Label } from 'ng2-charts';
+import { ChartDataset as ChartDataSets, ChartOptions,Color } from 'chart.js';
+//import { Color, Label } from 'ng2-charts';
 import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
@@ -27,7 +27,7 @@ import { map, startWith } from 'rxjs/operators';
 import { RouterExtService } from '@app/shared/services/routerExt.service';
 import Helper from '@app/shared/utility/Helper';
 import { AppConstants } from '@app/constants';
-
+type Label = string;
 @Component({
   selector: 'app-site-utilization-report',
   templateUrl: './site-utilization-report.component.html',

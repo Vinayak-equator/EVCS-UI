@@ -7,8 +7,8 @@ import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-pag
 import { MatSort } from '@angular/material/sort';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Color, Label } from 'ng2-charts';
+import { ChartDataset as ChartDataSets, ChartOptions,Color } from 'chart.js';
+//import { Color, Label } from 'ng2-charts';
 import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
@@ -29,7 +29,7 @@ import { GridFilterService } from '@app/shared/utility/grid-filter.service';
 import { map, startWith } from 'rxjs/operators';
 import { RouterExtService } from '@app/shared/services/routerExt.service';
 
-
+type Label = string;
 @Component({
   selector: 'app-chargepoint-utilization-report',
   templateUrl: './chargepoint-utilization-report.component.html',

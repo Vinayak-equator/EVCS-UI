@@ -10,12 +10,12 @@ import { Tenant } from '@app/models/tenant.model';
 import { Site } from '@app/models/site.model';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Color, Label } from 'ng2-charts';
+import { ChartDataset as ChartDataSets, ChartOptions,Color } from 'chart.js';
+//import { Color, Label } from 'ng2-charts';
 import { RouterExtService } from '@app/shared/services/routerExt.service';
 import { PromoCode } from '@app/models/promocode.model';
 import { PopUpService } from '@app/shared/utility/popup.service';
-
+type Label = string;
 @Component({
   selector: 'app-promocode-details-report',
   templateUrl: './promocode-details-report.component.html',

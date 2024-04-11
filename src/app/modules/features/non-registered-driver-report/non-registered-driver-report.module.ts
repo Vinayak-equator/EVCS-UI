@@ -5,7 +5,7 @@ import { MatLegacyFormFieldModule as MatFormFieldModule } from "@angular/materia
 import { MatLegacySlideToggleModule as MatSlideToggleModule } from '@angular/material/legacy-slide-toggle';
 import { NonRegisteredDriverReportComponent } from './non-registered-driver-report.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { ChartsModule } from 'ng2-charts';
+import { NgChartsModule as ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [

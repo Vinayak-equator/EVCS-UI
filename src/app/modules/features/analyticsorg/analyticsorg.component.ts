@@ -8,8 +8,8 @@ import Helper from '@app/shared/utility/Helper';
 import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
 import { MatLegacyPaginator as MatPaginator, LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
 import { MatSort } from '@angular/material/sort';
-import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Color, Label } from 'ng2-charts';
+import { ChartDataset as ChartDataSets, ChartOptions,Color } from 'chart.js';
+//import { Color, Label } from 'ng2-charts';
 import { HubConnectionBuilder } from '@microsoft/signalr';
 import { environment } from '@env';
 import { Router } from '@angular/router';
@@ -17,7 +17,7 @@ import { RoleType } from '@app/shared/services/roles.enum';
 import { RouterExtService } from '@app/shared/services/routerExt.service';
 import { AgmMap } from '@agm/core';
 import { MouseEvent, MapsAPILoader } from '@agm/core';
-
+type Label = string;
 @Component({
   selector: 'app-analytics',
   templateUrl: './analyticsorg.component.html',

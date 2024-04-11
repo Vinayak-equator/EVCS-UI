@@ -17,9 +17,9 @@ import { Router } from '@angular/router';
 import { PopUpService } from '@app/shared/utility/popup.service';
 import { RouterExtService } from '@app/shared/services/routerExt.service';
 import { ChargePoint } from '@app/models/chargepoint.model';
-import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Color, Label } from 'ng2-charts';
-
+import { ChartDataset as ChartDataSets, ChartOptions,Color } from 'chart.js';
+//import { Color, Label } from 'ng2-charts';
+type Label = string;
 @Component({
   selector: 'app-driver-activity-report',
   templateUrl: './driver-activity-report.component.html',

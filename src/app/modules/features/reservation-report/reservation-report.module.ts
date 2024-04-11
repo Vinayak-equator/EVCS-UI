@@ -4,7 +4,7 @@ import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy
 import { MatLegacyFormFieldModule as MatFormFieldModule } from "@angular/material/legacy-form-field";
 import { MatLegacySlideToggleModule as MatSlideToggleModule } from '@angular/material/legacy-slide-toggle';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { ChartsModule } from 'ng2-charts';
+import { NgChartsModule as ChartsModule } from 'ng2-charts';
 import { MatSortModule } from '@angular/material/sort';
 import { ReservationReportComponent } from './reservation-report.component';
 
