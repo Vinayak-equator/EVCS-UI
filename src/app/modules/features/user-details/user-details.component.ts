@@ -11,7 +11,7 @@ import { GridFilterService } from '@app/shared/utility/grid-filter.service';
 import { PopUpService } from '@app/shared/utility/popup.service';
 import { AppConstants } from 'src/app/constants';
 import { HttpDataService } from '@app/shared/services/http-data.service';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { DataService } from '../../../shared/services/data.service';
 import { Router } from '@angular/router';
 import { RoleType } from '@app/shared/services/roles.enum';

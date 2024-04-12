@@ -1,8 +1,12 @@
-import { NgModule } from '@angular/core';
+import {
+  NgModule,
+  CUSTOM_ELEMENTS_SCHEMA,
+  NO_ERRORS_SCHEMA,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
-import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
-import { MatLegacySlideToggleModule as MatSlideToggleModule } from '@angular/material/legacy-slide-toggle';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 // import { AnalyticsRoutingModule } from './analytics-routing.module';
 import { AnalyticsorgComponent } from './analyticsorg.component';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -12,16 +16,17 @@ import { AgmCoreModule } from '@agm/core';
 @NgModule({
   declarations: [AnalyticsorgComponent],
   imports: [
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDi24pBs1U4kD1zu2EqoyYLwT2laJdl8h4',
-    }),
-
+    
     SharedModule,
     CommonModule,
     MatSlideToggleModule,
     MatFormFieldModule,
     MatInputModule,
     NgChartsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDi24pBs1U4kD1zu2EqoyYLwT2laJdl8h4',
+    }),
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class AnalyticsorgModule {}

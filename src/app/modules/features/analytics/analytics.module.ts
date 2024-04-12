@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
-import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
-import { MatLegacySlideToggleModule as MatSlideToggleModule } from '@angular/material/legacy-slide-toggle';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AnalyticsRoutingModule } from './analytics-routing.module';
 import { AnalyticsComponent } from './analytics.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NgChartsModule } from 'ng2-charts';
 import { AgmCoreModule } from '@agm/core';
+import { MaterialModule } from '@app/material/material.module';
 
 @NgModule({
   declarations: [AnalyticsComponent],
@@ -23,6 +24,7 @@ import { AgmCoreModule } from '@agm/core';
     MatFormFieldModule,
     MatInputModule,
     NgChartsModule,
+    MaterialModule
   ],
 })
 export class AnalyticsModule {}

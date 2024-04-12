@@ -31,22 +31,22 @@
 ::ng-deep .mat-expansion-panel-header {
   padding-left: 15px !important;
 }
-.mat-button.mat-accent,
-.mat-stroked-button.mat-accent {
+.mat-mdc-button.mat-accent,
+.mat-mdc-outlined-button.mat-accent {
     color: #009122;
 }
-.mat-button.mat-accent:hover,
-.mat-stroked-button.mat-accent:hover {
+.mat-mdc-button.mat-accent:hover,
+.mat-mdc-outlined-button.mat-accent:hover {
   background-color: #f0fff3;
 }
-.mat-raised-button.mat-accent,
-.mat-flat-button.mat-accent,
-.mat-fab.mat-accent,
-.mat-mini-fab.mat-accent {
+.mat-mdc-raised-button.mat-accent,
+.mat-mdc-unelevated-button.mat-accent,
+.mat-mdc-fab.mat-accent,
+.mat-mdc-mini-fab.mat-accent {
   color: #f0fff3;
   background-color: #009122;
 }
-.mat-icon-button.mat-accent {
+.mat-mdc-icon-button.mat-accent {
   color:#009122;
 }
 .merchant-cls {

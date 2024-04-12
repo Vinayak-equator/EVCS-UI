@@ -99,15 +99,15 @@ select,
 b,
 strong,
 .mat-h2,
-.mat-title,
+.mat-headline-6,
 .mat-typography h2,
-.mat-table,
+.mat-mdc-table,
 .mat-body,
-.mat-body-1,
+.mat-body-2,
 .mat-typography,
-.mat-form-field,
-.mat-option,
-.mat-select {
+.mat-mdc-form-field,
+.mat-mdc-option,
+.mat-mdc-select {
   font-family: 'Poppins', sans-serif !important;
 }
 
@@ -39232,8 +39232,6 @@ text,
   color: #757575;
 }
 
-/*# sourceMappingURL=dashboard-pro.css.map */
-
 /* modified by dinesh */
 
 .btn-border {
@@ -39270,15 +39268,17 @@ text,
   margin-top: 15px;
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
 .mat-form-field-appearance-outline .mat-form-field-infix {
   padding: 0.884em 0;
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
 .mat-form-field-appearance-outline .mat-form-field-label {
   margin-top: -0.3em;
 }
 
-.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick,
+.mat-mdc-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick,
 .mat-form-field.mat-focused .mat-form-field-label,
 .mat-form-field-appearance-outline .mat-form-field-outline-thick {
   color: #184EA2;
@@ -39337,7 +39337,7 @@ mat-footer-cell:last-of-type {
   min-width: 70px;
 }
 
-.table-action .mat-mini-fab {
+.table-action .mat-mdc-mini-fab {
   width: 30px;
   height: 30px;
   line-height: 24px;
@@ -39346,20 +39346,22 @@ mat-footer-cell:last-of-type {
   margin-left: 5px !important;
 }
 
-.table-action .mat-mini-fab .mat-button-wrapper {
+/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version. */
+.table-action .mat-mdc-mini-fab .mat-button-wrapper {
   padding: 5px 0;
   font-size: 18px;
   line-height: 18px;
 }
 
-.table-action .mat-mini-fab .mat-button-wrapper .material-symbols-outlined {
+/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version. */
+.table-action .mat-mdc-mini-fab .mat-button-wrapper .material-symbols-outlined {
   font-size: 20px;
 }
 
-.mat-flat-button.mat-primary,
-.mat-raised-button.mat-primary,
-.mat-fab.mat-primary,
-.mat-mini-fab.mat-primary {
+.mat-mdc-unelevated-button.mat-primary,
+.mat-mdc-raised-button.mat-primary,
+.mat-mdc-fab.mat-primary,
+.mat-mdc-mini-fab.mat-primary {
   background-color: #184EA2;
 }
 
@@ -39371,7 +39373,7 @@ mat-footer-cell:last-of-type {
   margin-right: 0 !important;
 }
 
-.mat-header-cell {
+.mat-mdc-header-cell {
   text-transform: uppercase;
   color: #184EA2;
 }
@@ -39475,8 +39477,8 @@ mat-footer-cell:last-of-type {
   justify-content: center;
 }
 
-.table-loader .mat-progress-spinner circle,
-.table-loader .mat-spinner circle {
+.table-loader .mat-mdc-progress-spinner circle,
+.table-loader .mat-mdc-progress-spinner circle {
   stroke: #184EA2;
 }
 
@@ -39490,7 +39492,7 @@ mat-footer-cell:last-of-type {
   display: inline-block;
 }
 
-.loader-inner .mat-progress-spinner {
+.loader-inner .mat-mdc-progress-spinner {
   margin: 0 auto !important;
 }
 
@@ -39529,14 +39531,17 @@ mat-footer-cell:last-of-type {
   border-bottom: 1px solid #E4E4ED;
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version. */
 .custom-toggle .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
   line-height: 44px;
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version. */
 .custom-toggle.mat-button-toggle-group-appearance-standard {
   border-radius: 8px;
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version. */
 .custom-toggle .mat-button-toggle-checked {
   background: #1951a1;
   color: #fff;
@@ -39638,6 +39643,7 @@ mat-footer-cell:last-of-type {
   color: #fff !important;
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
 .main-filter-card .mat-form-field-wrapper {
   padding-bottom: 0;
 }
@@ -39725,7 +39731,7 @@ mat-footer-cell:last-of-type {
   display: none;
 }
 
-.mat-cell label.form-label,
+.mat-mdc-cell label.form-label,
 .mat-cell label {
   color: rgba(0, 0, 0, .87);
 }
@@ -39980,7 +39986,7 @@ mat-footer-cell:last-of-type {
   padding: 15px 0 0 15px;
 }
 
-.mat-tooltip {
+.mat-mdc-tooltip {
   font-size: 16px;
 }
 .box-4 .box-4-right ul li img {

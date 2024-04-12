@@ -5,8 +5,8 @@ import { Site } from 'src/app/models/site.model';
 import { AppConstants } from '@app/constants';
 import { HttpDataService } from '@app/shared/services/http-data.service';
 import Helper from '@app/shared/utility/Helper';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
-import { MatLegacyPaginator as MatPaginator, LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ChartDataset, ChartOptions } from 'chart.js';
 //import { Color, Label } from 'ng2-charts';
@@ -309,7 +309,7 @@ export class AnalyticsComponent implements OnInit {
           this.maplist.lng,
           
         );
-        geocoder.geocode({ location: latlng }, (results, status) => {
+        geocoder.geocode({ location: latlng }, (results:any, status:any) => {
           if (status === 'OK') {
             if (results[0]) {
               this.address = results[0].formatted_address;
