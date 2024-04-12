@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { HttpDataService } from '@app/shared/services/http-data.service';
 import { AppConstants } from '@app/constants';
@@ -9,7 +9,7 @@ import { map, catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class MaintenanceGuard implements CanActivate {
+export class MaintenanceGuard  {
 
   constructor(private httpDataService: HttpDataService, private router: Router) {}
 
