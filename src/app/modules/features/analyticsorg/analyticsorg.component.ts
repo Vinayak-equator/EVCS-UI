@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 import { RoleType } from '@app/shared/services/roles.enum';
 import { RouterExtService } from '@app/shared/services/routerExt.service';
 import { AgmMap } from '@agm/core';
-import { MouseEvent, MapsAPILoader } from '@agm/core';
+import { MapsAPILoader } from '@agm/core';
 
 @Component({
   selector: 'app-analytics',
