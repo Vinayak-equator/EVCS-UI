@@ -127,8 +127,9 @@
                         </div>
                         <canvas id="ChartJs" baseChart [datasets]="driverRegReportchartData"
                             [labels]="driverRegReportchartLabel" [options]="driverRegReportOptions"
-                            [colors]="driverRegReportchartColors" [legend]="driverRegReportchartLegend"
-                            [chartType]="'bar'" [plugins]="driverRegReportchartPlugins">
+                            [legend]="driverRegReportchartLegend"
+                            [type]="'bar'" [plugins]="driverRegReportchartPlugins">
+                            <!-- [colors]="driverRegReportchartColors" -->
                         </canvas>
                     </div>
                 </div>

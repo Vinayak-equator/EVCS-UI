@@ -115,8 +115,10 @@
                       
                     <div class="chartjs-container">
                       <canvas id="ChartJs" baseChart [datasets]="nondriverRegReportchartData" [labels]="nondriverRegReportchartLabel"
-                        [options]="nondriverRegReportOptions" [colors]="nondriverRegReportchartColors" [legend]="nondriverRegReportchartLegend"
-                        [chartType]="'bar'" [plugins]="nondriverRegReportchartPlugins">
+                        [options]="nondriverRegReportOptions" 
+                        [legend]="nondriverRegReportchartLegend"
+                        [type]="'bar'" [plugins]="nondriverRegReportchartPlugins">
+                        <!-- [colors]="nondriverRegReportchartColors" -->
     
                       </canvas>
                     </div>

@@ -8,8 +8,8 @@ import { MatSort } from '@angular/material/sort';
 import { Tenant } from '@app/models/tenant.model';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Color, Label } from 'ng2-charts';
+import { ChartDataset, ChartOptions } from 'chart.js';
+//import { Color, Label } from 'ng2-charts';
 
 @Component({
   selector: 'app-non-registered-driver-report',
@@ -36,13 +36,13 @@ export class NonRegisteredDriverReportComponent {
   ShowChart: boolean = true;
   userCount: any = '';
   totalUserCount: any = '';
-  nondriverRegReportchartData: ChartDataSets[] = [];
-  nondriverRegReportchartLabel: Label[] = [];
+  nondriverRegReportchartData: ChartDataset[] = [];
+  nondriverRegReportchartLabel: string[] = [];
   nondriverRegReportchartLegend = true;
   nondriverRegReportOptions: ChartOptions = {
     responsive: true,
   };
-  nondriverRegReportchartColors: Color[] = [];
+  nondriverRegReportchartColors: any[] = [];
   nondriverRegReportchartPlugins: any = [];
   @ViewChild(MatPaginator, { static: false })
   set paginator(value: MatPaginator) {

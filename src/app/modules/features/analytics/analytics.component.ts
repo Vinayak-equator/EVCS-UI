@@ -8,8 +8,8 @@ import Helper from '@app/shared/utility/Helper';
 import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
 import { MatLegacyPaginator as MatPaginator, LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
 import { MatSort } from '@angular/material/sort';
-import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Color, Label } from 'ng2-charts';
+import { ChartDataset, ChartOptions } from 'chart.js';
+//import { Color, Label } from 'ng2-charts';
 import { HubConnectionBuilder } from '@microsoft/signalr';
 import { environment } from '@env';
 import { Router } from '@angular/router';
@@ -85,22 +85,22 @@ export class AnalyticsComponent implements OnInit {
   offlineSiteChargers: any = [];
   // iconsUrl: "../assets/img/testMarker.png";
   //pie
-  piechartData: ChartDataSets[] = [];
-  piechartLabel: Label[] = [];
+  piechartData: ChartDataset[] = [];
+  piechartLabel: string[] = [];
   piechartLegend = true;
   piechartOptions: ChartOptions = {
     responsive: true,
   };
-  piechartColors: Color[] = [];
+  piechartColors: any[] = [];
   piechartPlugins: any = [];
   // current
-  chartData: ChartDataSets[] = [];
-  chartLabel: Label[] = [];
+  chartData: ChartDataset[] = [];
+  chartLabel: string[] = [];
   chartLegend = true;
   chartOptions: ChartOptions = {
     responsive: true,
   };
-  chartColors: Color[] = [
+  chartColors: any[] = [
     {
       // Red - Total Revenue
       backgroundColor: '#52BA6C',
@@ -134,13 +134,13 @@ export class AnalyticsComponent implements OnInit {
   ];
   chartPlugins: any = [];
   //register user
-  registerchartData: ChartDataSets[] = [];
-  registerchartLabel: Label[] = [];
+  registerchartData: ChartDataset[] = [];
+  registerchartLabel: string[] = [];
   registerchartLegend = true;
   registerchartOptions: ChartOptions = {
     responsive: true,
   };
-  registerchartColors: Color[] = [
+  registerchartColors: any[] = [
     {
       // Orange
       backgroundColor: '#FFAA29',
@@ -169,9 +169,9 @@ export class AnalyticsComponent implements OnInit {
   ];
   registerchartPlugins: any = [];
   //unit consumed
-  unitchartLabel: Label[] = [];
+  unitchartLabel: string[] = [];
   unitsConsumeResponse:any = [];
-  unitchartData: ChartDataSets[] = [
+  unitchartData: ChartDataset[] = [
     // { data: [10, 20, 30, 15, 25], label: 'Series A' },
   ];
   unitchartLegend = true;
@@ -190,7 +190,7 @@ export class AnalyticsComponent implements OnInit {
     //   ],
     // },
   };
-  unitchartColors: Color[] = [
+  unitchartColors: any[] = [
     {
       // Purple
       backgroundColor: '#29A5FF',
@@ -201,8 +201,8 @@ export class AnalyticsComponent implements OnInit {
   unitchartPlugins: any = [];
 
   //financial
-  finacialchartData: ChartDataSets[] = [];
-  finacialchartLabel: Label[] = [];
+  finacialchartData: ChartDataset[] = [];
+  finacialchartLabel: string[] = [];
   finacialchartLegend = true;
   finacialchartOptions: ChartOptions = {
     responsive: true,
@@ -218,7 +218,7 @@ export class AnalyticsComponent implements OnInit {
     //   ],
     // },
   };
-  finacialchartColors: Color[] = [
+  finacialchartColors: any[] = [
     {
       // Red
       backgroundColor: '#184EA2',

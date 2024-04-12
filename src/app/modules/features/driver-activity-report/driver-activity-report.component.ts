@@ -17,8 +17,8 @@ import { Router } from '@angular/router';
 import { PopUpService } from '@app/shared/utility/popup.service';
 import { RouterExtService } from '@app/shared/services/routerExt.service';
 import { ChargePoint } from '@app/models/chargepoint.model';
-import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Color, Label } from 'ng2-charts';
+import { ChartDataset, ChartOptions } from 'chart.js';
+//import { Color, Label } from 'ng2-charts';
 
 @Component({
   selector: 'app-driver-activity-report',
@@ -66,46 +66,46 @@ export class DriverActivityReportComponent {
   reportType:any;
 
   //State Chart Data
-  stateWiseDriverActivitychartData: ChartDataSets[] = [];
-  stateWiseDriverActivitychartLabel: Label[] = [];
+  stateWiseDriverActivitychartData: ChartDataset[] = [];
+  stateWiseDriverActivitychartLabel: string[] = [];
   stateWiseDriverActivitychartLegend = true;
   stateWiseDriverActivityOptions: ChartOptions = {
     responsive: true,
   };
-  stateWiseDriverActivitychartColors: Color[] = [];
+  stateWiseDriverActivitychartColors: any[] = [];
   stateWiseDriverActivitychartPlugins: any = [];
 
   //City Wise Chart Data
 
-  cityWiseDriverActivitychartData: ChartDataSets[] = [];
-  cityWiseDriverActivitychartLabel: Label[] = [];
+  cityWiseDriverActivitychartData: ChartDataset[] = [];
+  cityWiseDriverActivitychartLabel: string[] = [];
   cityWiseDriverActivitychartLegend = true;
   cityWiseDriverActivityOptions: ChartOptions = {
     responsive: true,
   };
-  cityWiseDriverActivitychartColors: Color[] = [];
+  cityWiseDriverActivitychartColors: any[] = [];
   cityWiseDriverActivitychartPlugins: any = [];
 
   //Date Wise Chart Data
 
-  dateWiseDriverActivitychartData: ChartDataSets[] = [];
-  dateWiseDriverActivitychartLabel: Label[] = [];
+  dateWiseDriverActivitychartData: ChartDataset[] = [];
+  dateWiseDriverActivitychartLabel: string[] = [];
   dateWiseDriverActivitychartLegend = true;
   dateWiseDriverActivityOptions: ChartOptions = {
     responsive: true,
   };
-  dateWiseDriverActivitychartColors: Color[] = [];
+  dateWiseDriverActivitychartColors: any[] = [];
   dateWiseDriverActivitychartPlugins: any = [];
 
   //Customer Wise Chart Data
 
-  customerWiseDriverActivitychartData: ChartDataSets[] = [];
-  customerWiseDriverActivitychartLabel: Label[] = [];
+  customerWiseDriverActivitychartData: ChartDataset[] = [];
+  customerWiseDriverActivitychartLabel: string[] = [];
   customerWiseDriverActivitychartLegend = true;
   customerWiseDriverActivityOptions: ChartOptions = {
     responsive: true,
   };
-  customerWiseDriverActivitychartColors: Color[] = [];
+  customerWiseDriverActivitychartColors: any[] = [];
   customerWiseDriverActivitychartPlugins: any = [];
 
   dataSource = new MatTableDataSource();

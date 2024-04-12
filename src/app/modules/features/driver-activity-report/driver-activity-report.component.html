@@ -177,31 +177,32 @@
                     
                         <canvas id="ChartJs" baseChart [datasets]="stateWiseDriverActivitychartData"
                             [labels]="stateWiseDriverActivitychartLabel" [options]="stateWiseDriverActivityOptions"
-                            [colors]="stateWiseDriverActivitychartColors"
-                            [legend]="stateWiseDriverActivitychartLegend" [chartType]="'bar'"
+                            [legend]="stateWiseDriverActivitychartLegend" [type]="'bar'"
                             [plugins]="stateWiseDriverActivitychartPlugins">
+                            <!-- [colors]="stateWiseDriverActivitychartColors" -->
                         </canvas>
 
                         <canvas id="ChartJs" baseChart [datasets]="cityWiseDriverActivitychartData"
                             [labels]="cityWiseDriverActivitychartLabel" [options]="cityWiseDriverActivityOptions"
-                            [colors]="cityWiseDriverActivitychartColors" [legend]="cityWiseDriverActivitychartLegend"
-                            [chartType]="'bar'" [plugins]="cityWiseDriverActivitychartPlugins">
+                            [legend]="cityWiseDriverActivitychartLegend"
+                            [type]="'bar'" [plugins]="cityWiseDriverActivitychartPlugins">
+                            <!-- [colors]="cityWiseDriverActivitychartColors" -->
                         </canvas>
 
                         <canvas id="ChartJs" baseChart [datasets]="dateWiseDriverActivitychartData"
                             [labels]="dateWiseDriverActivitychartLabel"
                             [options]="dateWiseDriverActivityOptions"
-                            [colors]="dateWiseDriverActivitychartColors"
-                            [legend]="dateWiseDriverActivitychartLegend" [chartType]="'bar'"
+                            [legend]="dateWiseDriverActivitychartLegend" [type]="'bar'"
                             [plugins]="dateWiseDriverActivitychartPlugins">
+                            <!-- [colors]="dateWiseDriverActivitychartColors" -->
                         </canvas>
 
                         <canvas id="ChartJs" baseChart [datasets]="customerWiseDriverActivitychartData"
                             [labels]="customerWiseDriverActivitychartLabel"
                             [options]="customerWiseDriverActivityOptions"
-                            [colors]="customerWiseDriverActivitychartColors"
-                            [legend]="customerWiseDriverActivitychartLegend" [chartType]="'bar'"
+                            [legend]="customerWiseDriverActivitychartLegend" [type]="'bar'"
                             [plugins]="customerWiseDriverActivitychartPlugins">
+                            <!-- [colors]="customerWiseDriverActivitychartColors" -->
                         </canvas>
                     </div>
                 </div>

@@ -10,8 +10,8 @@ import { Tenant } from '@app/models/tenant.model';
 import { Site } from '@app/models/site.model';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Color, Label } from 'ng2-charts';
+import { ChartDataset, ChartOptions } from 'chart.js';
+//import { Color, Label } from 'ng2-charts';
 import { RouterExtService } from '@app/shared/services/routerExt.service';
 import { PromoCode } from '@app/models/promocode.model';
 import { PopUpService } from '@app/shared/utility/popup.service';
@@ -61,13 +61,13 @@ export class PromocodeDetailsReportComponent {
   allPromoCodeSelected = false;
   promoCodeId: any;
 
-  promocodeUtilizationReportchartData: ChartDataSets[] = [];
-  promocodeUtilizationReportchartLabel: Label[] = [];
+  promocodeUtilizationReportchartData: ChartDataset[] = [];
+  promocodeUtilizationReportchartLabel: string[] = [];
   promocodeUtilizationReportchartLegend = true;
   promocodeUtilizationReportOptions: ChartOptions = {
     responsive: true,
   };
-  promocodeUtilizationReportchartColors: Color[] = [];
+  promocodeUtilizationReportchartColors: any[] = [];
   promocodeUtilizationReportchartPlugins: any = [];
 
   @ViewChild(MatPaginator, { static: false })
