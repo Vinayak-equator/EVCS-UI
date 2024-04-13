@@ -29,7 +29,7 @@
     "@azure/msal-angular": "^2.0.6",
     "@azure/msal-browser": "^2.20.0",
     "@microsoft/signalr": "^6.0.1",
-    "@ngx-translate/core": "^13.0.0",
+    "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
     "bootstrap": "^4.6.2",
     "chart.js": "^4.4.2",
