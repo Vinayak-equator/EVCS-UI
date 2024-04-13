@@ -40,7 +40,7 @@ const isIframe = window !== window.parent && !window.opener;
     initialNavigation: !isIframe ? 'enabledBlocking' : 'disabled',
     scrollPositionRestoration: 'top',
     paramsInheritanceStrategy: 'always',
-    malformedUriErrorHandler: (error: URIError, urlSerializer: UrlSerializer, url: string) => urlSerializer.parse('/dashboard')
+    // malformedUriErrorHandler: (error: URIError, urlSerializer: UrlSerializer, url: string) => urlSerializer.parse('/dashboard')
 }),
   ],
   exports: [RouterModule],
