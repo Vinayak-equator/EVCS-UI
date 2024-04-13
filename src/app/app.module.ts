@@ -32,9 +32,9 @@ import { MatDeleteDialogComponent } from './mat-delete-dialog/mat-delete-dialog.
 import { DataService } from './shared/services/data.service';
 import { LoginComponent } from './login/login.component';
 import { IndexedDBService } from '@app/shared/utility/indexed-db.service';
-import { MatLegacyProgressBarModule as MatProgressBarModule } from '@angular/material/legacy-progress-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTransferDialogComponent } from './mat-transfer-dialog/mat-transfer-dialog.component';
-import { MatLegacyTableModule as MatTableModule } from '@angular/material/legacy-table';
+import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatMerchantDialogComponent } from './mat-merchant-dialog/mat-merchant-dialog.component';
 import { MaintainaceComponent } from './maintainace/maintainace.component';

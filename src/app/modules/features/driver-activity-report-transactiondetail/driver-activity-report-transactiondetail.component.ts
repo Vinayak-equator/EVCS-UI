@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AppConstants } from '@app/constants';
 import { HttpDataService } from '@app/shared/services/http-data.service';
@@ -9,8 +9,8 @@ import { TranslateConfigService } from '@app/shared/services/translate-config.se
 import { GridFilterService } from '@app/shared/utility/grid-filter.service';
 import { PopUpService } from '@app/shared/utility/popup.service';
 import { Location } from '@angular/common';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
-import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import Helper from '@app/shared/utility/Helper';
 

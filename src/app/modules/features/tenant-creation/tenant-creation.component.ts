@@ -10,7 +10,7 @@ import { HttpDataService } from 'src/app/shared/services/http-data.service';
 import Helper from 'src/app/shared/utility/Helper';
 import * as Country from 'src/app/shared/country.json';
 import { PopUpService } from '@app/shared/utility/popup.service';
-import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatMerchantDialogComponent } from '@app/mat-merchant-dialog/mat-merchant-dialog.component';
 
 @Component({

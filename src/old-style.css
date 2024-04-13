@@ -8,7 +8,7 @@ body {
   overflow-x: hidden;
 }
 .mat-body,
-.mat-body-1,
+.mat-body-2,
 .mat-typography {
   font-family: "Roboto", sans-serif !important;
 }
@@ -33,6 +33,7 @@ body::-webkit-scrollbar-thumb:hover {
 .pointer {
   cursor: pointer;
 }
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
 .mat-form-field-appearance-outline .mat-form-field-outline {
   color: #aeb4c2;
 }
@@ -96,10 +97,10 @@ a.ucg-logo {
 .profile img {
   height: 35px;
 }
-.mat-menu-content {
+.mat-mdc-menu-content {
   padding: 0 !important;
 }
-.mat-menu-panel {
+.mat-mdc-menu-panel {
   min-height: 50px !important;
 }
 .right-nav {
@@ -264,21 +265,21 @@ a.ucg-logo {
 .tenantListContainer {
   margin-top: 2rem;
 }
-.mat-header-row.cdk-header-row.ng-star-inserted {
+.mat-mdc-header-row.cdk-header-row.ng-star-inserted {
   background: #54bb6d;
 }
-.mat-header-cell {
+.mat-mdc-header-cell {
   color: #fff;
   font-size: 16px;
   font-weight: 400;
 }
-.mat-cell,
-.mat-footer-cell {
+.mat-mdc-cell,
+.mat-mdc-footer-cell {
   color: #1951a1;
   font-size: 14px;
   font-weight: 400;
 }
-.mat-cell img {
+.mat-mdc-cell img {
   cursor: pointer;
 }
 .blue-card {
@@ -297,14 +298,14 @@ a.ucg-logo {
   justify-content: center;
   border-radius: 16px !important;
 }
-.green-card .mat-card-title,
+.green-card .mat-mdc-card-title,
 .blue-card .mat-card-title {
   text-align: center;
   font-size: 20px;
   font-weight: 400;
   margin-bottom: 2rem;
 }
-.green-card .mat-card-content,
+.green-card .mat-mdc-card-content,
 .blue-card .mat-card-content {
   text-align: center;
   font-size: 22px;
@@ -338,6 +339,7 @@ a.ucg-logo {
   padding-top: 0.75rem;
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
 .mat-form-field-infix {
   padding: 0.5em 0;
   border-top: 0.6em solid transparent;
@@ -356,7 +358,7 @@ a.ucg-logo {
   text-align: center;
   line-height: 24px;
 }
-.mat-card-content.ucg-card-content {
+.mat-mdc-card-content.ucg-card-content {
   display: contents;
   margin-top: 1rem;
 }
@@ -508,7 +510,7 @@ a.ucg-logo {
   min-height: 150px;
   height: auto;
 }
-.mat-dialog-container {
+.mat-mdc-dialog-container {
   padding: 0 !important;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12), 0px 20px 20px rgba(0, 0, 0, 0.08);
   border-radius: 8px;
@@ -635,10 +637,11 @@ button#resetBtn {
   border: 1px solid #ccc;
   border-radius: 8px;
 }
+/* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version. */
 .ucg-tab .mat-tab-label {
   height: 75px;
 }
-.mat-tab-header {
+.mat-mdc-tab-header {
   background: #e2e6eb;
   /* rgba(133, 196, 91, 0.2); */
 }
@@ -674,16 +677,19 @@ button#resetBtn {
   background-repeat: no-repeat;
   margin: 0.5rem auto;
 }
-.mat-tab-group.mat-primary .mat-ink-bar,
-.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+.mat-mdc-tab-group.mat-primary .mat-ink-bar,
+.mat-mdc-tab-nav-bar.mat-primary .mat-ink-bar {
   background-color: #0a4c79;
 }
+/* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version. */
 .mat-tab-label-active {
   background: #3f51b5;
 }
+/* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version. */
 .mat-tab-label-active p {
   color: rgb(255, 255, 255);
 }
+/* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version. */
 .mat-tab-label-active .ucg-connector-icon {
   background: url("./assets/tab-connector-online.svg");
   width: 24px;
@@ -692,6 +698,7 @@ button#resetBtn {
   background-repeat: no-repeat;
   margin: 0.5rem auto;
 }
+/* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version. */
 .mat-tab-label-active .ucg-connector-icon {
   background: url("./assets/tab-connector-online.svg");
   width: 24px;
@@ -700,6 +707,7 @@ button#resetBtn {
   background-repeat: no-repeat;
   margin: 0.5rem auto;
 }
+/* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version. */
 .mat-tab-label-active .ucg-config-icon {
   background: url("./assets/tab-config-online.svg");
   width: 24px;
@@ -708,6 +716,7 @@ button#resetBtn {
   background-repeat: no-repeat;
   margin: 0.5rem auto;
 }
+/* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version. */
 .mat-tab-label-active .ucg-operation-icon {
   background: url("./assets/tab-operation-online.svg");
   width: 24px;
@@ -716,6 +725,7 @@ button#resetBtn {
   background-repeat: no-repeat;
   margin: 0.5rem auto;
 }
+/* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version. */
 .mat-tab-label-active .ucg-messages-icon {
   background: url("./assets/tab-message-online.svg");
   width: 24px;
@@ -724,6 +734,7 @@ button#resetBtn {
   background-repeat: no-repeat;
   margin: 0.5rem auto;
 }
+/* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version. */
 .ucg-tab .mat-tab-label .mat-tab-label-content {
   display: block;
 }
@@ -780,7 +791,7 @@ button#resetBtn {
   background-repeat: no-repeat;
   margin: 1rem auto;
 }
-.mat-stroked-button {
+.mat-mdc-outlined-button {
   height: 46px;
   margin-top: 0.2rem;
 }
@@ -889,6 +900,7 @@ span.charger-status {
   display: flex;
   justify-content: space-evenly;
 }
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
 .mat-form-field-appearance-outline .mat-form-field-infix {
   padding: 1em 0 1em 0;
   height: 48px;
@@ -896,6 +908,7 @@ span.charger-status {
 .mt-02 {
   margin-top: 0.2rem !important;
 }
+/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version. */
 .toggleBtn .mat-button-toggle-label-content {
   display: flex;
   align-items: center;
@@ -917,12 +930,15 @@ span.charger-status {
   background-repeat: no-repeat;
   margin-right: 0.35rem;
 }
+/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version. */
 .mat-button-toggle-checked {
   background-color: #ffffff;
 }
+/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version. */
 .mat-button-toggle-checked span {
   color: #1951a1;
 }
+/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version. */
 .mat-button-toggle-checked .listviewico {
   background: url("./assets/activeListview.svg");
   width: 24px;
@@ -930,6 +946,7 @@ span.charger-status {
   display: block;
   background-repeat: no-repeat;
 }
+/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version. */
 .mat-button-toggle-checked .mapviewico {
   background: url("./assets/activemapview.svg");
 
@@ -946,7 +963,7 @@ span.charger-status {
   .sites-content span {
     font-size: 10px;
   }
-  .mat-card {
+  .mat-mdc-card {
     padding: 5px !important;
     margin-top: 1rem;
   }
@@ -964,20 +981,24 @@ span.charger-status {
   right: 1rem;
   transform: rotate(180deg) !important;
 }
+/* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version. */
 .mat-tab-body-content {
   overflow-y: auto !important;
   height: 458px !important;
 }
+/* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version. */
 .mat-tab-body-content::-webkit-scrollbar {
   width: 10px;
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version. */
 .mat-tab-body-content::-webkit-scrollbar-track {
   background-color: rgba(0, 0, 0, 0.06);
   height: 8px;
   width: 10px;
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version. */
 .mat-tab-body-content::-webkit-scrollbar-thumb {
   background: #cacaca;
   border-radius: 20px;
@@ -990,6 +1011,7 @@ span.charger-status {
 .toggle .sidenav {
   width: 75px !important;
 }
+/* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version. */
 .toggle .sidenav .mat-list-item-content span {
   display: none;
 }
@@ -999,6 +1021,7 @@ span.charger-status {
 .toggle .mat-sidenav-content {
   margin-left: 70px !important;
 }
+/* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version. */
 .sidenav .mat-list-item-content {
   padding: 0 30px !important;
   width: 100%;
@@ -1110,6 +1133,7 @@ span.charger-status {
   background-repeat: no-repeat;
   margin-right: 0.5rem;
 }
+/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version. */
 span.mat-button-wrapper {
   display: flex;
   align-items: center;
@@ -1137,7 +1161,7 @@ span.mat-button-wrapper {
   align-items: center;
 }
 
-.mat-tooltip {
+.mat-mdc-tooltip {
   font-size: 14px !important;
 }
 
