@@ -7,8 +7,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Color, Label } from 'ng2-charts';
+import { ChartDataset, ChartOptions } from 'chart.js';
+//import { Color, Label } from 'ng2-charts';
 
 @Component({
   selector: 'app-driver-registration-report',
@@ -32,13 +32,13 @@ export class DriverRegistrationReportComponent {
   hideMonthly: boolean = false;
   hideQuarterly: boolean = false;
   ShowChart: boolean = true;
-  driverRegReportchartData: ChartDataSets[] = [];
-  driverRegReportchartLabel: Label[] = [];
+  driverRegReportchartData: ChartDataset[] = [];
+  driverRegReportchartLabel: string[] = [];
   driverRegReportchartLegend = true;
   driverRegReportOptions: ChartOptions = {
     responsive: true,
   };
-  driverRegReportchartColors: Color[] = [];
+  driverRegReportchartColors: any[] = [];
   driverRegReportchartPlugins: any = [];
   displayedColumns: string[] = ['name', 'email', 'mobile', 'registrationDate'];
   @ViewChild(MatPaginator, { static: false })

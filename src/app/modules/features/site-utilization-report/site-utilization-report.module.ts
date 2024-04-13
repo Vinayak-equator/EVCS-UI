@@ -5,7 +5,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SiteUtilizationReportComponent } from './site-utilization-report.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { ChartsModule } from 'ng2-charts';
+import { NgChartsModule } from 'ng2-charts';
 import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
@@ -19,7 +19,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatFormFieldModule,
     MatInputModule,
     MatSortModule,
-    ChartsModule,
+    NgChartsModule,
   ]
 })
 export class SiteutilizationReportmodule { }

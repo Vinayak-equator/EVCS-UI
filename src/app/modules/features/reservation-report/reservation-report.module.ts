@@ -4,7 +4,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { ChartsModule } from 'ng2-charts';
+import { NgChartsModule } from 'ng2-charts';
 import { MatSortModule } from '@angular/material/sort';
 import { ReservationReportComponent } from './reservation-report.component';
 
@@ -19,7 +19,7 @@ import { ReservationReportComponent } from './reservation-report.component';
     MatFormFieldModule,
     MatInputModule,
     MatSortModule,
-    ChartsModule,
+    NgChartsModule,
   ]
 })
 export class ReservationReportModule { }

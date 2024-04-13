@@ -7,8 +7,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Color, Label } from 'ng2-charts';
+import { ChartDataset, ChartOptions } from 'chart.js';
+//import { Color, Label } from 'ng2-charts';
 import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
@@ -57,13 +57,13 @@ export class ChargepointUtilizationReportComponent implements OnInit {
   ShowChart: boolean = true;
   tenantName: any;
 
-  chargepointUtilizationReportchartData: ChartDataSets[] = [];
-  chargepointUtilizationReportchartLabel: Label[] = [];
+  chargepointUtilizationReportchartData: ChartDataset[] = [];
+  chargepointUtilizationReportchartLabel: string[] = [];
   chargepointUtilizationReportchartLegend = true;
   chargepointUtilizationReportOptions: ChartOptions = {
     responsive: true,
   };
-  chargepointUtilizationReportchartColors: Color[] = [];
+  chargepointUtilizationReportchartColors: any[] = [];
   chargepointUtilizationReportchartPlugins: any = [];
   tenantCount: number; 
   sitesCount: number;

@@ -210,8 +210,9 @@
                 <!-- *ngIf="piechartData.length" -->
                 <div class="chartjs-container">
                   <canvas id="ChartJs" baseChart [datasets]="piechartData" [options]="piechartOptions"
-                    [colors]="piechartColors" [labels]="piechartLabel" [legend]="piechartLegend" [chartType]="'pie'"
-                    [plugins]="piechartPlugins">
+                  [labels]="piechartLabel" [legend]="piechartLegend" [type]="'pie'"
+                  [plugins]="piechartPlugins">
+                  <!-- [colors]="piechartColors" -->
                   </canvas>
                 </div>
               </div>
@@ -266,8 +267,10 @@
                 <div class="chartjs-container">
                   <h4 style="text-align: end;">Duration: {{this.selected.charAt(0).toUpperCase() + this.selected.slice(1)}}</h4>
                   <canvas id="ChartJs" baseChart [datasets]="finacialchartData" [labels]="finacialchartLabel"
-                    [options]="finacialchartOptions" [colors]="finacialchartColors" [legend]="finacialchartLegend"
-                    [chartType]="'bar'" [plugins]="finacialchartPlugins">
+                    [options]="finacialchartOptions" 
+                    [legend]="finacialchartLegend"
+                    [type]="'bar'" [plugins]="finacialchartPlugins">
+                    <!-- [colors]="finacialchartColors" -->
 
                   </canvas>
                 </div>
@@ -318,8 +321,9 @@
                 <div class="chartjs-container">
                   <h4 style="text-align: end;">Duration: {{this.selected.charAt(0).toUpperCase() + this.selected.slice(1)}}</h4>
                   <canvas id="ChartJs" baseChart [datasets]="unitchartData" [options]="unitchartOptions"
-                    [colors]="unitchartColors" [labels]="unitchartLabel" [legend]="unitchartLegend" [chartType]="'line'"
-                    [plugins]="unitchartPlugins">
+                  [labels]="unitchartLabel" [legend]="unitchartLegend" [type]="'line'"
+                  [plugins]="unitchartPlugins">
+                  <!-- [colors]="unitchartColors" -->
                   </canvas>
                 </div>
               </div>
@@ -415,8 +419,10 @@
 
             <div class="chartjs-container">
               <canvas id="ChartJs" baseChart [datasets]="finacialchartData" [labels]="finacialchartLabel"
-                [options]="finacialchartOptions" [colors]="finacialchartColors" [legend]="finacialchartLegend"
-                [chartType]="'bar'" [plugins]="finacialchartPlugins">
+                [options]="finacialchartOptions" 
+                [legend]="finacialchartLegend"
+                [type]="'bar'" [plugins]="finacialchartPlugins">
+                <!-- [colors]="finacialchartColors" -->
 
               </canvas>
             </div>
@@ -447,8 +453,9 @@
 
             <div class="chartjs-container">
               <canvas id="ChartJs" baseChart [datasets]="unitchartData" [options]="unitchartOptions"
-                [colors]="unitchartColors" [labels]="unitchartLabel" [legend]="unitchartLegend" [chartType]="'line'"
-                [plugins]="unitchartPlugins">
+              [labels]="unitchartLabel" [legend]="unitchartLegend" [type]="'line'"
+              [plugins]="unitchartPlugins">
+              <!-- [colors]="unitchartColors" -->
               </canvas>
             </div>
           </div>

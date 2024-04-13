@@ -6,7 +6,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 // import { AnalyticsRoutingModule } from './analytics-routing.module';
 import { AnalyticsorgComponent } from './analyticsorg.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { ChartsModule } from 'ng2-charts';
+import { NgChartsModule } from 'ng2-charts';
 import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
@@ -21,7 +21,7 @@ import { AgmCoreModule } from '@agm/core';
     MatSlideToggleModule,
     MatFormFieldModule,
     MatInputModule,
-    ChartsModule,
+    NgChartsModule,
   ],
 })
 export class AnalyticsorgModule {}

@@ -4,8 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Color, Label } from 'ng2-charts';
+import { ChartDataset, ChartOptions } from 'chart.js';
+//import { Color, Label } from 'ng2-charts';
 import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
@@ -56,24 +56,24 @@ export class SiteUtilizationReportComponent implements OnInit {
   ShowChart: boolean = true;
   tenantName: any;
 
-  statewiseSiteUtilizationchartData: ChartDataSets[] = [];
-  statewiseSiteUtilizationchartLabel: Label[] = [];
+  statewiseSiteUtilizationchartData: ChartDataset[] = [];
+  statewiseSiteUtilizationchartLabel: string[] = [];
   statewiseSiteUtilizationchartLegend = true;
   statewiseSiteUtilizationOptions: ChartOptions = {
     responsive: true,
   };
-  statewiseSiteUtilizationchartColors: Color[] = [
+  statewiseSiteUtilizationchartColors: any[] = [
    
   ];
   statewiseSiteUtilizationchartPlugins: any = [];
 
-  citywiseSiteUtilizationchartData: ChartDataSets[] = [];
-  citywiseSiteUtilizationchartLabel: Label[] = [];
+  citywiseSiteUtilizationchartData: ChartDataset[] = [];
+  citywiseSiteUtilizationchartLabel: string[] = [];
   citywiseSiteUtilizationchartLegend = true;
   citywiseSiteUtilizationOptions: ChartOptions = {
     responsive: true,
   };
-  citywiseSiteUtilizationchartColors: Color[] = [
+  citywiseSiteUtilizationchartColors: any[] = [
     
   ];
   citywiseSiteUtilizationchartPlugins: any = [];
