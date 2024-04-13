@@ -5,7 +5,7 @@ import { SiteDashboardRoutingModule } from './site-dashboard-routing.module';
 import { SiteDashboardComponent } from './site-dashboard.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AgmCoreModule } from '@agm/core';
-import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
+// import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 
 @NgModule({
@@ -18,7 +18,7 @@ import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
     SiteDashboardRoutingModule,
     AgmCoreModule.forRoot({
     }),
-    AgmJsMarkerClustererModule,
+    // AgmJsMarkerClustererModule,
     AgmSnazzyInfoWindowModule,
     MatSlideToggleModule,
   ],

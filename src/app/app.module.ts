@@ -23,7 +23,7 @@ import { AppConstants } from './constants';
 import { MsalBroadcastService, MsalModule } from '@azure/msal-angular';
 import { SignUpInvitationComponent } from './components/sign-up-invitation/sign-up-invitation.component';
 import { AgmCoreModule } from '@agm/core';
-import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
+// import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 import { RouterExtService } from './shared/services/routerExt.service';
 import { SignalRService } from './shared/services/signalr.service';
@@ -81,7 +81,7 @@ import { MatLogDialogComponent } from './mat-log-dialog/mat-log-dialog.component
       apiKey: 'AIzaSyBwg_LyNB9AsizTdmTEX2gp-TydKCxFv84',
       libraries: ['places'],
     }),
-    AgmJsMarkerClustererModule,
+    // AgmJsMarkerClustererModule,
     AgmSnazzyInfoWindowModule,
     BrowserAnimationsModule,
     MatProgressBarModule

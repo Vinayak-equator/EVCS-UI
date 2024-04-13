@@ -379,7 +379,8 @@
 
     <div class="row mt-5 box-5">
       <div class="col-lg-12 col-md-12">
-        <agm-map [latitude]="39.16" [longitude]="-97.89" [zoom]="3" [mapTypeControl]='true'
+        <!-- [mapTypeControl]='true' -->
+        <agm-map [latitude]="39.16" [longitude]="-97.89" [zoom]="3" 
           style="height: 400px; width: 100%;">
           <agm-marker *ngFor="let marker of maplist" [latitude]="marker.lat" [longitude]="marker.lng"
             [iconUrl]="marker.iconsUrl" (mouseOver)="openInfoWindow()" (mouseOut)="closeInfoWindow()">

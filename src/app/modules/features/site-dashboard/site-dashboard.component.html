@@ -364,8 +364,8 @@
             <div *ngIf="isMapViewEnabled">
               <agm-map [latitude]="lat" [longitude]="long" [zoom]="zoom" [disableDefaultUI]="false"
                 [zoomControl]="false">
-                <agm-marker-cluster
-                  imagePath="https://raw.githubusercontent.com/googlearchive/js-marker-clusterer/gh-pages/images/m">
+                <!-- <agm-marker-cluster
+                  imagePath="https://raw.githubusercontent.com/googlearchive/js-marker-clusterer/gh-pages/images/m"> -->
                   <agm-marker *ngFor="let map of mapList; let i = index" [latitude]="map.lat" [longitude]="map.long"
                     [label]="map.label" [markerDraggable]="map.draggable">
 
@@ -402,7 +402,7 @@
                     </agm-snazzy-info-window>
 
                   </agm-marker>
-                </agm-marker-cluster>
+                <!-- </agm-marker-cluster> -->
 
               </agm-map>
             </div>
