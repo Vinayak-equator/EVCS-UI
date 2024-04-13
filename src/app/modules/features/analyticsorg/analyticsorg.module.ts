@@ -7,15 +7,16 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AnalyticsorgComponent } from './analyticsorg.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NgChartsModule } from 'ng2-charts';
-import { AgmCoreModule } from '@agm/core';
+// import { AgmCoreModule } from '@agm/core';
+import { GoogleMapsModule } from '@angular/google-maps'
 
 @NgModule({
   declarations: [AnalyticsorgComponent],
   imports: [
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDi24pBs1U4kD1zu2EqoyYLwT2laJdl8h4',
-    }),
-
+    // AgmCoreModule.forRoot({
+    //   apiKey: 'AIzaSyDi24pBs1U4kD1zu2EqoyYLwT2laJdl8h4',
+    // }),
+    GoogleMapsModule,
     SharedModule,
     CommonModule,
     MatSlideToggleModule,

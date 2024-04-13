@@ -15,8 +15,8 @@ import { environment } from '@env';
 import { Router } from '@angular/router';
 import { RoleType } from '@app/shared/services/roles.enum';
 import { RouterExtService } from '@app/shared/services/routerExt.service';
-import { AgmMap } from '@agm/core';
-import { MapsAPILoader } from '@agm/core';
+// import { AgmMap } from '@agm/core';
+// import { MapsAPILoader } from '@agm/core';
 
 @Component({
   selector: 'app-analytics',
@@ -34,14 +34,13 @@ export class AnalyticsorgComponent implements OnInit {
   tenants: Tenant[];
   selectedTenant: any = '';
   displayStyle = 'none';
-  
+  mapsAPILoader:any;
 
   constructor(
     private httpDataService: HttpDataService,
     private cdref: ChangeDetectorRef,
     private routerExtService: RouterExtService,
-    public router: Router,
-    private mapsAPILoader: MapsAPILoader
+    public router: Router
   ) {}
 
   ngOnInit(): void {

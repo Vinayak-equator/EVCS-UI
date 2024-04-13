@@ -384,7 +384,7 @@
     <div class="row mt-5 box-5">
       <div class="col-lg-12 col-md-12">
         <!-- [mapTypeControl]='true' -->
-        <agm-map [latitude]="39.16" [longitude]="-97.89" [zoom]="3" 
+        <!-- <agm-map [latitude]="39.16" [longitude]="-97.89" [zoom]="3" 
           style="height: 400px; width: 100%;">
           <agm-marker *ngFor="let marker of maplist" [latitude]="marker.lat" [longitude]="marker.lng"
             [iconUrl]="marker.iconsUrl" (mouseOver)="openInfoWindow()" (mouseOut)="closeInfoWindow()">
@@ -396,8 +396,21 @@
               </strong>
             </agm-info-window>
           </agm-marker>
-        </agm-map>
-
+        </agm-map> -->
+        <google-map [options]="mapOptions" width="100%" (mapClick)="closeInfoWindow()">
+          <map-marker #markerID="mapMarker"  *ngFor="let marker of maplist" 
+            [position]="{ lat: marker.lat, lng: marker.lng }" 
+            [options]="{icon:marker.iconsUrl}" (mapClick)="openInfoWindow(markerID,marker)">
+          </map-marker>
+          <map-info-window>
+            {{ selectedMarker?.label }}<br><br>
+            <strong> <label ngClass="bluelabel">No of Chargers : {{selectedMarker?.NoOfConnectors }} </label><br>
+              <label ngClass="bluelabel"> Available: {{selectedMarker?.Available }} </label><br>
+              <label ngClass="bluelabel"> Unavailable: {{selectedMarker?.UnAvailable }} </label><br>
+              <label ngClass="bluelabel"> Occupied: {{selectedMarker?.Occupied }} </label>
+            </strong>
+          </map-info-window>
+       </google-map>
       </div>
     </div>
   </div>

@@ -22,9 +22,10 @@ import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dial
 import { AppConstants } from './constants';
 import { MsalBroadcastService, MsalModule } from '@azure/msal-angular';
 import { SignUpInvitationComponent } from './components/sign-up-invitation/sign-up-invitation.component';
-import { AgmCoreModule } from '@agm/core';
+// import { AgmCoreModule } from '@agm/core';
 // import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
-import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
+// import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
+import { GoogleMapsModule } from '@angular/google-maps';
 import { RouterExtService } from './shared/services/routerExt.service';
 import { SignalRService } from './shared/services/signalr.service';
 import { HttpTokenInterceptor } from './shared/utility/http-token.interceptor';
@@ -77,14 +78,15 @@ import { MatLogDialogComponent } from './mat-log-dialog/mat-log-dialog.component
         deps: [HttpClient],
       },
     }),
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBwg_LyNB9AsizTdmTEX2gp-TydKCxFv84',
-      libraries: ['places'],
-    }),
+    // AgmCoreModule.forRoot({
+    //   apiKey: 'AIzaSyBwg_LyNB9AsizTdmTEX2gp-TydKCxFv84',
+    //   libraries: ['places'],
+    // }),
     // AgmJsMarkerClustererModule,
-    AgmSnazzyInfoWindowModule,
+    // AgmSnazzyInfoWindowModule,
     BrowserAnimationsModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    GoogleMapsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },

@@ -15,8 +15,9 @@ import { environment } from '@env';
 import { Router } from '@angular/router';
 import { RoleType } from '@app/shared/services/roles.enum';
 import { RouterExtService } from '@app/shared/services/routerExt.service';
-import { AgmMap } from '@agm/core';
-import { MapsAPILoader } from '@agm/core';
+import { MapInfoWindow, MapMarker } from '@angular/google-maps';
+// import { AgmMap } from '@agm/core';
+// import { MapsAPILoader } from '@agm/core';
 
 @Component({
   selector: 'app-analytics',
@@ -283,7 +284,16 @@ export class AnalyticsComponent implements OnInit {
   public userRole = '';
   public countprocess = false;
   public greenprocess = false;
-
+  public mapsAPILoader:any;
+  public selectedMarker:any;
+  @ViewChild(MapInfoWindow) infoWindow: MapInfoWindow;
+  myLatLng = { lat: 39.16, lng: -97.89 }; 
+  public mapOptions: google.maps.MapOptions = {
+    center: this.myLatLng,
+    zoom: 3,
+    mapTypeControl:true
+  };
+  markerOptions: google.maps.MarkerOptions = {};
   // chartClicked(event: any) {
   //   console.log(event);
   // }
@@ -297,11 +307,10 @@ export class AnalyticsComponent implements OnInit {
     private cdref: ChangeDetectorRef,
     private routerExtService: RouterExtService,
     public router: Router,
-    private mapsAPILoader: MapsAPILoader
   ) {}
 
-  openInfoWindow(): void {
-    this.mapsAPILoader.load().then(() => {
+  openInfoWindow(markerID:MapMarker,marker:any): void {
+    this.mapsAPILoader?.load().then(() => {
       const geocoder = new google.maps.Geocoder();
       for (var i = 0; i < this.maplist.length; i++) {
         const latlng = new google.maps.LatLng(
@@ -320,10 +329,13 @@ export class AnalyticsComponent implements OnInit {
         });
       }
     });
+    this.infoWindow.open(markerID);
+    this.selectedMarker = marker;
   }
 
   closeInfoWindow(): void {
     this.address = '';
+    this.infoWindow?.close();
   }
   clearCache() {
     caches.keys().then((keyList) => Promise.all(keyList.map((key) => caches.delete(key))));

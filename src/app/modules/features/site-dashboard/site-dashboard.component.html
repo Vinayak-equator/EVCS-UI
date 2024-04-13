@@ -362,10 +362,10 @@
 
 
             <div *ngIf="isMapViewEnabled">
-              <agm-map [latitude]="lat" [longitude]="long" [zoom]="zoom" [disableDefaultUI]="false"
+              <!-- <agm-map [latitude]="lat" [longitude]="long" [zoom]="zoom" [disableDefaultUI]="false"
                 [zoomControl]="false">
-                <!-- <agm-marker-cluster
-                  imagePath="https://raw.githubusercontent.com/googlearchive/js-marker-clusterer/gh-pages/images/m"> -->
+                <agm-marker-cluster
+                  imagePath="https://raw.githubusercontent.com/googlearchive/js-marker-clusterer/gh-pages/images/m">
                   <agm-marker *ngFor="let map of mapList; let i = index" [latitude]="map.lat" [longitude]="map.long"
                     [label]="map.label" [markerDraggable]="map.draggable">
 
@@ -392,7 +392,7 @@
                           <label ngClass="occupiedlabel"><i class="status-occupied"></i> <span>Others:
                               {{map.OtherStatus}}/{{map.noOfChargePoints}}</span></label><br>
 
-                          <!-- <label>{{site.connector1Status}}</label><br> -->
+                          <label>{{site.connector1Status}}</label><br>
 
                           <a (click)="siteEdit($event,tenantId,map.siteId)" class="bluelabel">
                             View Detail
@@ -402,9 +402,9 @@
                     </agm-snazzy-info-window>
 
                   </agm-marker>
-                <!-- </agm-marker-cluster> -->
+                </agm-marker-cluster>
 
-              </agm-map>
+              </agm-map> -->
             </div>
 
           </div>

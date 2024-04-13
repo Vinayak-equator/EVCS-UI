@@ -4,9 +4,10 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SiteDashboardRoutingModule } from './site-dashboard-routing.module';
 import { SiteDashboardComponent } from './site-dashboard.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { AgmCoreModule } from '@agm/core';
+// import { AgmCoreModule } from '@agm/core';
 // import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
-import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
+// import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
+import { GoogleMapsModule } from '@angular/google-maps'
 
 @NgModule({
   declarations: [
@@ -16,11 +17,12 @@ import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
     SharedModule,
     CommonModule,
     SiteDashboardRoutingModule,
-    AgmCoreModule.forRoot({
-    }),
+    // AgmCoreModule.forRoot({
+    // }),
     // AgmJsMarkerClustererModule,
-    AgmSnazzyInfoWindowModule,
+    // AgmSnazzyInfoWindowModule,
     MatSlideToggleModule,
+    GoogleMapsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA],
 })
